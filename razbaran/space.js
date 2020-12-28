@@ -38,7 +38,6 @@ const main = () => {
 
         rocks.push(createAstroid())
 
-        
     }
     onMouseMove = (event) => {
 
