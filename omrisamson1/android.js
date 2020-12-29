@@ -1,5 +1,5 @@
 const Spaceship = () => {
-    var group = new Raster('Assets/startup.svg');
+    var group = new Raster('startup.svg');
     group.closed = true;
     group.position = view.bounds.center
     group.currentRotation =0;
@@ -8,7 +8,7 @@ const Spaceship = () => {
 }
 
 const createAsteroid = () => {
-    var rock = new Raster('Assets/rock.svg');
+    var rock = new Raster('rock.svg');
     rock.strokeColor = 'white'
     rock.scale(0.2)
     rock.vec =  Point.random()- Point.random()*4
