@@ -1,30 +1,25 @@
-const createShip = () => {
-    var path = new Path([-10, -8], [10, 0], [-10, 8], [-8, 4], [-8, -4]);
-    path.closed = true;
-    var thrust = new Path([-8, -4], [-14, 0], [-8, 4]);
-    var group = new Group(path, thrust);
-    group.position = view.bounds.center;
-    group.strokeColor ='white'
+const Spaceship = () => {
+    var group = new Raster('startup.svg');
+    group.closed = true;
+    group.position = view.bounds.center
     group.currentRotation =0;
+    group.scale(0.2);
     return group
 }
 
 const createAsteroid = () => {
-    const rock = new Path(
-        [-23, -40.5], [0, -30.5], [24, -40.5], [45, -21.5], [25, -12.5],
-        [46, 9.5], [22, 38.5], [-10, 30.5], [-22, 40.5], [-46, 18.5],
-        [-33, 0.5], [-44, -21.5], [-23, -40.5])
+    var rock = new Raster('rock.svg');
     rock.strokeColor = 'white'
-    rock.scale(Point.random())
-    rock.position = Point.random() * view.size;
-    rock.vec =  Point.random()- Point.random()*2
+    rock.scale(0.2)
+    rock.vec =  Point.random()- Point.random()*10
     return rock;
 }
 
-const main = () => {
-    const ship = createShip()
 
-    const num = Math.random() * 5 +5
+const main = () => {
+    const ship = Spaceship()
+
+    const num = Math.random() * 1 + 7
 
     const rocks = []
     for (let i=0; i<num;i++){
@@ -43,6 +38,8 @@ const main = () => {
         for (let i =0; i <rocks.length; i++ ){
             if (ship.intersects(rocks[i])){
                 rocks[i].remove()
+                document.getElementById("gameover").style.display = "block";
+                
             }
         }
     }
@@ -73,4 +70,3 @@ const main = () => {
 }
 
 main()
-

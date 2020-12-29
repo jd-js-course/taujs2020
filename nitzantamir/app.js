@@ -4,9 +4,10 @@ const createShip = () => {
     var thrust = new Path([-8, -4], [-14, 0], [-8, 4]);
     var group = new Group(path, thrust);
     group.position = view.bounds.center;
-    group.strokeColor ='white'
-    group.currentRotation =0;
+    group.strokeColor = 'white'
+    group.currrentRotation = 0;
     return group
+
 }
 
 const createAsteroid = () => {
@@ -17,33 +18,32 @@ const createAsteroid = () => {
     rock.strokeColor = 'white'
     rock.scale(Point.random())
     rock.position = Point.random() * view.size;
-    rock.vec =  Point.random()- Point.random()*2
+    rock.vec = Point.random()- Point.random()*2
     return rock;
 }
 
 const main = () => {
     const ship = createShip()
 
-    const num = Math.random() * 5 +5
+    const num = Math.random() * 5 + 5
 
     const rocks = []
-    for (let i=0; i<num;i++){
+    for (let i = 0; i<num; i++) {
         rocks.push(createAsteroid())
-    }   
+    }
 
     onMouseMove = (event) => {
         ship.position = event.point
-        const delta = ship.currentRotation - event.delta.angle
+        const delta = ship.currrentRotation - event.delta.angle
         ship.rotate(delta)
-        if (event.delta.angle)
-            ship.currentRotation = event.delta.angle
+        ship.currrentRotation = event.delta.angle
     }
 
     checkCollision = () => {
         for (let i =0; i <rocks.length; i++ ){
-            if (ship.intersects(rocks[i])){
-                rocks[i].remove()
-            }
+           if (ship.intersects(rocks[i])){
+               rocks[i].fillColor ="red"
+           }
         }
     }
 
@@ -57,6 +57,7 @@ const main = () => {
             if (rock.position.x > view.bounds.width){
                 rock.position.x =0;
             }
+
             if (rock.position.x <0){
                 rock.position.x =view.bounds.width;
             }
@@ -64,6 +65,7 @@ const main = () => {
             if (rock.position.y <0){
                 rock.position.y =view.bounds.height;
             }
+
             if (rock.position.y > view.bounds.height){
                 rock.position.y =0;
             }

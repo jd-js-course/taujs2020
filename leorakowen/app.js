@@ -1,11 +1,14 @@
 const createShip = () => {
     var path = new Path([-10, -8], [10, 0], [-10, 8], [-8, 4], [-8, -4]);
     path.closed = true;
+    path.fillColor = '#f26352'
     var thrust = new Path([-8, -4], [-14, 0], [-8, 4]);
+    thrust.fillColor = '#e8c8be'
     var group = new Group(path, thrust);
     group.position = view.bounds.center;
     group.strokeColor ='white'
-    group.currentRotation =0;
+    group.currentRotation = 0;
+    group.scale(2)
     return group
 }
 
@@ -15,6 +18,7 @@ const createAsteroid = () => {
         [46, 9.5], [22, 38.5], [-10, 30.5], [-22, 40.5], [-46, 18.5],
         [-33, 0.5], [-44, -21.5], [-23, -40.5])
     rock.strokeColor = 'white'
+    rock.fillColor = '#917c71'
     rock.scale(Point.random())
     rock.position = Point.random() * view.size;
     rock.vec =  Point.random()- Point.random()*2
@@ -24,7 +28,7 @@ const createAsteroid = () => {
 const main = () => {
     const ship = createShip()
 
-    const num = Math.random() * 5 +5
+    const num = Math.random() * 5 + 20
 
     const rocks = []
     for (let i=0; i<num;i++){
@@ -32,24 +36,36 @@ const main = () => {
     }   
 
     onMouseMove = (event) => {
+        
+        const pos_delta = ship.position.getDistance(event.point)
+        if (pos_delta < 10)
+            return
+
+        var direction_vect = event.point - ship.position
+
         ship.position = event.point
-        const delta = ship.currentRotation - event.delta.angle
+        const delta = direction_vect.angle - ship.currentRotation
         ship.rotate(delta)
         if (event.delta.angle)
-            ship.currentRotation = event.delta.angle
+            ship.currentRotation = direction_vect.angle
     }
 
     checkCollision = () => {
+        let found_collision = false;
         for (let i =0; i <rocks.length; i++ ){
-            if (ship.intersects(rocks[i])){
+            if (rocks[i].visible && ship.intersects(rocks[i])){
                 rocks[i].remove()
+                rocks[i].visible = false
+                found_collision = true;
             }
         }
+
+        return found_collision;
     }
 
     onFrame = (event) => {
 
-        for (let i =0; i <rocks.length; i++ ){
+        for (let i = 0; i <rocks.length; i++ ){
 
             const rock = rocks[i];
             rock.position+=rock.vec
@@ -68,7 +84,10 @@ const main = () => {
                 rock.position.y =0;
             }
         }
-        checkCollision()
+        found = checkCollision()
+
+        if (found)
+            rocks.push(createAsteroid())
     }
 }
 
