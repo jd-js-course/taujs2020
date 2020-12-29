@@ -11,7 +11,7 @@ const createAsteroid = () => {
     var rock = new Raster('rock.svg');
     rock.strokeColor = 'white'
     rock.scale(0.2)
-    rock.vec =  Point.random()- Point.random()*4
+    rock.vec =  Point.random()- Point.random()*10
     return rock;
 }
 
@@ -19,7 +19,7 @@ const createAsteroid = () => {
 const main = () => {
     const ship = Spaceship()
 
-    const num = Math.random() * 1 +5
+    const num = Math.random() * 1 + 7
 
     const rocks = []
     for (let i=0; i<num;i++){
@@ -38,6 +38,8 @@ const main = () => {
         for (let i =0; i <rocks.length; i++ ){
             if (ship.intersects(rocks[i])){
                 rocks[i].remove()
+                document.getElementById("gameover").style.display = "block";
+                
             }
         }
     }
