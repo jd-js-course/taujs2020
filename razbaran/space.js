@@ -212,6 +212,7 @@ onFrame = (event) => {
 
     }
 
+    
 
     checkCollision()
 
