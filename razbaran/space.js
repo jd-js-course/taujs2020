@@ -1,14 +1,14 @@
 const createShip = () => {
-    var path = new Path([-10, -8], [10, 0], [-10, 8], [-8, 4], [-8, -4]);
-    path.closed = true;
-    path.fillColor = 'blue'
-    var thrust = new Path([-8, -4], [-14, 0], [-8, 4]);
-    thrust.fillColor = "red"
-    var group = new Group(path, thrust);
-    group.position = view.bounds.center;
-    group.strokeColor = 'white'
-    group.currentRotation = 0
-    return group
+    const raster = new Raster('assert/photos/dog12.png')
+
+    raster.position = view.bounds.center;
+    raster.currentRotation = 0
+    raster.rotate(60)
+    raster.scale(0.3);
+    raster.vec = new Point();
+    raster.vec.length = 0;
+    raster.angle = 0;
+    return raster
 
 }
 
@@ -28,71 +28,197 @@ const createAstroid = () => {
 }
 
 const main = () => {
+    let gameEnded = false;
+    let dogExploding = false;
+    let gameStarted = false;
     const ship = createShip()
-    const num = Math.random() * 100 + 5;
-
+    const eggs = []
     const rocks = []
 
-    
+    const num = Math.random() * 5 + 5;
     for (let i = 0; i < num; i++) {
 
         rocks.push(createAstroid())
 
     }
-    onMouseMove = (event) => {
+    const explosionDog = new Raster('assert/photos/explosion.png')
+    explosionDog.position = [-1000, -1000]
+    var gameMusic = new Howl({
 
 
-        ship.position = event.point
+        src: ['assert/sounds/Good-Morning-Doctor-Weird.mp3'],
+        loop: true,
+        volume: 0.2,
+    });
+    var explosionMusic = new Howl({
 
-        const delta = ship.currentRotation - event.delta.angle
-        ship.rotate(delta)
-        if (event.delta.angle)
-            ship.currentRotation = event.delta.angle
+
+        src: ['assert/sounds/Explosion7.mp3'],
+        loop: false,
+        volume: 0.2,
+    });
+
+    const shotSynth = new Tone.Synth().toDestination();
+    const explode = new Tone.Synth().toDestination();
+
+
+    onKeyDown = (event) => {
+        if (!gameStarted) {
+            gameStarted = true
+            gameMusic.play()
+
+        }
+
+        switch (event.key) {
+            case 'space':
+                const shotEgg = new Raster('assert/photos/egg.png')
+                shotEgg.scale(0.15)
+                shotEgg.position = ship.position
+                shotEgg.vec = new Point({
+                    angle: ship.vec.angle,
+                    length: 10,
+                })
+
+                eggs.push(shotEgg)
+                shotSynth.triggerAttackRelease("B6", "32n");
+                break;
+            case 'up':
+                ship.vec.length = ship.vec.length + 0.3
+                break;
+            case 'down':
+                ship.vec.length = ship.vec.length - 0.3
+                break;
+            case 'right':
+                ship.rotate(-5)
+                ship.vec.angle -= 5
+                break;
+            case 'left':
+                ship.rotate(5)
+                ship.vec.angle += 5
+                break;
+
+        }
+
 
     }
+
+
 
     checkCollision = () => {
 
 
         for (let i = 0; i < rocks.length; i++) {
 
-            if (ship.intersects(rocks[i]))
-                rocks[i].remove()
-                
+            for (let j = 0; j < eggs.length; j++) {
+
+                if (rocks[i].intersects(eggs[j])) {
+                    rocks[i].remove()
+                    rocks.splice(i, 1)
+                    explode.triggerAttackRelease("e6", "32n");
+
+                      const num = Math.random() * 1 + 1;
+                      for (let i = 0; i < num; i++) {
+
+                       rocks.push(createAstroid())
+                }
+            }
         }
+        if (ship.intersects(rocks[i])) {
+
+            explosionDog.position = ship.position
+            gameMusic.stop()
+            explosionDog.scale(0.1)
+
+            ship.remove()
+            explosionMusic.play()
+            dogExploding = true;
+
+        }
+
     }
 
 
 
-
-
-
-
-
-    onFrame = (event) => {
-
-        for (let i = 0; i < rocks.length; i++) {
-            const rock = rocks[i];
-            rock.position += rock.vec
-
-            if (rock.position.x > view.bounds.width) {
-                rock.position.x = 0
-            }
-            if (rock.position.x < 0) {
-                rock.position.x = view.bounds.width
-            }
-            if (rock.position.y < 0) {
-                rock.position.y = view.bounds.height
-            }
-
-            if (rock.position.y > view.bounds.height) {
-                rock.position.y = 0
-            }
-
-        }
-        checkCollision()
-    }
 }
+
+
+
+
+
+
+
+
+onFrame = (event) => {
+    if (gameEnded) {
+        explosionMusic.stop()
+        return;
+    }
+
+    if (dogExploding) {
+        explosionDog.scale(1.1)
+
+        setTimeout(() => {
+            gameEnded = true;
+            explosionDog.position = [-1000, -1000]
+        }, 500)
+        return;
+    }
+    ship.position += ship.vec
+
+
+    if (ship.position.x > view.bounds.width) {
+        ship.position.x = 0
+    }
+    if (ship.position.x < 0) {
+        ship.position.x = view.bounds.width
+    }
+    if (ship.position.y < 0) {
+        ship.position.y = view.bounds.height
+    }
+
+    if (ship.position.y > view.bounds.height) {
+        ship.position.y = 0
+    }
+
+
+
+
+
+
+
+
+    for (let i = 0; i < rocks.length; i++) {
+        const rock = rocks[i];
+        rock.position += rock.vec
+
+        if (rock.position.x > view.bounds.width) {
+            rock.position.x = 0
+        }
+        if (rock.position.x < 0) {
+            rock.position.x = view.bounds.width
+        }
+        if (rock.position.y < 0) {
+            rock.position.y = view.bounds.height
+        }
+
+        if (rock.position.y > view.bounds.height) {
+            rock.position.y = 0
+        }
+
+    }
+
+    for (let i = 0; i < eggs.length; i++) {
+        eggs[i].position += eggs[i].vec
+
+    }
+
+
+
+    checkCollision()
+
+}
+
+    }
 
 main()
 
