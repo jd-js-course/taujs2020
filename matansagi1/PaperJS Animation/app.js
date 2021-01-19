@@ -87,12 +87,12 @@ const main = () => {
                 ship.vec.length = ship.vec.length - 0.5;
                 break;
             case 'right':
-                ship.rotate(-5)
-                ship.vec.angle-=5
+                ship.rotate(5)
+                ship.vec.angle+=5
                 break;
             case 'left':
-                ship.rotate(+5)
-                ship.vec.angle+=5
+                ship.rotate(-5)
+                ship.vec.angle-=5
                 break;
         }
     }
