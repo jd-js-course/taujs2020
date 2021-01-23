@@ -9,6 +9,23 @@ class Cat {
         belly: false,
         tail: false,
         head: true
+        // suggestion for mood random generator. each game will have completetly different mood
+        // if(math.random() < 0.5 ) {
+        //  legs: false}
+        // else {legs: true}
+        // if(math.random() < 0.5 ) {
+        //  back: false}
+        // else {back: true}
+        // if(math.random() < 0.5 ) {
+        //  belly: false}
+        // else {belly: true}
+        // if(math.random() < 0.5 ) {
+        //  tail: false}
+        // else {tail: true}
+        // if(math.random() < 0.5 ) {
+        //  head: false}
+        // else {head: true}
+        //  do this for each property of the cats behaviour
     }
 
     graphics = {
