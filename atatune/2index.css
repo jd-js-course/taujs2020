@@ -1,0 +1,12 @@
+h1{
+
+        text-align: center;
+        margin: 30%;
+        border: 3px solid rgb(255, 0, 157);
+}
+
+audio{
+ align-items: center;
+ display: flex;
+ justify-content: center;
+}
