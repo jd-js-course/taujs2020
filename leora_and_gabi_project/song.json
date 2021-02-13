@@ -1,0 +1,37 @@
+{
+"rate": 60, // beats per minute
+"notes": [
+        {
+                "note": "C",
+                "length": 1, // length in beats
+                "octave": 1
+        },
+        {
+                "note": "E",
+                "length": 1, // length in beats
+                "octave": 1
+        },
+        {
+                "note": "E",
+                "length": 2, // length in beats
+                "octave": 1
+        },
+        null,
+        {
+                "note": "D",
+                "length": 1, // length in beats
+                "octave": 1
+        },
+        {
+                "note": "F",
+                "length": 1, // length in beats
+                "octave": 1
+        },
+        {
+                "note": "F",
+                "length": 2, // length in beats
+                "octave": 1
+        },
+        null
+        ]
+}
