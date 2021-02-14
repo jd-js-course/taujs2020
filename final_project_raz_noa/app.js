@@ -1,3 +1,14 @@
+//color picker 
+var pickerDiv = document.getElementById('colorPicker');
+var picker = new Picker(pickerDiv);
+picker.onChange = function (color) {
+    pickerDiv.style.background = color.rgbaString;
+    currentColor = color.rgbaString;
+}
+
+
+
+
 //create building and background
 var background = new Path.Rectangle([0, 0], [15000, 15000]);
 background.fillColor = '#afdadb'

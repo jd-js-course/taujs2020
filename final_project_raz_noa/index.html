@@ -7,6 +7,8 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.11/paper-full.js"></script>
     <script type="text/paperscript" canvas="paper" src="index.js"></script>
+    <script src="https://unpkg.com/vanilla-picker@2"></script>
+
     <style>
         html,
         body {
@@ -22,11 +24,49 @@
             height: 100%;
             background-color: #afdadb
         }
+
+        .button {
+            background-color: #999999;
+            width: 180px;
+            border: none;
+            color: white;
+            padding: 16px 30px;
+            text-align: center;
+            font-size: 16px;
+            opacity: 0.6;
+            transition: 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+            font-family: "Tahoma";
+            border-radius: 8px;
+            margin: 4px 4px;
+
+
+
+        }
+
+        .button:hover {
+            opacity: 1;
+        }
+
+        .menu {
+            display: inline-block;
+            position: absolute;
+        }
+
+
+        #btnAbout {
+            visibility: hidden;
+        }
     </style>
 </head>
 
 <body>
-
+    <div class="menu">
+        <button class="button" id="colorPicker">Choose Color</button>
+        <br>
+    </div>
 
     <canvas id="paper" resize></canvas>
 
