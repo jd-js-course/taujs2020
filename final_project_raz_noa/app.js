@@ -7,14 +7,41 @@ picker.onChange = function (color) {
 }
 
 
+//create cloud
+function createCloud() {
+    const cloud = new Raster('assert/cloud.png')
+    cloud.scale(Math.random() * 0.05 + 0.02)
+    cloud.position = Point.random() * view.size;
+    if (cloud.position.y > 500) {
+        cloud.position.y = Math.random() * 500;
+    }
+    cloud.vec = Point.random() - Point.random() * 2
+    return cloud
+}
 
+//create star
+function createStar() {
+    const star = new Raster('assert/star.png')
+    star.scale(Math.random() * 0.3 + 0.02)
+    star.position = Point.random() * view.size;
+    star.vec = Point.random() - Point.random() * 2
+    return star
+}
 
 //create building and background
 var background = new Path.Rectangle([0, 0], [15000, 15000]);
 background.fillColor = '#afdadb'
 let sun = new Path.Circle(new Point(1500, 50), 100);
 sun.fillColor = '#FFCA06'
-
+let stars = []
+for (let i = 0; i < 80; i++) {
+    stars[i] = createStar();
+    stars[i].visible = false;
+}
+let clouds = []
+for (let i = 0; i < 12; i++) {
+    clouds[i] = createCloud();
+}
 var ground = new Path.Rectangle([0, 650], [15000, 15000]);
 ground.fillColor = '#515a5b'
 var path3 = new Path.Rectangle([420, 80], [150, 40]);
