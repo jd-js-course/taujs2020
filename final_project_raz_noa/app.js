@@ -6,6 +6,12 @@ picker.onChange = function (color) {
     currentColor = color.rgbaString;
 }
 
+//sounds 
+var paintkMusic = new Howl({
+    src: ['assert/button-46.mp3'],
+    loop: false,
+    volume: 0.1,
+});
 
 //create cloud
 function createCloud() {
