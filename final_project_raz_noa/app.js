@@ -89,3 +89,26 @@ path13.fillColor = 'white'
 var path14 = new Path.Rectangle([1213, 625], [7, 40]);
 path14.strokeColor = 'white'
 path14.fillColor = 'white'
+
+//create windows and painting function
+var check = new Point(318, 130)
+var arr = [];
+var currentColor = '#e1e1e1';
+for (let j = 0; j < 12; j++) {
+    for (let i = 0; i < 20; i++) {
+        arr[i] = new Path.Rectangle([check.x, check.y], [44, 37]);
+        arr[i].fillColor = '#e1e1e1'
+        arr[i].strokeColor = 'white'
+        arr[i].strokeWidth = 3
+        check.x = check.x + 45
+        arr[i].onClick = function (event) {
+            this.fillColor = currentColor;
+            paintkMusic.play()
+        }
+        arr[i].onDoubleClick = function (event) {
+            this.fillColor = '#e1e1e1';
+        }
+    }
+    check.x = (318)
+    check.y = check.y + 41
+}
