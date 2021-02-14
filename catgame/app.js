@@ -80,13 +80,16 @@ class Cat {
             map: 'cat_lies_down_upset_map.png',
             separate_tail: true
         },
-        give_in: {
+        give_in: { // the give_in pose is to recieve a different preference setting: he is to automatically love anywhere he is petted, and to basicaly move on to the in_love pose automatically. 
+            image: 'cat_lies_down3.png',
+            map: '',
+            separate_tail: false
+        },
+        in_love: { //added a new case, the in_love case which is meant to be the same as the give_in case but with hearts flying out his eyes animation.
             image: 'cat_lies_down3.png',
             map: '',
             separate_tail: false
         }
-
-
     }
 
 
@@ -107,7 +110,22 @@ class Cat {
                     this.mood = 'lie'
                     break;
                 case 'lie':
-                    this.mood = 'give_in'
+                    this.mood = 'give_in' 
+                    break;
+                case 'give_in': //added a new case, the in_love case which is meant to be the same as the give_in case but with hearts flying out his eyes animation.
+                    this.mood = 'in_love'
+                    break;
+                case 'stand_upset':
+                    this.mood = 'stand'
+                    break;
+                case 'sit_upset':
+                    this.mood = 'sit'
+                    break;
+                case 'restive_upset':
+                    this.mood = 'restive'
+                    break;
+                case 'lies_upset':
+                    this.mood = 'lie'
                     break;
             }
         } else {
@@ -202,6 +220,18 @@ class Cat {
     }
 
 }
+
+const hearts = () =>{
+//in_love   //importing heart image for the cat in_love mood animation
+//     const heart = image 'heart.png' ({
+
+// }) 
+
+}
+
+
+
+
 
 const julio = new Cat() //starting the game - a cat appears on screen
 
