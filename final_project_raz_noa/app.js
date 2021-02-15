@@ -128,7 +128,7 @@ for (let j = 0; j < 12; j++) {
     check.x = (318)
     check.y = check.y + 41
 }
-
+var gameNight = false;
 //clouds and stars animation
 function main() {
 
@@ -169,6 +169,46 @@ function main() {
                 star.position.y = 0
             }
         }
+    }
+    //check which mode you play
+    btnNight.addEventListener("click", function () {
+        if (!gameNight) {
+            nightmode();
+        }
+        else {
+            dayMode();
+        }
+    });
+}
+//day mode
+function dayMode() {
+    gameNight = false
+    morningMusic.play()
+    nightMusic.stop()
+    document.getElementById("btnNight").innerHTML = "Night"
+    background.fillColor = '#afdadb'
+    sun.fillColor = '#FFCA06'
+    for (let i = 0; i < 12; i++) {
+        clouds[i].visible = true;
+    }
+    for (let i = 0; i < stars.length; i++) {
+        stars[i].visible = false;
+    }
+}
+
+//night mode
+function nightmode() {
+    nightMusic.play()
+    morningMusic.stop()
+    gameNight = true
+    document.getElementById("btnNight").innerHTML = "Day"
+    sun.fillColor = "#fdfdd5ec"
+    background.fillColor = "#112a31"
+    for (let i = 0; i < 80; i++) {
+        stars[i].visible = true;
+    }
+    for (let i = 0; i < clouds.length; i++) {
+        clouds[i].visible = false;
     }
 }
     main()
