@@ -12,6 +12,16 @@ var paintkMusic = new Howl({
     loop: false,
     volume: 0.1,
 });
+var morningMusic = new Howl({
+    src: ['assert/mixkit-little-birds-singing-in-the-trees-17.wav'],
+    loop: true,
+    volume: 0.1,
+});
+var nightMusic = new Howl({
+    src: ['assert/mixkit-crickets-at-night-in-nature-2475.wav'],
+    loop: true,
+    volume: 0.1,
+});
 
 //create cloud
 function createCloud() {
