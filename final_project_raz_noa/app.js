@@ -160,3 +160,5 @@ function main() {
             }
         }
     }
+}
+    main()
