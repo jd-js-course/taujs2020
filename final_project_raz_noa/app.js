@@ -118,3 +118,45 @@ for (let j = 0; j < 12; j++) {
     check.x = (318)
     check.y = check.y + 41
 }
+
+//clouds and stars animation
+function main() {
+
+    onFrame = (event) => {
+
+        for (let i = 0; i < clouds.length; i++) {
+            const cloud = clouds[i];
+            cloud.position.x += cloud.bounds.width / 500
+
+            if (cloud.position.x > view.bounds.width) {
+                cloud.position.x = 0
+            }
+            if (cloud.position.x < 0) {
+                cloud.position.x = view.bounds.width
+            }
+            if (cloud.position.y < 0) {
+                cloud.position.y = view.bounds.height
+            }
+
+            if (cloud.position.y > view.bounds.height) {
+                cloud.position.y = 0
+            }
+        }
+        for (let i = 0; i < stars.length; i++) {
+            const star = stars[i];
+            star.position.x += star.bounds.width / 500
+
+            if (star.position.x > view.bounds.width) {
+                star.position.x = 0
+            }
+            if (star.position.x < 0) {
+                star.position.x = view.bounds.width
+            }
+            if (star.position.y < 0) {
+                star.position.y = view.bounds.height
+            }
+            if (star.position.y > view.bounds.height) {
+                star.position.y = 0
+            }
+        }
+    }
