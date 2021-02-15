@@ -1,6 +1,8 @@
 ////comment
+//loading the PaperJS library
+paper.install(window)
+paper.setup('paper-js-canvas')
 class Cat {
-
     mood = 'stand'
     preferences = {
         //defining our cat's mood - where he likes being petted. we need to make this part randomised for each new game sesion.
@@ -97,10 +99,13 @@ class Cat {
         //check what organ was clicked
         //const clickedOrgan = ''
         //const moodChange = this.organs[clickedOrgan]
+        if (this.currentAnimation) clearInterval(this.currentAnimation)
+        paper.project.activeLayer.removeChildren()
+
         // we check in this.preferences and we check what's the current this.mood, and we change this.mood to a new value
         if (this.preferences[bodypart] == true) {
             switch (this.mood) {
-                case 'stand':
+                case 'stand':                
                     this.mood = 'sit'
                     break;
                 case 'sit':
@@ -114,6 +119,7 @@ class Cat {
                     break;
                 case 'give_in': //added a new case, the in_love case which is meant to be the same as the give_in case but with hearts flying out his eyes animation.
                     this.mood = 'in_love'
+                    hearts()
                     break;
                 case 'stand_upset':
                     this.mood = 'stand'
@@ -132,24 +138,28 @@ class Cat {
             switch (this.mood) {
                 case 'stand':
                     this.mood = 'stand_upset'
+                    this.currentAnimation = tail_wag1()
                     break;
                 case 'stand_upset':
                     this.mood = 'scratch1'
                     break;
                 case 'sit':
                     this.mood = 'sit_upset'
+                    this.currentAnimation = tail_wag2()
                     break;
                 case 'sit_upset':
                     this.mood = 'scratch2'
                     break;
                 case 'restive':
                     this.mood = 'restive_upset'
+                    this.currentAnimation = tail_wag3()
                     break;
                 case 'restive_upset':
                     this.mood = 'scratch1'
                     break;
                 case 'lie':
                     this.mood = 'lies_upset'
+                    this.currentAnimation = tail_wag4()
                     break
                 case 'lies_upset':
                     this.mood = 'scratch2'
@@ -222,15 +232,114 @@ class Cat {
 }
 
 const hearts = () =>{
-//in_love   //importing heart image for the cat in_love mood animation
-//     const heart = image 'heart.png' ({
+// in_love   //importing heart image for the cat in_love mood, setting it properly in place and creating the animation.
+    console.log('we are printing hearts')
+    const heart = new Raster('heart')
+    heart.position = [305, 573]
+    heart.rotate(-92)
+    heart.scale(0.05)
 
+    const heart2 = new Raster('heart')
+    heart2.position = [318, 633]
+    heart2.rotate(-92)
+    heart2.scale(0.05)
+
+    let heartsExpanding = true
+    let numberOfSizeChanges = 0
+    setInterval(()=> {
+        if (numberOfSizeChanges > 5) {
+            numberOfSizeChanges = 0
+            heartsExpanding = !heartsExpanding
+        }
+        if (heartsExpanding) {
+            heart.scale(1.1)
+            heart2.scale(1.1)
+        } else {
+            heart.scale(0.91)
+            heart2.scale(0.91)
+        }
+        numberOfSizeChanges++
+
+    },100)
 // }) 
 
 }
 
+const tail_wag1 = () =>{
+    //stand_upset //importing tail image for the cat stand_upset mood, setting it properly in place and animating it.
+        console.log('tail wagging')
+        const tail1 = new Raster('tail1')
+        tail1.position = [802, 189]
+        var point = tail1.bounds.bottomLeft;
 
+        let tailMovement = 2
+        let totalTailMovement = 0
+        return setInterval(()=> {
+            if (totalTailMovement > 20 || totalTailMovement < -10) {
+                tailMovement = -tailMovement
+            }
+            tail1.rotate(tailMovement, point)
+            totalTailMovement+=tailMovement
+        },100)
+        
+}
 
+const tail_wag2 = () =>{
+    //sit_upset // importing tail image for the cat sit_upset mood, setting it properly in place and animating it.
+    console.log('tail wagging')
+    const tail2 = new Raster('tail2')
+    tail2.position = [725, 655]
+    var point = tail2.bounds.bottomLeft;
+
+    let tailMovement = 2
+    let totalTailMovement = 0
+    return setInterval(()=> {
+        if (totalTailMovement > 0 || totalTailMovement < -20) { 
+            tailMovement = -tailMovement
+        }
+        tail2.rotate(tailMovement, point)
+        totalTailMovement+=tailMovement
+    },100)
+
+}
+
+const tail_wag3 = () =>{
+    //restive_upset // importing tail image for the cat restive_upset mood, setting it properly in place and animating it.
+    console.log('tail wagging')
+    const tail3 = new Raster('tail3')
+    tail3.position = [755, 310]
+    var point = tail3.bounds.bottomLeft;
+
+    let tailMovement = 2
+        let totalTailMovement = 0
+        return setInterval(()=> {
+            if (totalTailMovement > 10 || totalTailMovement < -20) {
+                tailMovement = -tailMovement
+            }
+            tail3.rotate(tailMovement, point)
+            totalTailMovement+=tailMovement
+        },100)
+
+}
+
+const tail_wag4 =() =>{
+    //lies_upset // importing tail image for the cat lies_upset mood, setting it properly in place and animating it.
+    console.log('tail wagging')
+    const tail4 =new Raster('tail4')
+    tail4.position = [740, 302]
+    var point = tail4.bounds.bottomRight;
+
+    let tailMovement = 2
+        let totalTailMovement = 0
+        return setInterval(()=> {
+            if (totalTailMovement > 20 || totalTailMovement < -17) {
+                tailMovement = -tailMovement
+            }
+            tail4.rotate(tailMovement, point)
+            totalTailMovement+=tailMovement
+        },100)
+
+}
 
 
 const julio = new Cat() //starting the game - a cat appears on screen
