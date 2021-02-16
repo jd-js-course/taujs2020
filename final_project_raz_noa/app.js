@@ -1,3 +1,19 @@
+//save image
+const mycanvas = document.querySelector("#paper")
+btnDownload.addEventListener("click", function () {
+    const dataURI = mycanvas.toDataURL("image/jpeg");
+    if (window.navigator.msSaveBlob) {
+        window.navigator.msSaveBlob(mycanvas.msToBlob(), "canvas-image.png");
+    } else {
+        const a = document.createElement("a")
+        document.body.appendChild(a)
+        a.href = mycanvas.toDataURL();
+        a.download = "canvas-image.png"
+        a.click();
+        document.mycanvas.removeChild(a);
+    }
+});
+
 //color picker 
 var pickerDiv = document.getElementById('colorPicker');
 var picker = new Picker(pickerDiv);
@@ -23,6 +39,52 @@ var nightMusic = new Howl({
     volume: 0.1,
 });
 
+//open page  
+function openPage() {
+    document.getElementById("btnDownload").disabled = true;
+    document.getElementById("btnNight").disabled = true;
+    document.getElementById("colorPicker").disabled = true;
+    var backopacity = new Path.Rectangle([316, 115], [904, 510]);
+    backopacity.fillColor = 'white'
+    backopacity.opacity = 0.01
+    const credit = new Raster('assert/credit3.jpg')
+    credit.scale(0.25)
+    credit.position = [768, 375]
+    var gitRaz = new PointText({
+        point: [461, 472],
+        content: 'RazBaran',
+        fillColor: 'white',
+        fontFamily: 'Tahoma',
+        fontSize: 16
+    });
+    var gitNoa = new PointText({
+        point: [461, 495],
+        content: 'NoaShimoni',
+        fillColor: 'white',
+        fontFamily: 'Tahoma',
+        fontSize: 16
+    });
+    var TauLink = new PointText({
+        point: [756, 369],
+        content: 'arts.tau.ac.il',
+        fillColor: 'white',
+        fontFamily: 'Tahoma',
+        fontSize: 16
+    });
+    var playButton = new Path.Rectangle([680, 400], [170, 50]);
+    playButton.fillColor = '#999999'
+    playButton.opacity = 0.6
+    var play = new PointText({
+        point: [742, 432],
+        content: 'Play',
+        fillColor: 'white',
+        fontFamily: 'Tahoma',
+        fontSize: 25
+    });
+    var group = new Group({
+        children: [backopacity, credit, gitRaz, gitNoa, TauLink, playButton, play],
+    });
+}
 //create cloud
 function createCloud() {
     const cloud = new Raster('assert/cloud.png')
