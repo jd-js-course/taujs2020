@@ -84,6 +84,29 @@ function openPage() {
     var group = new Group({
         children: [backopacity, credit, gitRaz, gitNoa, TauLink, playButton, play],
     });
+    gitRaz.onClick = function (event) {
+        window.open("https://github.com/RazBaran");;
+    }
+    gitNoa.onClick = function (event) {
+        window.open("https://github.com/NoaShimoni");;
+    }
+    TauLink.onClick = function (event) {
+        window.open("https://arts.tau.ac.il/");;
+    }
+    play.onClick = function (event) {
+        group.visible = false
+        document.getElementById("btnDownload").disabled = false;
+        document.getElementById("btnNight").disabled = false;
+        document.getElementById("colorPicker").disabled = false;
+        if (sun.fillColor == '#FFCA06') {
+            morningMusic.play()
+        }
+        else {
+            nightMusic.play()
+        }
+        document.getElementById("btnAbout").style.visibility = "visible";
+    }
+    return group
 }
 //create cloud
 function createCloud() {
@@ -190,6 +213,17 @@ for (let j = 0; j < 12; j++) {
     check.x = (318)
     check.y = check.y + 41
 }
+//start game
+var group = openPage();
+btnAbout.addEventListener("click", function () {
+    document.getElementById("btnAbout").style.visibility = "hidden";
+    document.getElementById("btnDownload").disabled = true;
+    document.getElementById("btnNight").disabled = true;
+    document.getElementById("colorPicker").disabled = true;
+    morningMusic.stop()
+    nightMusic.stop()
+    group.visible = true;
+});
 var gameNight = false;
 //clouds and stars animation
 function main() {
