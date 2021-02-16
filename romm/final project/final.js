@@ -50,9 +50,6 @@ function randInt(min, max) {
 }
 var colors = [
     'white',
-    'white',
-    'white',
-    'white',
     'black',
     'red',
     'blue',
