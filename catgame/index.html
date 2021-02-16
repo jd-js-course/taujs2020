@@ -3,7 +3,6 @@
 
 <head>
     <script type="module" src="app.js"></script>
-
     <style>
         html,
         body {
@@ -11,16 +10,29 @@
             overflow: hidden;
             height: 100%;
             background: rgb(249,173,129);
-
         }
-
-
     </style>
 </head>
 
 <body>
-    <img id="julio" style="position: absolute; top: 0; left: 0;"/>
-    <canvas id="julio-map" style="position: absolute; top:0; left: 0; z-index: -1; visibility: hidden;"></canvas>
+
+    <div id="splashscreen"> <!--Shows the splash screen-->
+        <img src="splashscreen.png" width="800" height="500"/>
+    </div>
+
+    <div id="start"> <!--Shows the start menu-->
+        <button id="startbutton">Start a new game</button>
+    </div>
+
+    <div id="game"> <!--Shows the actual game -->
+        <img id="julio" style="position: absolute; top: 0; left: 0;"/>
+        <canvas id="julio-map" style="position: absolute; top:0; left: 0; z-index: -1; visibility: hidden;"></canvas>
+    </div>
+
+    <div id="gameOver"> <!--Shows the start menu-->
+        <img src="gameovercat.png" width="800" height="500"/>
+    </div> 
+
 </body>
 
 </html>

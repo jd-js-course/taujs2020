@@ -1,43 +1,63 @@
-////comment
-class Cat {
+////////////////////////Menu part start/////////////////////////////////////////
 
-    mood = 'stand'
-    preferences = {
-        //defining our cat's mood - where he likes being petted. we need to make this part randomised for each new game sesion.
-        //this function generates random number (0 to 1)for every 'if' function. 
-        //The function than decides wether the argument is higher or lower than 0.5.
-        //Upon detection the if functions will tag the body parts as true for liking and false for unliking
-        if (math.random() < 0.5) {
-            legs: false
-        }
-        else {
-            legs: true
-        }
-        if (math.random() < 0.5) {
-            back: false
-        }
-        else {
-            back: true
-        }
-        if (math.random() < 0.5) {
-            belly: false
-        }
-        else {
-            belly: true
-        }
-        if (math.random() < 0.5) {
-            tail: false
-        }
-        else {
-            tail: true
-        }
-        if (math.random() < 0.5) {
-            head: false
-        }
-        else {
-            head: true
-        }
+function hide(id) { //Hiding elements by id
+    document.getElementById(id).className = "hidden";
+}
+
+function show(id) { //Showing elements by id
+    document.getElementById(id).className = "";
+}
+
+function gameMenu(id) { //decides what screen is displayed
+    switch (id) {
+        case 1:
+            show("splashscreen");
+            hide("start");
+            hide("game");
+            hide("gameOver");
+            break;
+        case 2:
+            show("start");
+            hide("game");
+            hide("gameOver");
+            hide("splashscreen");
+            break;
+        case 3:
+            show("game");
+            hide("start");
+            hide("gameOver");
+            hide("splashscreen");
+            break;
+        case 4:
+            show("gameOver");
+            hide("start");
+            hide("game");
+            hide("splashscreen");
+            break;
     }
+}
+
+//helper functions to set hide n' show menu screens
+function splashscreen(){
+    gameMenu(1);
+} 
+
+function startscreen(){ 
+    gameMenu(2);
+} 
+
+function startThegame(){ 
+    gameMenu(3);
+} 
+
+//accept clicks on images
+document.getElementById("splashscreen").addEventListener("click", startscreen); //send to start screen
+document.getElementById("startbutton").addEventListener("click", startThegame); //send to game screen
+document.getElementById("gameover").addEventListener("click", startscreen); //send to game screen
+
+splashscreen(); //starts the game at the splash screen
+
+//////////////////////Menu part end//////////////////////////////////////////////
 
     graphics = {
         //here we define our cat's different poses - the various images we use in the game - and each matching color coded map.
@@ -100,6 +120,46 @@ class Cat {
 
     }
 
+    class Cat {
+
+        mood = 'stand';
+        preferences = {
+            //defining our cat's mood - where he likes being petted. we need to make this part randomised for each new game sesion.
+            //this function generates random number (0 to 1)for every 'if' function. 
+            //The function than decides wether the argument is higher or lower than 0.5.
+            //Upon detection the if functions will tag the body parts as true for liking and false for unliking
+            if (math.random() < 0.5) {
+                legs: false
+            }
+            else {
+                legs: true
+            }
+            if (math.random() < 0.5) {
+                back: false
+            }
+            else {
+                back: true
+            }
+            if (math.random() < 0.5) {
+                belly: false
+            }
+            else {
+                belly: true
+            }
+            if (math.random() < 0.5) {
+                tail: false
+            }
+            else {
+                tail: true
+            }
+            if (math.random() < 0.5) {
+                head: false
+            }
+            else {
+                head: true
+            }
+        }
+    }
 
     stroke(bodypart) {
         //check what organ was clicked
@@ -216,11 +276,10 @@ class Cat {
 
 const julio = new Cat() //starting the game - a cat appears on screen
 
-const main = () => {
+const main = () => { //WHAT DOES THIS FUNCTION DO?
 
     julio.render()
 }
-
 
 
 window.addEventListener('load', main)
