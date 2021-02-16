@@ -3,12 +3,12 @@ const mycanvas = document.querySelector("#paper")
 btnDownload.addEventListener("click", function () {
     const dataURI = mycanvas.toDataURL("image/jpeg");
     if (window.navigator.msSaveBlob) {
-        window.navigator.msSaveBlob(mycanvas.msToBlob(), "canvas-image.png");
+        window.navigator.msSaveBlob(mycanvas.msToBlob(), "TLV-IN-LIGHTS.png");
     } else {
         const a = document.createElement("a")
         document.body.appendChild(a)
         a.href = mycanvas.toDataURL();
-        a.download = "canvas-image.png"
+        a.download = "TLV-IN-LIGHTS.png"
         a.click();
         document.mycanvas.removeChild(a);
     }
