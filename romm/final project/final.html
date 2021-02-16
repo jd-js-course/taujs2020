@@ -1,102 +1,183 @@
-<canvas id="doodle" width="800" height="600" style="border:3px solid #000000;"></canvas>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+  <canvas id="doodle" width="800" height="600" style="border:3px solid #000000;"></canvas>
+  <!-- <a href="music.mp3">Play music</a>
+  <audio src="music.mp3"></audio> -->
+</body>
+</html>
 
 <script type="text/javascript">
-function randInt (min, max) {
-  return Math.floor(Math.random() * (max - min) + min)
-}
-
-class Point {
-  constructor (x, y) {
-    this.x = x
-    this.y = y
+  function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min)
   }
-}
 
-var colors = [
+  var dict = {};
+  var list = [];
+  class Point {
+    constructor(x, y) {
+      this.x = x
+      this.y = y
+    }
+  }
+
+  var colors = [
     'white',
     'white',
     'white',
     'white',
-//    'black',
-//    'red',
-//    'blue',
-//    'yellow'  
+    //    'black',
+    //    'red',
+    //    'blue',
+    //    'yellow'  
 
     // need to add here more colors to allow it to show them on browser
-//question: how do start with all white, then add colors by clicking?
-]
+    //question: how do start with all white, then add colors by clicking?
+  ]
 
-class Rectangle {
-  constructor (min, max) {
-    this.min = min
-    this.max = max
-  }
-
-  get width () {
-    return this.max.x - this.min.x
-  }
-
-  get height () {
-    return this.max.y - this.min.y
-  }
-
-  draw (ctx) {
-    // Draw clockwise
-    ctx.moveTo(this.min.x, this.min.y)
-    ctx.lineTo(this.max.x, this.min.y)
-    ctx.lineTo(this.max.x, this.max.y)
-    ctx.lineTo(this.min.x, this.max.y)
-    ctx.lineTo(this.min.x, this.min.y)
-  }
-
-  split (xPad, yPad, depth, limit, ctx) {
-    ctx.fillStyle = colors[randInt(0, colors.length)]
-    ctx.fillRect(this.min.x, this.min.y, this.max.x, this.max.y)
-    this.draw(ctx)
-
-    // Check the level of recursion
-    if (depth === limit) {
-      return
+  class Rectangle {
+    constructor(min, max) {
+      this.min = min
+      this.max = max
     }
 
-    // Check the rectangle is enough large and tall
-    if (this.width < 2 * xPad || this.height < 2 * yPad) {
-      return
+    get width() {
+      return this.max.x - this.min.x
     }
 
-    // If the rectangle is wider than it's height do a left/right split
-    var r1 = new Rectangle()
-    var r2 = new Rectangle()
-    if (this.width > this.height) {
-      var x = randInt(this.min.x + xPad, this.max.x - xPad)
-      r1 = new Rectangle(this.min, new Point(x, this.max.y))
-      r2 = new Rectangle(new Point(x, this.min.y), this.max)
-    // Else do a top/bottom split
-    } else {
-      var y = randInt(this.min.y + yPad, this.max.y - yPad)
-      r1 = new Rectangle(this.min, new Point(this.max.x, y))
-      r2 = new Rectangle(new Point(this.min.x, y), this.max)
+    get height() {
+      return this.max.y - this.min.y
     }
 
-    // Split the sub-rectangles
-    r1.split(xPad, yPad, depth + 1, limit, ctx)
-    r2.split(xPad, yPad, depth + 1, limit, ctx)
+    draw(ctx) {
+      // Draw clockwise
+      ctx.moveTo(this.min.x, this.min.y)
+      ctx.lineTo(this.max.x, this.min.y)
+      ctx.lineTo(this.max.x, this.max.y)
+      ctx.lineTo(this.min.x, this.max.y)
+      ctx.lineTo(this.min.x, this.min.y)
+    }
+
+    split(xPad, yPad, depth, limit, ctx) {
+      ctx.fillStyle = colors[randInt(0, colors.length)]
+      ctx.fillRect(this.min.x, this.min.y, this.max.x, this.max.y)
+
+      this.draw(ctx)
+
+      // Check the level of recursion
+      if (depth === limit) {
+        return
+      }
+
+      // Check the rectangle is enough large and tall
+      if (this.width < 2 * xPad || this.height < 2 * yPad) {
+        return
+      }
+
+      // If the rectangle is wider than it's height do a left/right split
+      var r1 = new Rectangle()
+      var r2 = new Rectangle()
+      if (this.width > this.height) {
+        var x = randInt(this.min.x + xPad, this.max.x - xPad)
+        r1 = new Rectangle(this.min, new Point(x, this.max.y))
+
+        dict['minX'] = this.min.x;
+        dict['minY'] = this.min.y;
+        dict['maxX'] = x;
+        dict['maxY'] = this.max.y;
+        list.push(dict);
+        dict = {}
+        r2 = new Rectangle(new Point(x, this.min.y), this.max)
+
+        dict['minX'] = x;
+        dict['minY'] = this.min.y;
+        dict['maxX'] = this.max.x;
+        dict['maxY'] = this.max.y;
+        list.push(dict);
+        dict = {}
+        // Else do a top/bottom split
+      } else {
+        var y = randInt(this.min.y + yPad, this.max.y - yPad)
+        r1 = new Rectangle(this.min, new Point(this.max.x, y))
+        dict['minX'] = this.min.x;
+        dict['minY'] = this.min.y;
+        dict['maxX'] = this.max.x;
+        dict['maxY'] = y;
+        list.push(dict);
+        dict = {}
+        r2 = new Rectangle(new Point(this.min.x, y), this.max)
+        dict['minX'] = this.min.x;
+        dict['minY'] = y;
+        dict['maxX'] = this.max.x;
+        dict['maxY'] = this.max.y;
+        list.push(dict);
+        dict = {}
+      }
+      // Split the sub-rectangles
+      r1.split(xPad, yPad, depth + 1, limit, ctx)
+      r2.split(xPad, yPad, depth + 1, limit, ctx)
+    }
   }
-}
 
-var canvas = document.getElementById('doodle')
-var ctx = canvas.getContext('2d')
-ctx.beginPath()
-ctx.lineWidth = 4
+  var canvas = document.getElementById('doodle')
+  var ctx = canvas.getContext('2d')
+  var clr = ['black', 'blue', 'red', 'yellow']
+  var j=0
+  ctx.beginPath()
+  ctx.lineWidth = 4
 
-var xPad = Math.floor(canvas.width * 0.1)
-var yPad = Math.floor(canvas.height * 0.1)
+  var xPad = Math.floor(canvas.width * 0.1)
+  var yPad = Math.floor(canvas.height * 0.1)
 
-var initialRect = new Rectangle(new Point(0, 0), new Point(canvas.width, canvas.height))
+  var initialRect = new Rectangle(new Point(0, 0), new Point(canvas.width, canvas.height))
 
-initialRect.split(xPad, yPad, 0, 5, ctx)
+  initialRect.split(xPad, yPad, 0, 5, ctx)
 
-ctx.stroke()
+  ctx.stroke()
+
+  function getCursorPosition(canvas, event) {
+    let i;
+    const rect = canvas.getBoundingClientRect()
+    const x = event.clientX - rect.left
+    const y = event.clientY - rect.top
+    console.log(x,y);
+    for ( i = list.length-1; i >=0 ; i--) {
+      if ((x > list[i].minX) && (x < list[i].maxX )&& (y > list[i].minY) && (y < list[i].maxY)) {
+        let can = document.getElementById('doodle')
+        let ct = canvas.getContext('2d')
+        ct.fillStyle = clr[j];
+        j++;
+        if(j==4)
+        {
+          j=0;
+        }
+        ct.fillRect(list[i].minX, list[i].minY, list[i].maxX, list[i].maxY);
+        console.log(list[i].minX, list[i].minY, list[i].maxX, list[i].maxY);
+        // let  r2 = new Rectangle(new Point(list[i].minX, list[i].minY), new Point( list[i].maxX, list[i].maxY))
+        // r2.draw(ct);
+        break;
+      }
+
+    }
+  }
+
+  canvas.addEventListener('mousedown', function (e) {
+    console.log("hello");
+    getCursorPosition(canvas, e)
+  })
+console.log(list);
+  // background music
+
+
+  var mp3snd = "music.mp3";
+
+document.write('<audio autoplay="autoplay">');
+document.write('<source src="'+mp3snd+'" type="audio/mpeg">');
+document.write('<!--[if lt IE 9]>');
+document.write('<bgsound src="'+mp3snd+'" loop="1">');
+document.write('<![endif]-->');
+document.write('</audio>');
 
 </script>
-
