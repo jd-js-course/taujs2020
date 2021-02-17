@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 </head>
+
 <body>
   <canvas id="doodle" width="800" height="600" style="border:3px solid #000000;"></canvas>
- 
 </body>
+
 </html>
 
 <script type="text/javascript">
@@ -21,7 +23,7 @@
       this.y = y
     }
   }
-
+  
   var colors = [
     'white',
     'white',
@@ -52,6 +54,7 @@
 
     draw(ctx) {
       // Draw clockwise
+
       ctx.moveTo(this.min.x, this.min.y)
       ctx.lineTo(this.max.x, this.min.y)
       ctx.lineTo(this.max.x, this.max.y)
@@ -62,7 +65,13 @@
     split(xPad, yPad, depth, limit, ctx) {
       ctx.fillStyle = colors[randInt(0, colors.length)]
       ctx.fillRect(this.min.x, this.min.y, this.max.x, this.max.y)
-
+      dict['minX'] = this.min.x;
+      dict['minY'] = this.min.y;
+      dict['maxX'] = this.max.x;
+      dict['maxY'] = this.max.y;
+      dict['j'] = 0;
+      list.push(dict);
+      dict = {}
       this.draw(ctx)
 
       // Check the level of recursion
@@ -82,37 +91,15 @@
         var x = randInt(this.min.x + xPad, this.max.x - xPad)
         r1 = new Rectangle(this.min, new Point(x, this.max.y))
 
-        dict['minX'] = this.min.x;
-        dict['minY'] = this.min.y;
-        dict['maxX'] = x;
-        dict['maxY'] = this.max.y;
-        list.push(dict);
-        dict = {}
         r2 = new Rectangle(new Point(x, this.min.y), this.max)
 
-        dict['minX'] = x;
-        dict['minY'] = this.min.y;
-        dict['maxX'] = this.max.x;
-        dict['maxY'] = this.max.y;
-        list.push(dict);
-        dict = {}
         // Else do a top/bottom split
       } else {
         var y = randInt(this.min.y + yPad, this.max.y - yPad)
         r1 = new Rectangle(this.min, new Point(this.max.x, y))
-        dict['minX'] = this.min.x;
-        dict['minY'] = this.min.y;
-        dict['maxX'] = this.max.x;
-        dict['maxY'] = y;
-        list.push(dict);
-        dict = {}
+
         r2 = new Rectangle(new Point(this.min.x, y), this.max)
-        dict['minX'] = this.min.x;
-        dict['minY'] = y;
-        dict['maxX'] = this.max.x;
-        dict['maxY'] = this.max.y;
-        list.push(dict);
-        dict = {}
+
       }
       // Split the sub-rectangles
       r1.split(xPad, yPad, depth + 1, limit, ctx)
@@ -122,8 +109,8 @@
 
   var canvas = document.getElementById('doodle')
   var ctx = canvas.getContext('2d')
-  var clr = ['black', 'blue', 'red', 'yellow']
-  var j=0
+  var clr = ['black', 'blue', 'yellow', 'red', 'white']
+
   ctx.beginPath()
   ctx.lineWidth = 4
 
@@ -141,21 +128,21 @@
     const rect = canvas.getBoundingClientRect()
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
-    console.log(x,y);
-    for ( i = list.length-1; i >=0 ; i--) {
-      if ((x > list[i].minX) && (x < list[i].maxX )&& (y > list[i].minY) && (y < list[i].maxY)) {
+   
+    for (i = list.length - 1; i >= 0; i--) {
+      if ((x > list[i].minX) && (x < list[i].maxX) && (y > list[i].minY) && (y < list[i].maxY)) {
         let can = document.getElementById('doodle')
         let ct = canvas.getContext('2d')
-        ct.fillStyle = clr[j];
-        j++;
-        if(j==4)
-        {
-          j=0;
+
+        ct.fillStyle = clr[list[i].j];
+        list[i].j++
+        if (list[i].j == 5) {
+          list[i].j = 0;
         }
-        ct.fillRect(list[i].minX, list[i].minY, list[i].maxX, list[i].maxY);
-        console.log(list[i].minX, list[i].minY, list[i].maxX, list[i].maxY);
-        // let  r2 = new Rectangle(new Point(list[i].minX, list[i].minY), new Point( list[i].maxX, list[i].maxY))
-        // r2.draw(ct);
+
+        ct.fillRect(list[i].minX + 2, list[i].minY + 2, (list[i].maxX - list[i].minX) - 2, (list[i].maxY - list[i].minY) - 2);
+      
+
         break;
       }
 
@@ -163,20 +150,19 @@
   }
 
   canvas.addEventListener('mousedown', function (e) {
-    console.log("hello");
     getCursorPosition(canvas, e)
   })
-console.log(list);
-  // background music
 
+
+  // background music
 
   var mp3snd = "music.mp3";
 
-document.write('<audio autoplay="autoplay">');
-document.write('<source src="'+mp3snd+'" type="audio/mpeg">');
-document.write('<!--[if lt IE 9]>');
-document.write('<bgsound src="'+mp3snd+'" loop="1">');
-document.write('<![endif]-->');
-document.write('</audio>');
+  document.write('<audio autoplay="autoplay">');
+  document.write('<source src="' + mp3snd + '" type="audio/mpeg">');
+  document.write('<!--[if lt IE 9]>');
+  document.write('<bgsound src="' + mp3snd + '" loop="1">');
+  document.write('<![endif]-->');
+  document.write('</audio>');
 
 </script>
