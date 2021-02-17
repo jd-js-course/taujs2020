@@ -1,14 +1,13 @@
 const createShip = () => {
     var path = new Path([-10, -8], [10, 0], [-10, 8], [-8, 4], [-8, -4]);
     path.closed = true;
-    path.fillColor = '#f26352'
     var thrust = new Path([-8, -4], [-14, 0], [-8, 4]);
-    thrust.fillColor = '#e8c8be'
     var group = new Group(path, thrust);
     group.position = view.bounds.center;
-    group.strokeColor ='white'
-    group.currentRotation = 0;
-    group.scale(2)
+    group.strokeColor = 'white'
+    group.vec = new Point();
+    group.vec.length = 0;
+    group.vec.angle = 0;
     return group
 }
 
@@ -18,78 +17,211 @@ const createAsteroid = () => {
         [46, 9.5], [22, 38.5], [-10, 30.5], [-22, 40.5], [-46, 18.5],
         [-33, 0.5], [-44, -21.5], [-23, -40.5])
     rock.strokeColor = 'white'
-    rock.fillColor = '#917c71'
+    rock.fillColor = "white"
     rock.scale(Point.random())
     rock.position = Point.random() * view.size;
-    rock.vec =  Point.random()- Point.random()*2
+    rock.vec = Point.random() - Point.random() * 2
     return rock;
 }
 
 const main = () => {
+
+    let gameStarted = false
+    let gameEnded = false
+    let shipExploding = false
+
     const ship = createShip()
 
-    const num = Math.random() * 5 + 20
 
+    const shots = []
     const rocks = []
-    for (let i=0; i<num;i++){
+    const num = Math.random() * 5 + 5
+    for (let i = 0; i < num; i++) {
         rocks.push(createAsteroid())
-    }   
+    }
 
-    onMouseMove = (event) => {
-        
-        const pos_delta = ship.position.getDistance(event.point)
-        if (pos_delta < 10)
-            return
+    const explosion = new Raster('assets/images/explosion.png');
+    explosion.position = [-1000, -1000]
 
-        var direction_vect = event.point - ship.position
+    var bgMusic = new Howl({
+        src: ['assets/sound/bgMusic.mp3'],
+        loop: true,
+        volume: 0.2
+    });
 
-        ship.position = event.point
-        const delta = direction_vect.angle - ship.currentRotation
-        ship.rotate(delta)
-        if (event.delta.angle)
-            ship.currentRotation = direction_vect.angle
+    var explosionSound = new Howl({
+        src: ['assets/sound/explosion.mp3'],
+        loop: false,
+        volume: 0.2
+    });
+
+    var rockExplodeSound = new Howl({
+        src: ['assets/sound/rockExplosion.mp3'],
+        loop: false,
+        volume: 0.4
+    });
+
+    const shotSynth = new Tone.PolySynth(Tone.Synth, {
+        oscillator: {
+            type: "fatsawtooth",
+            count: 3,
+            spread: 30
+        },
+        envelope: {
+            attack: 0.01,
+            decay: 0.1,
+            sustain: 0.5,
+            release: 0.4,
+            attackCurve: "exponential"
+        }
+    }).toDestination();
+
+    /*const rockExplodeSynth = new Tone.FMSynth({
+        modulationIndex: 12.22,
+        envelope: {
+            attack: 0.01,
+            decay: 0.2
+        },
+        modulation:{
+            type: "square"
+        },
+        modulationEnvelope: {
+            attack: 0.2,
+            decay: 0.01
+        }
+    }).toDestination();
+    */
+
+
+    onKeyDown = (event) => {
+
+        if (!gameStarted && !gameEnded) {
+            gameStarted = true
+            bgMusic.play()
+        }
+
+
+        switch (event.key) {
+            case 'space':
+
+                const shot = new Path.Circle({
+                    center: ship.position,
+                    radius: 2,
+                    fillColor: 'blue'
+                })
+                shot.vec = new Point({
+                    angle: ship.vec.angle,
+                    length: 10
+                })
+                shots.push(shot)
+
+                shotSynth.triggerAttackRelease("C2", "16n")
+
+                break;
+            case 'up':
+                ship.vec.length = ship.vec.length + 0.2
+                break;
+            case 'down':
+                ship.vec.length = ship.vec.length - 0.2
+                break;
+            case 'right':
+                ship.rotate(5)
+                ship.vec.angle += 5
+                break;
+            case 'left':
+                ship.rotate(-5)
+                ship.vec.angle -= 5
+                break;
+        }
+        console.log(ship.vec)
     }
 
     checkCollision = () => {
-        let found_collision = false;
-        for (let i =0; i <rocks.length; i++ ){
-            if (rocks[i].visible && ship.intersects(rocks[i])){
-                rocks[i].remove()
-                rocks[i].visible = false
-                found_collision = true;
+        for (let i = 0; i < rocks.length; i++) {
+            for (let j = 0; j < shots.length; j++) {
+                if (shots[j].intersects(rocks[i])) {
+                    rocks[i].remove();
+                    rocks.splice(i,1);
+                    //rockExplodeSynth.triggerAttackRelease("C3", "16n");
+                    rockExplodeSound.play()
+                    
+                    const num = Math.random() * 1 + 1
+                    for (let i = 0; i < num; i++) {
+                        rocks.push(createAsteroid())
+                    }
+                    
+                }
             }
+            if (ship.intersects(rocks[i])) {
+                // rocks[i].remove()
+                shipExploding = true;
+                explosion.scale(0.1)
+                explosion.position = ship.position;
+                bgMusic.stop()
+                explosionSound.play()
+                ship.remove()
+            }
+        
         }
-
-        return found_collision;
     }
 
     onFrame = (event) => {
 
-        for (let i = 0; i <rocks.length; i++ ){
+        if (gameEnded) {
+            return;
+        }
+
+        if (shipExploding) {
+            explosion.scale(1.2)
+            setTimeout(() => {
+                gameEnded = true;
+                explosion.position = [-400, -400]
+            }, 400)
+            return;
+        }
+
+        ship.position += ship.vec;
+        if (ship.position.x > view.bounds.width) {
+            ship.position.x = 0;
+        }
+        if (ship.position.x < 0) {
+            ship.position.x = view.bounds.width;
+        }
+
+        if (ship.position.y < 0) {
+            ship.position.y = view.bounds.height;
+        }
+        if (ship.position.y > view.bounds.height) {
+            ship.position.y = 0;
+        }
+
+        for (let i = 0; i < rocks.length; i++) {
 
             const rock = rocks[i];
-            rock.position+=rock.vec
+            rock.position += rock.vec
 
-            if (rock.position.x > view.bounds.width){
-                rock.position.x =0;
+            if (rock.position.x > view.bounds.width) {
+                rock.position.x = 0;
             }
-            if (rock.position.x <0){
-                rock.position.x =view.bounds.width;
+            if (rock.position.x < 0) {
+                rock.position.x = view.bounds.width;
             }
 
-            if (rock.position.y <0){
-                rock.position.y =view.bounds.height;
+            if (rock.position.y < 0) {
+                rock.position.y = view.bounds.height;
             }
-            if (rock.position.y > view.bounds.height){
-                rock.position.y =0;
+            if (rock.position.y > view.bounds.height) {
+                rock.position.y = 0;
             }
         }
-        found = checkCollision()
 
-        if (found)
-            rocks.push(createAsteroid())
+        for (let i = 0; i < shots.length; i++) {
+            shots[i].position += shots[i].vec
+        }
+
+        checkCollision()
     }
 }
 
-main()
 
+main()
