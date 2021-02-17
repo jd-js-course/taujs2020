@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Records</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+
+    <a href="record.html">New Recording</a>
+    <ul id="records">
+
+    </ul>
+
+    <h3>Add Effects:</h3>
+    <ul>
+        <li>
+            <a onclick="sound.addEffect(ringModulator);">Ring Modulator</a>
+        </li>
+        <li>
+            <a onclick="sound.addEffect(delay);">Delay</a>
+        </li>
+        <li>
+            <a onclick="sound.addEffect(distortion);">Distortion</a>
+        </li>
+    </ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.min.js"></script>
+    <script src="javascripts/list.js"></script>
+</body>
+</html>
