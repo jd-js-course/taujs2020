@@ -95,6 +95,8 @@ class Rectangle {
         r2.split(xPad, yPad, depth+1, limit, ctx)
     }
 
+
+    
 }
 var c = document.getElementById("doodle")
 var ctx = c.getContext("2d")
