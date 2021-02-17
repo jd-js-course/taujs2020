@@ -12,7 +12,7 @@ const createPlayer = () => {
 
 
 const createZombie = () => {
-    const zombie = new Path.Circle(new Point(1000, 1000), 20);
+    const zombie = new Path.Circle(new Point(1000, 1000), 15);
     zombie.strokeColor = 'black'
     zombie.fillColor = 'green'
     zombie.position = Point.random() * view.size;
