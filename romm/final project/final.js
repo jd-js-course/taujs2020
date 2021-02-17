@@ -12,11 +12,11 @@ class Point {
 }
 
 var colors = [
-    'white',
-    'black',
-    'red',
-    'blue',
-    'yellow'
+    '#F2F2F2', //'white',
+    '#0A0B06', //'black',
+    '#D91C0B', //'red',
+    '#023373', //'blue',
+    '#F2CB05' //'yellow',
 ]
 
 class Rectangle {
@@ -88,7 +88,7 @@ class Rectangle {
     }
 }
 
-var canvas = document.getElementById('doodle')
+var canvas = document.getElementById('mondrian')
 var ctx = canvas.getContext('2d')
 
 ctx.beginPath()
