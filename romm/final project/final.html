@@ -4,15 +4,27 @@
 <head>
 </head>
 
+<style>
+
+  canvas {
+    cursor: url("./brush.svg") 0 37, auto;
+  }
+</style>
 
 <body>
 <div>
-<audio src="./music.mp3" autoplay loop controls style="margin: auto; display: block"></audio>
+<button onclick="fillPainting()" style="margin: auto; display: block; margin-bottom: 15px; margin-top: 15px; padding: 10px">Refresh</button>
+
+<canvas id="mondrian" width="800" height="600" style="border:3px solid #000000; margin-top: 50px; display: block; margin: 25px auto"></canvas>
 </div>
 <div>
-<button onclick="fillPainting()" style="margin: auto; display: block; margin-bottom: 25px; margin-top: 25px; padding: 10px">Refresh</button>
-
-<canvas id="mondrian" width="800" height="600" style="border:3px solid #000000; margin-top: 50px; display: block; margin: auto"></canvas>
+  <button onclick="exportImage()" style="margin: auto; display: block; margin-bottom: 15px; margin-top: 15px; padding: 10px">Export</button>
+</div>
+<div>
+  <audio class="backgroundmusic" src="./music.mp3" autoplay loop controls style="margin: auto; display: block"></audio>
+  <audio class="shoowshaudio">
+    <source src="./swoosh.mp3">
+  </audio>
 </div>
 
 </body>

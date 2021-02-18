@@ -2,8 +2,12 @@ function randInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min)
 }
 
+var music = document.querySelector('.backgroundmusic')
+music.volume = 0.4
+
 var dict = {}
 var list = []
+
 class Point {
     constructor(x, y) {
         this.x = x
@@ -12,11 +16,11 @@ class Point {
 }
 
 var colors = [
-    '#F2F2F2', //'white',
-    '#0A0B06', //'black',
-    '#D91C0B', //'red',
-    '#023373', //'blue',
-    '#F2CB05' //'yellow',
+    'white',
+    'black',
+    'red',
+    'blue',
+    'yellow'
 ]
 
 class Rectangle {
@@ -118,9 +122,9 @@ function fillPainting() {
 
 function getCursorPosition(canvas, event) {
     let i
-    const rect = canvas.getBoundingClientRect()
-    const x = event.clientX - rect.left
-    const y = event.clientY - rect.top
+    let rect = canvas.getBoundingClientRect()
+    let x = event.clientX - rect.left
+    let y = event.clientY - rect.top
 
     for (i = list.length - 1; i >= 0; i--) {
         if ((x > list[i].minX) && (x < list[i].maxX) && (y > list[i].minY) && (y < list[i].maxY)) {
@@ -143,4 +147,38 @@ function getCursorPosition(canvas, event) {
 
 canvas.addEventListener('mousedown', function (e) {
     getCursorPosition(canvas, e)
+
+    document.querySelector('.shoowshaudio').currentTime = 0
+    document.querySelector('.shoowshaudio').play()
 })
+
+function exportImage() {
+    var fileName = "image"
+    var link = document.createElement('a')
+    link.download = fileName + '.jpeg'
+
+    // Add watermark
+    var canv = document.createElement('canvas')
+    canv.height = 600
+    canv.width = 800
+    var canvCtx = canv.getContext('2d')
+
+    // Copy old canvas
+    canvCtx.drawImage(canvas, 0,0)
+
+    // Write watermark text
+    canvCtx.font = 'bold 25px sans-serif'
+    canvCtx.fillText('THANK YOU', 575, 525)
+    canvCtx.fillText('FOR PLAYING', 564, 555)
+    canvCtx.strokeStyle = 'white'
+
+    // Write watermark outline
+    canvCtx.strokeText('THANK YOU', 575, 525)
+    canvCtx.strokeText('FOR PLAYING', 564, 555)
+
+    // Save image
+    canv.toBlob(function(blob) {
+        link.href = URL.createObjectURL(blob)
+        link.click()
+    });
+}
