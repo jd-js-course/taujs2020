@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ////////////////////////Menu part start/////////////////////////////////////////
 
 function hide(id) { //Hiding elements by id
@@ -35,7 +34,6 @@ function gameMenu(id) { //decides what screen is displayed
             hide("game");
             hide("splashscreen");
             break;
-=======
 ////comment
 //loading the PaperJS library
 paper.install(window)
@@ -66,7 +64,6 @@ class Cat {
         //  head: false}
         // else {head: true}
         //  do this for each property of the cats behaviour
->>>>>>> cf44590a8d6fb66033c8b917201f1797814f6dd8
     }
 }
 
