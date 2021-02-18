@@ -103,6 +103,19 @@ initialRect.split(xPad, yPad, 0, 5, ctx)
 
 ctx.stroke()
 
+function fillPainting() {
+    list = []
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.beginPath()
+
+    initialRect = new Rectangle(new Point(0, 0), new Point(canvas.width, canvas.height))
+
+    initialRect.split(xPad, yPad, 0, 5, ctx)
+
+    ctx.stroke()
+}
+
 function getCursorPosition(canvas, event) {
     let i
     const rect = canvas.getBoundingClientRect()
@@ -115,7 +128,6 @@ function getCursorPosition(canvas, event) {
             // Get random color fill
             do {
                 list[i].j = randInt(0, colors.length)
-                console.log(list[i].j)
             } while (list[i].j === curClr)
 
             ctx.fillStyle = colors[list[i].j]
