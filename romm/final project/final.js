@@ -92,7 +92,7 @@ class Rectangle {
     }
 }
 
-var canvas = document.getElementById('mondrian')
+var canvas = document.getElementById('doodle')
 var ctx = canvas.getContext('2d')
 
 ctx.beginPath()
@@ -181,4 +181,15 @@ function exportImage() {
         link.href = URL.createObjectURL(blob)
         link.click()
     });
+}
+
+function backgroundMusic() {
+    var button = document.querySelector('.musicButton');
+    if (music.paused == true) {
+        button.innerText = 'Music off'
+        music.play()
+    } else {
+        button.innerText = 'Music on'
+        music.pause()
+    }
 }
