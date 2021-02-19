@@ -4,23 +4,52 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.11/paper-full.js"></script> 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/acorn/4.0.11/acorn.js'></script>
     <script type="text/paperscript" canvas="paper" src="background.js"></script> 
+    
     <style> 
+            .btn {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn:hover {background: #eee;}
+
+        .success {color: green;}
+        .info {color: dodgerblue;}
+        .warning {color: orange;}
+        .danger {color: red;}
+        .default {color: black;}
         html, 
         body { 
             margin: 0; 
             overflow: hidden;
-            height: 100%; background: rgba(143, 233, 255, 0.596);  
+            height: 100%; 
+            /* background: rgba(143, 233, 255, 0.596);   */
         } 
+
         /* Scale canvas with resize attribute to full size */ 
-            
+
+
         canvas[resize] { 
             width: 100%; 
             height: 100%; 
         } 
-     </style> 
+
+
+    </style> 
 </head>
 
- <body>
-     <canvas id="paper" resize></canvas> 
-</body> 
+<body>
+
+    <button class="btn success">Success</button>
+    <button class="btn info">Info</button>
+    <button class="btn warning">Warning</button>
+    <button class="btn danger">Danger</button>
+    <button class="btn default">Default</button>
+
+        <canvas id="paper" resize></canvas> 
+     </body>
 </html>
