@@ -140,6 +140,9 @@ const createZombie = () => {
 }
 
 const main = () => {
+
+    let gameStarted = false
+    let gameEnded = false
     
     const bones1 = []
     const bones2 = []
