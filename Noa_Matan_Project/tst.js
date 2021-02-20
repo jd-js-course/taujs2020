@@ -10,103 +10,130 @@ const createPlayer = () => {
     return group
 }
 
+// create background
+
+const createbone1 = () => {
+    const bone1 = new Raster('assets/IMG/BONE1.png');
+    bone1.position = Point.random() * view.size;
+    bone1.scale(Point.random()*0.005+0.1)
+    bone1.vec = Point.random() - Point.random() * 2
+    return bone1
+    }
+    
+    const createbone2 = () => {
+    const bone2 = new Raster('assets/IMG/BONE2.png');
+    bone2.position = Point.random() * view.size;
+    bone2.scale(Point.random()*0.005+0.1)
+    bone2.vec = Point.random() - Point.random() * 2
+    return bone2
+    }
+    
+    const createscull = () => {
+    const scull = new Raster('assets/IMG/SCULL.png');
+    scull.position = Point.random() * view.size;
+    scull.scale(Point.random()*0.005+0.1)
+    scull.vec = Point.random() - Point.random() * 2
+    return scull
+    }
+
 //create zombie
 
 const createZombie = () => {
 
     const knife = new Path({
-        segments: [[9,44], [109,44], [109,60]],
+        segments: [[9, 44], [109, 44], [109, 60]],
         fillColor: '#C3C4C6',
         strokeColor: 'black',
         closed: true
     });
 
     const KnifeHendel = new Path();
-KnifeHendel.strokeColor = 'black';
-KnifeHendel.fillColor = '#5D3019'
-KnifeHendel.add(new Point(109,44));
-KnifeHendel.add(new Point(109,49));
-KnifeHendel.add(new Point(136,49));
-KnifeHendel.add(new Point(136,44));
-KnifeHendel.closed = true;
+    KnifeHendel.strokeColor = 'black';
+    KnifeHendel.fillColor = '#5D3019'
+    KnifeHendel.add(new Point(109, 44));
+    KnifeHendel.add(new Point(109, 49));
+    KnifeHendel.add(new Point(136, 49));
+    KnifeHendel.add(new Point(136, 44));
+    KnifeHendel.closed = true;
 
-var rectangle = new Rectangle(new Point(30, 30), new Size(60, 60));
+    var rectangle = new Rectangle(new Point(30, 30), new Size(60, 60));
     var cornerSize = new Size(10, 10);
     var ZombieHead = new Path.Rectangle(rectangle, cornerSize);
     ZombieHead.strokeColor = 'black';
     ZombieHead.fillColor = 'green';
 
     const eye1 = new Path.Circle(new Point(47, 49), 8);
-eye1.fillColor = '#ECC777';
+    eye1.fillColor = '#ECC777';
 
-const eye1Red = new Path.Circle(new Point(46, 47), 5);
-eye1Red.fillColor = 'red';
+    const eye1Red = new Path.Circle(new Point(46, 47), 5);
+    eye1Red.fillColor = 'red';
 
-const eye1Cen = new Path.Circle(new Point(46, 47), 2);
-eye1Cen.fillColor = 'black';
+    const eye1Cen = new Path.Circle(new Point(46, 47), 2);
+    eye1Cen.fillColor = 'black';
 
-const EB1 = new Path({
-    segments: [[56, 47], [41, 39]],
-    strokeColor: 'black',
-    strokeWidth: 4,
-});
+    const EB1 = new Path({
+        segments: [[56, 47], [41, 39]],
+        strokeColor: 'black',
+        strokeWidth: 4,
+    });
 
-const eye2 = new Path.Circle(new Point(76, 55), 7);
-eye2.fillColor = '#ECC777';
+    const eye2 = new Path.Circle(new Point(76, 55), 7);
+    eye2.fillColor = '#ECC777';
 
-const eye2Red = new Path.Circle(new Point(76, 55), 5);
-eye2Red.fillColor = 'red';
+    const eye2Red = new Path.Circle(new Point(76, 55), 5);
+    eye2Red.fillColor = 'red';
 
-const eye2Cen = new Path.Circle(new Point(76, 55), 2);
-eye2Cen.fillColor = 'black';
+    const eye2Cen = new Path.Circle(new Point(76, 55), 2);
+    eye2Cen.fillColor = 'black';
 
-const EB2 = new Path({
-    segments: [[68, 51], [83, 47]],
-    strokeColor: 'black',
-    strokeWidth: 4,
-});
+    const EB2 = new Path({
+        segments: [[68, 51], [83, 47]],
+        strokeColor: 'black',
+        strokeWidth: 4,
+    });
 
-const mouth = new Path({
-    segments: [[45, 69], [74, 74]],
-    strokeColor: 'black',
-    strokeWidth: 6,
-    strokeCap: 'round',
-});
+    const mouth = new Path({
+        segments: [[45, 69], [74, 74]],
+        strokeColor: 'black',
+        strokeWidth: 6,
+        strokeCap: 'round',
+    });
 
-const scar1 = new Path({
-    segments: [[61, 35], [83, 40]],
-    strokeColor: 'black',
-    strokeWidth: 2,
-    strokeCap: 'round',
-});
+    const scar1 = new Path({
+        segments: [[61, 35], [83, 40]],
+        strokeColor: 'black',
+        strokeWidth: 2,
+        strokeCap: 'round',
+    });
 
-const scar2 = new Path({
-    segments: [[69, 35], [65, 39]],
-    strokeColor: 'black',
-    strokeWidth: 1,
-    strokeCap: 'round',
-});
+    const scar2 = new Path({
+        segments: [[69, 35], [65, 39]],
+        strokeColor: 'black',
+        strokeWidth: 1,
+        strokeCap: 'round',
+    });
 
-const scar3 = new Path({
-    segments: [[76, 35], [72, 41]],
-    strokeColor: 'black',
-    strokeWidth: 1,
-    strokeCap: 'round',
-});
+    const scar3 = new Path({
+        segments: [[76, 35], [72, 41]],
+        strokeColor: 'black',
+        strokeWidth: 1,
+        strokeCap: 'round',
+    });
 
-const scar4 = new Path({
-    segments: [[82, 37], [78, 42]],
-    strokeColor: 'black',
-    strokeWidth: 1,
-    strokeCap: 'round',
-});
+    const scar4 = new Path({
+        segments: [[82, 37], [78, 42]],
+        strokeColor: 'black',
+        strokeWidth: 1,
+        strokeCap: 'round',
+    });
 
-const zombie = new Group({
-    children: [knife,KnifeHendel,ZombieHead,eye1,eye1Red,eye1Cen,eye2,eye2Red,eye2Cen,mouth,scar1,scar2,scar3,scar4,EB1,EB2],
-    position: (60,60)
-});
-    
+    const zombie = new Group({
+        children: [knife, KnifeHendel, ZombieHead, eye1, eye1Red, eye1Cen, eye2, eye2Red, eye2Cen, mouth, scar1, scar2, scar3, scar4, EB1, EB2],
+        position: (60, 60)
+    });
+
     zombie.position = Point.random() * view.size;
+    zombie.scale(Point.random()*0.7+1)
     zombie.vec = Point.random() - Point.random() * 2
     return zombie
 
@@ -114,22 +141,52 @@ const zombie = new Group({
 
 const main = () => {
     
+    const bones1 = []
+    const bones2 = []
+    const sculls = []
     const player = createPlayer()
     const shots = []
     const zombies = []
+
+    var Music = new Howl({
+        src: ['assets/sound/Arcade-Fantasy.mp3'],
+        loop: true,
+        volume: 0.1,
+      });
+
+      var expSound = new Howl({
+        src: ['assets/sound/exp_sound.mp3'],
+        loop: false,
+        volume: 0.5,
+      });
+
+      const ShotSynth = new Tone.Synth().toDestination();
 
     var playerHP=100
     var round = 1
 
    zombies.push(createZombie())
 
-    
+   for (let i = 0; i < 5; i++) {
+       bones1.push(createbone1())
+   }
 
+   for (let i = 0; i < 5; i++) {
+    bones1.push(createbone2())
+   }
+
+   for (let i = 0; i < 5; i++) {
+    sculls.push(createscull())
+   }
 
 
     onKeyDown = (event) => {
 
-        
+        if (!gameStarted && !gameEnded){
+            gameStarted = true
+            Music.play()
+
+        }
 
         switch (event.key) {
 
@@ -144,7 +201,7 @@ const main = () => {
                     length: 10
                 })
                 shots.push(shot)
-                
+                ShotSynth.triggerAttackRelease("C3", "16n");
                 break;
             case 'up':
                 player.vec.length = player.vec.length + 0.2
@@ -196,6 +253,7 @@ const main = () => {
                 if (shots[j].intersects(zombies[i])) {
                     zombies[i].remove();
                     zombies.splice(i, 1)
+                    expSound.play()
 
                     shots[j].remove()
                     shots.splice(i, 1)
@@ -261,10 +319,94 @@ const main = () => {
 
         checkIntersection()
 
+        for (let i = 0; i < bones1.length; i++) {
+
+            const bone1 = bones1[i];
+            bone1.position+=bones1[i].vec
+
+            if (bone1.position.x > view.bounds.width) {
+                bone1.position.x = 0;
+            }
+
+            if (bone1.position.x < 0) {
+                bone1.position.x = view.bounds.width;
+            }
+
+            if (bone1.position.y < 0) {
+                bone1.position.y = view.bounds.height;
+            }
+
+            if (bone1.position.y > view.bounds.height) {
+                bone1.position.y = 0;
+            }
+        }
+
+        for (let i = 0; i < bones2.length; i++) {
+
+            const bone2 = bones2[i];
+            bone2.position+=bones2[i].vec
+
+            if (bone2.position.x > view.bounds.width) {
+                bone2.position.x = 0;
+            }
+
+            if (bone2.position.x < 0) {
+                bone2.position.x = view.bounds.width;
+            }
+
+            if (bone2.position.y < 0) {
+                bone2.position.y = view.bounds.height;
+            }
+
+            if (bone2.position.y > view.bounds.height) {
+                bone2.position.y = 0;
+            }
+        }
         
+        for (let i = 0; i < sculls.length; i++) {
+
+            const scull = sculls[i];
+            scull.position+=sculls[i].vec
+
+            if (scull.position.x > view.bounds.width) {
+                scull.position.x = 0;
+            }
+
+            if (scull.position.x < 0) {
+                scull.position.x = view.bounds.width;
+            }
+
+            if (scull.position.y < 0) {
+                scull.position.y = view.bounds.height;
+            }
+
+            if (scull.position.y > view.bounds.height) {
+                scull.position.y = 0;
+            }
+        }
 
     }
 
 }
 
 main()
+
+//background animation
+
+//const explosion = new Raster('assets/IMG/EXPLOSION.png');
+//explosion.position = [-1000,-1000]
+
+//const count = 10;
+//var bone1 = new Raster('assets/IMG/BONE1.png');
+//bone1.position = [-1000,-1000]
+//bone1.center = [0,0]
+
+//var symbol = new Symbol(bone1);
+
+//for (var i = 0; i<count; i++){
+    //var center = Point.random()*view.size;
+    //var placedSymbol = symbol.place(center);
+    //placedSymbol.scale(i/count-0.2);
+//}
+
+
