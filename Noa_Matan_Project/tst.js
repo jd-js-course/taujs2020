@@ -165,7 +165,8 @@ const main = () => {
     var playerHP=100
     var round = 1
 
-   zombies.push(createZombie())
+    zombies.push(createZombie())
+
 
    for (let i = 0; i < 5; i++) {
        bones1.push(createbone1())
@@ -225,27 +226,27 @@ const main = () => {
 
 
     checkIntersection = () => {
-        
+
         for (let i = 0; i < zombies.length; i++) {
             if (player.intersects(zombies[i])) {
-                playerHP=playerHP-10
+                playerHP = playerHP - 10
 
                 console.log(playerHP)
 
-                if(playerHP<=0){
+                if (playerHP <= 0) {
                     return;
                 }
-                    
+
                 zombies[i].remove();
-                    zombies.splice(i, 1)
+                zombies.splice(i, 1)
 
-                    if(zombies.length==0){
-                        round++
+                if (zombies.length == 0) {
+                    round++
 
-                        for(let k=0;k<round;k++){
-                            zombies.push(createZombie())
-                        }
+                    for (let k = 0; k < round; k++) {
+                        zombies.push(createZombie())
                     }
+                }
 
             }
 
@@ -258,9 +259,9 @@ const main = () => {
                     shots[j].remove()
                     shots.splice(i, 1)
 
-                    if(zombies.length==0){
+                    if (zombies.length == 0) {
                         round++
-                        for(let k=0;k<round;k++){
+                        for (let k = 0; k < round; k++) {
                             zombies.push(createZombie())
                         }
                     }
@@ -268,7 +269,7 @@ const main = () => {
                 }
             }
         }
-        
+
 
     }
 
