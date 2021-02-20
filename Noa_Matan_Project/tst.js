@@ -152,15 +152,21 @@ const main = () => {
     const zombies = []
 
     var Music = new Howl({
-        src: ['assets/sound/Arcade-Fantasy.mp3'],
+        src: ['assets/sound/MYSTERY_MUSIC.mp3'],
         loop: true,
-        volume: 0.1,
+        volume: 0.05,
       });
 
-      var expSound = new Howl({
-        src: ['assets/sound/exp_sound.mp3'],
+      var ScreamSound = new Howl({
+        src: ['assets/sound/SCREAM.mp3'],
         loop: false,
-        volume: 0.5,
+        volume: 0.08,
+      });
+
+      var OutchSound = new Howl({
+        src: ['assets/sound/OUTCH.mp3'],
+        loop: false,
+        volume: 0.08,
       });
 
       const ShotSynth = new Tone.Synth().toDestination();
@@ -233,6 +239,7 @@ const main = () => {
         for (let i = 0; i < zombies.length; i++) {
             if (player.intersects(zombies[i])) {
                 playerHP = playerHP - 10
+                OutchSound.play()
 
                 console.log(playerHP)
 
@@ -257,7 +264,7 @@ const main = () => {
                 if (shots[j].intersects(zombies[i])) {
                     zombies[i].remove();
                     zombies.splice(i, 1)
-                    expSound.play()
+                    ScreamSound.play()
 
                     shots[j].remove()
                     shots.splice(i, 1)
