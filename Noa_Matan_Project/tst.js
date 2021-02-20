@@ -15,26 +15,26 @@ const createPlayer = () => {
 const createbone1 = () => {
     const bone1 = new Raster('assets/IMG/BONE1.png');
     bone1.position = Point.random() * view.size;
-    bone1.scale(Point.random()*0.005+0.1)
+    bone1.scale(Point.random() * 0.005 + 0.1)
     bone1.vec = Point.random() - Point.random() * 2
     return bone1
-    }
-    
-    const createbone2 = () => {
+}
+
+const createbone2 = () => {
     const bone2 = new Raster('assets/IMG/BONE2.png');
     bone2.position = Point.random() * view.size;
-    bone2.scale(Point.random()*0.005+0.1)
+    bone2.scale(Point.random() * 0.005 + 0.1)
     bone2.vec = Point.random() - Point.random() * 2
     return bone2
-    }
-    
-    const createscull = () => {
+}
+
+const createscull = () => {
     const scull = new Raster('assets/IMG/SCULL.png');
     scull.position = Point.random() * view.size;
-    scull.scale(Point.random()*0.005+0.1)
+    scull.scale(Point.random() * 0.005 + 0.1)
     scull.vec = Point.random() - Point.random() * 2
     return scull
-    }
+}
 
 //create zombie
 
@@ -133,17 +133,53 @@ const createZombie = () => {
     });
 
     zombie.position = Point.random() * view.size;
-    zombie.scale(Point.random()*0.7+1)
+    zombie.scale(Point.random() * 0.7 + 1)
     zombie.vec = Point.random() - Point.random() * 2
     return zombie
 
 }
 
+// hides an element by id
+function hide(id) {
+    document.getElementById(id).style.display = "none"
+}
+
+//shows element by id
+function show(id) {
+    document.getElementById(id).style.display = "block"
+}
+
+const openScreen = () => {
+
+    console.log("in open screen")
+
+    show("screen1")
+    hide("screen2")
+    hide("screen3")
+
+    const button = document.getElementById("btn1")
+
+    console.log("got button")
+
+    button.addEventListener("click", function () {
+        hide("screen1")
+        show("screen2")
+
+        console.log("clicked")
+
+
+    })
+}
+
 const main = () => {
+
+    openScreen()
+
+
 
     let gameStarted = false
     let gameEnded = false
-    
+
     const bones1 = []
     const bones2 = []
     const sculls = []
@@ -155,48 +191,47 @@ const main = () => {
         src: ['assets/sound/MYSTERY_MUSIC.mp3'],
         loop: true,
         volume: 0.05,
-      });
+    });
 
-      var ScreamSound = new Howl({
+    var ScreamSound = new Howl({
         src: ['assets/sound/SCREAM.mp3'],
         loop: false,
         volume: 0.08,
-      });
+    });
 
-      var OutchSound = new Howl({
+    var OutchSound = new Howl({
         src: ['assets/sound/OUTCH.mp3'],
         loop: false,
         volume: 0.08,
-      });
+    });
 
-      const ShotSynth = new Tone.Synth().toDestination();
+    const ShotSynth = new Tone.Synth().toDestination();
 
-    var playerHP=100
-    var round = 1
+    var playerHP = 50
+    var round = 2
 
-    zombies.push(createZombie())
+    for (var x=0;x<round;x++){
+        zombies.push(createZombie())
 
+    }
 
-   for (let i = 0; i < 5; i++) {
-       bones1.push(createbone1())
-   }
+    for (let i = 0; i < 5; i++) {
+        bones1.push(createbone1())
+    }
 
-   for (let i = 0; i < 5; i++) {
-    bones1.push(createbone2())
-   }
+    for (let i = 0; i < 5; i++) {
+        bones1.push(createbone2())
+    }
 
-   for (let i = 0; i < 5; i++) {
-    sculls.push(createscull())
-   }
+    for (let i = 0; i < 5; i++) {
+        sculls.push(createscull())
+    }
 
 
     onKeyDown = (event) => {
 
-        if (!gameStarted && !gameEnded){
-            gameStarted = true
-            Music.play()
 
-        }
+        Music.play()
 
         switch (event.key) {
 
@@ -235,6 +270,25 @@ const main = () => {
 
 
     checkIntersection = () => {
+
+        if (playerHP <= 0) {
+
+
+            show("screen3")
+            hide("screen2")
+
+            const button2 = document.getElementById("btn2")
+
+            button2.addEventListener("click", function () {
+
+                playerHP = 50
+                round = 3
+
+                openScreen()
+
+            })
+
+        }
 
         for (let i = 0; i < zombies.length; i++) {
             if (player.intersects(zombies[i])) {
@@ -333,7 +387,7 @@ const main = () => {
         for (let i = 0; i < bones1.length; i++) {
 
             const bone1 = bones1[i];
-            bone1.position+=bones1[i].vec
+            bone1.position += bones1[i].vec
 
             if (bone1.position.x > view.bounds.width) {
                 bone1.position.x = 0;
@@ -355,7 +409,7 @@ const main = () => {
         for (let i = 0; i < bones2.length; i++) {
 
             const bone2 = bones2[i];
-            bone2.position+=bones2[i].vec
+            bone2.position += bones2[i].vec
 
             if (bone2.position.x > view.bounds.width) {
                 bone2.position.x = 0;
@@ -373,11 +427,11 @@ const main = () => {
                 bone2.position.y = 0;
             }
         }
-        
+
         for (let i = 0; i < sculls.length; i++) {
 
             const scull = sculls[i];
-            scull.position+=sculls[i].vec
+            scull.position += sculls[i].vec
 
             if (scull.position.x > view.bounds.width) {
                 scull.position.x = 0;
@@ -399,6 +453,8 @@ const main = () => {
     }
 
 }
+
+
 
 main()
 
