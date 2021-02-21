@@ -15,79 +15,75 @@ function gameMenu(id) { //decides what screen is displayed
             hide("start");
             hide("game");
             hide("gameOver");
+            hide("julio");
             break;
         case 2:
             show("start");
             hide("game");
             hide("gameOver");
             hide("splashscreen");
+            hide("julio");
             break;
         case 3:
+
             show("game");
+            show("julio");
             hide("start");
             hide("gameOver");
             hide("splashscreen");
+            julio.reset();
             break;
         case 4:
             show("gameOver");
+            hide("julio");
             hide("start");
             hide("game");
             hide("splashscreen");
             break;
+    }
+}
+
+//helper functions to set hide n' show menu screens
+function splashscreen() {
+    gameMenu(1);
+}
+
+function startscreen() {
+    gameMenu(2);
+}
+
+function startThegame() {
+    gameMenu(3);
+}
+
+function gameOver() {
+    gameMenu(4);
+}
+
+//accept clicks on images
+document.getElementById("splashscreen").addEventListener("click", startscreen); //send to start screen
+document.getElementById("startbutton").addEventListener("click", startThegame); //send to game screen
+document.getElementById("gameOver").addEventListener("click", startscreen); //send to game screen
+
+
+//////////////////////Menu part end//////////////////////////////////////////////
 ////comment
 //loading the PaperJS library
 paper.install(window)
 paper.setup('paper-js-canvas')
 class Cat {
-    mood = 'stand'
+    mood = 'stand';
     preferences = {
         //defining our cat's mood - where he likes being petted. we need to make this part randomised for each new game sesion.
-        legs: false,
-        back: true,
-        belly: false,
-        tail: false,
-        head: true
-        // suggestion for mood random generator. each game will have completetly different mood
-        // if(math.random() < 0.5 ) {
-        //  legs: false}
-        // else {legs: true}
-        // if(math.random() < 0.5 ) {
-        //  back: false}
-        // else {back: true}
-        // if(math.random() < 0.5 ) {
-        //  belly: false}
-        // else {belly: true}
-        // if(math.random() < 0.5 ) {
-        //  tail: false}
-        // else {tail: true}
-        // if(math.random() < 0.5 ) {
-        //  head: false}
-        // else {head: true}
-        //  do this for each property of the cats behaviour
+        //this function generates random number (0 to 1)for every 'if' function. 
+        //The function than decides wether the argument is higher or lower than 0.5.
+        //Upon detection the if functions will tag the body parts as true for liking and false for unliking
+        legs: (Math.random() < 0.5),
+        back: (Math.random() < 0.5),
+        belly: (Math.random() < 0.5),
+        tail: (Math.random() < 0.5),
+        head: (Math.random() < 0.5)
     }
-}
-
-//helper functions to set hide n' show menu screens
-function splashscreen(){
-    gameMenu(1);
-} 
-
-function startscreen(){ 
-    gameMenu(2);
-} 
-
-function startThegame(){ 
-    gameMenu(3);
-} 
-
-//accept clicks on images
-document.getElementById("splashscreen").addEventListener("click", startscreen); //send to start screen
-document.getElementById("startbutton").addEventListener("click", startThegame); //send to game screen
-document.getElementById("gameover").addEventListener("click", startscreen); //send to game screen
-
-splashscreen(); //starts the game at the splash screen
-
-//////////////////////Menu part end//////////////////////////////////////////////
 
     graphics = {
         //here we define our cat's different poses - the various images we use in the game - and each matching color coded map.
@@ -153,44 +149,18 @@ splashscreen(); //starts the game at the splash screen
         }
     }
 
-    class Cat {
+    reset() {
+        // we return the cat to the start position
+        this.mood = 'stand';
+        this.render();
 
-        mood = 'stand';
-        preferences = {
-            //defining our cat's mood - where he likes being petted. we need to make this part randomised for each new game sesion.
-            //this function generates random number (0 to 1)for every 'if' function. 
-            //The function than decides wether the argument is higher or lower than 0.5.
-            //Upon detection the if functions will tag the body parts as true for liking and false for unliking
-            if (math.random() < 0.5) {
-                legs: false
-            }
-            else {
-                legs: true
-            }
-            if (math.random() < 0.5) {
-                back: false
-            }
-            else {
-                back: true
-            }
-            if (math.random() < 0.5) {
-                belly: false
-            }
-            else {
-                belly: true
-            }
-            if (math.random() < 0.5) {
-                tail: false
-            }
-            else {
-                tail: true
-            }
-            if (math.random() < 0.5) {
-                head: false
-            }
-            else {
-                head: true
-            }
+        this.preferences = {
+            // we change the cat's preferences for the next game
+            legs: (Math.random() < 0.5),
+            back: (Math.random() < 0.5),
+            belly: (Math.random() < 0.5),
+            tail: (Math.random() < 0.5),
+            head: (Math.random() < 0.5)
         }
     }
 
@@ -201,10 +171,12 @@ splashscreen(); //starts the game at the splash screen
         if (this.currentAnimation) clearInterval(this.currentAnimation)
         paper.project.activeLayer.removeChildren()
 
+        if (this.mood == 'scratch1' || this.mood == 'scratch2') gameOver();
+
         // we check in this.preferences and we check what's the current this.mood, and we change this.mood to a new value
         if (this.preferences[bodypart] == true) {
             switch (this.mood) {
-                case 'stand':                
+                case 'stand':
                     this.mood = 'sit'
                     break;
                 case 'sit':
@@ -214,7 +186,7 @@ splashscreen(); //starts the game at the splash screen
                     this.mood = 'lie'
                     break;
                 case 'lie':
-                    this.mood = 'give_in' 
+                    this.mood = 'give_in'
                     break;
                 case 'give_in': //added a new case, the in_love case which is meant to be the same as the give_in case but with hearts flying out his eyes animation.
                     this.mood = 'in_love'
@@ -273,7 +245,7 @@ splashscreen(); //starts the game at the splash screen
     }
 
     clickEventAdded = false //we use this to make sure the event was added just once, or else the game skips moods.
-    
+
     render() {
         // here we get the right graphics acording to the currant cat's mood and display it, while also retrieving the correct color coded map of the cat's body.
         // all of the cats' upset moods are curantly without tails, as we need to add animation for tail-wagging.
@@ -330,8 +302,8 @@ splashscreen(); //starts the game at the splash screen
 
 }
 
-const hearts = () =>{
-// in_love   //importing heart image for the cat in_love mood, setting it properly in place and creating the animation.
+const hearts = () => {
+    // in_love   //importing heart image for the cat in_love mood, setting it properly in place and creating the animation.
     console.log('we are printing hearts')
     const heart = new Raster('heart')
     heart.position = [305, 573]
@@ -345,7 +317,7 @@ const hearts = () =>{
 
     let heartsExpanding = true
     let numberOfSizeChanges = 0
-    setInterval(()=> {
+    setInterval(() => {
         if (numberOfSizeChanges > 5) {
             numberOfSizeChanges = 0
             heartsExpanding = !heartsExpanding
@@ -359,31 +331,31 @@ const hearts = () =>{
         }
         numberOfSizeChanges++
 
-    },100)
-// }) 
+    }, 100)
+    // }) 
 
 }
 
-const tail_wag1 = () =>{
+const tail_wag1 = () => {
     //stand_upset //importing tail image for the cat stand_upset mood, setting it properly in place and animating it.
-        console.log('tail wagging')
-        const tail1 = new Raster('tail1')
-        tail1.position = [802, 189]
-        var point = tail1.bounds.bottomLeft;
+    console.log('tail wagging')
+    const tail1 = new Raster('tail1')
+    tail1.position = [802, 189]
+    var point = tail1.bounds.bottomLeft;
 
-        let tailMovement = 2
-        let totalTailMovement = 0
-        return setInterval(()=> {
-            if (totalTailMovement > 20 || totalTailMovement < -10) {
-                tailMovement = -tailMovement
-            }
-            tail1.rotate(tailMovement, point)
-            totalTailMovement+=tailMovement
-        },100)
-        
+    let tailMovement = 2
+    let totalTailMovement = 0
+    return setInterval(() => {
+        if (totalTailMovement > 20 || totalTailMovement < -10) {
+            tailMovement = -tailMovement
+        }
+        tail1.rotate(tailMovement, point)
+        totalTailMovement += tailMovement
+    }, 100)
+
 }
 
-const tail_wag2 = () =>{
+const tail_wag2 = () => {
     //sit_upset // importing tail image for the cat sit_upset mood, setting it properly in place and animating it.
     console.log('tail wagging')
     const tail2 = new Raster('tail2')
@@ -392,17 +364,17 @@ const tail_wag2 = () =>{
 
     let tailMovement = 2
     let totalTailMovement = 0
-    return setInterval(()=> {
-        if (totalTailMovement > 0 || totalTailMovement < -20) { 
+    return setInterval(() => {
+        if (totalTailMovement > 0 || totalTailMovement < -20) {
             tailMovement = -tailMovement
         }
         tail2.rotate(tailMovement, point)
-        totalTailMovement+=tailMovement
-    },100)
+        totalTailMovement += tailMovement
+    }, 100)
 
 }
 
-const tail_wag3 = () =>{
+const tail_wag3 = () => {
     //restive_upset // importing tail image for the cat restive_upset mood, setting it properly in place and animating it.
     console.log('tail wagging')
     const tail3 = new Raster('tail3')
@@ -410,33 +382,33 @@ const tail_wag3 = () =>{
     var point = tail3.bounds.bottomLeft;
 
     let tailMovement = 2
-        let totalTailMovement = 0
-        return setInterval(()=> {
-            if (totalTailMovement > 10 || totalTailMovement < -20) {
-                tailMovement = -tailMovement
-            }
-            tail3.rotate(tailMovement, point)
-            totalTailMovement+=tailMovement
-        },100)
+    let totalTailMovement = 0
+    return setInterval(() => {
+        if (totalTailMovement > 10 || totalTailMovement < -20) {
+            tailMovement = -tailMovement
+        }
+        tail3.rotate(tailMovement, point)
+        totalTailMovement += tailMovement
+    }, 100)
 
 }
 
-const tail_wag4 =() =>{
+const tail_wag4 = () => {
     //lies_upset // importing tail image for the cat lies_upset mood, setting it properly in place and animating it.
     console.log('tail wagging')
-    const tail4 =new Raster('tail4')
+    const tail4 = new Raster('tail4')
     tail4.position = [740, 302]
     var point = tail4.bounds.bottomRight;
 
     let tailMovement = 2
-        let totalTailMovement = 0
-        return setInterval(()=> {
-            if (totalTailMovement > 20 || totalTailMovement < -17) {
-                tailMovement = -tailMovement
-            }
-            tail4.rotate(tailMovement, point)
-            totalTailMovement+=tailMovement
-        },100)
+    let totalTailMovement = 0
+    return setInterval(() => {
+        if (totalTailMovement > 20 || totalTailMovement < -17) {
+            tailMovement = -tailMovement
+        }
+        tail4.rotate(tailMovement, point)
+        totalTailMovement += tailMovement
+    }, 100)
 
 }
 
@@ -450,3 +422,4 @@ const main = () => { //WHAT DOES THIS FUNCTION DO?
 
 
 window.addEventListener('load', main)
+splashscreen(); //starts the game at the splash screen
