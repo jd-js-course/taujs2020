@@ -199,7 +199,33 @@ const main = () => {
 
             }
         })
+    }
 
+    var flower = new Raster('assets/images/flower.png');
+    flower.position = [640, 275]
+    flower.onClick = function (event) {
+        choosenext().position = [-1000, -1000]
+        Over = false;
+        first=false   
+        var flowermsg = new Raster('assets/images/flowermsg.png');
+        flowermsg.position = view.bounds.center;
+        setTimeout(function () {
+            flowermsg.position = [-1000, -1000]
+            GameStarted = true;
+        }, 5000);
+        var sunflower = new Raster('assets/images/sunflower.png');
+        sunflower.position = [484, 277]   
+        document.addEventListener('keyup', event => {
+            if (event.code === 'KeyF') {
+                if (success2){
+                    GameStarted=false
+                    const index2 = missions.indexOf(flower)
+                    missions.splice(index2,1)
+                    choosenext().position = view.bounds.center
+                }
+
+            }
+        })
     }
 
     choosenext = () =>{
