@@ -225,6 +225,7 @@ const main = () => {
             }
         })
     }
+
     var supertask = new Raster('assets/images/super.png');
     supertask.position = [640, 400]
     supertask.onClick = function (event) {
@@ -244,7 +245,7 @@ const main = () => {
         var milk = new Raster('assets/images/milk.png');
         milk.position = [484, 436]
         document.addEventListener('keyup', event => {
-            if (event.code === 'KeyM') {
+            if (event.code == 'KeyM') {
                 if (success4) {
                     tasks++
                     GameStarted = false
@@ -261,7 +262,7 @@ const main = () => {
     
     choosenext = () => {
         var blank = new Raster('assets/images/blank.png');
-        if (tasks == 1) {
+        if (tasks == 4) {
             done()
             return blank ;
         }
@@ -392,8 +393,6 @@ const main = () => {
         if (nurse.intersects(p5)) {
             success5 = true
         }
-
-
     }
 
     const GO = new Raster('assets/images/gameover.png')
