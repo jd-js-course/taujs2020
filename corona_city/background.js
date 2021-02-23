@@ -11,11 +11,11 @@ const road = new Path([670, 500], [460, 500], [460, 460], [520, 460], [520, 300]
 road.fillColor = '#c7c6c5'
 road.strokeColor = '#575655'
 
+var Over = false;
 
 
-const nurse = new Raster('assets/images/nurse2.png');
-nurse.position = [800, 510]
-
+var success = false
+var success2 = false
 const market = new Raster('assets/images/market.png')
 market.position = [440, 460]
 
@@ -37,16 +37,25 @@ kindergarten.position = [1000, 320]
 const bank = new Raster('assets/images/bank.png')
 bank.position = [940, 100]
 
-var head = new Shape.Circle(new Point(670, 110), 10);
-head.strokeColor = 'black';
- var path1 = new Path([660, 150], [652,150], [652, 124], [688, 124], [688,150], [680,150]);
-path1.strokeColor = 'black'
-const path2 = new Path([660, 138], [660,183], [670, 183], [670, 156], [670,183], [680,183], [680, 138]);
-path2.strokeColor = 'black'
-const man = new Group(head, path1, path2);
-man.scale(0.65)
-man.strokeWidth = 2;
-man.fillColor = 'white'
+const nurse = new Raster('assets/images/nurse2.png');
+nurse.position = [800, 510]
+
+const sunflower = new Raster('assets/images/sunflower.png');
+sunflower.position=[-1000, -1000]
+
+var dollar = new Raster('assets/images/dollar.png');
+dollar.position = [-1000, -1000]
+
+// var head = new Shape.Circle(new Point(670, 110), 10);
+// head.strokeColor = 'black';
+//  var path1 = new Path([660, 150], [652,150], [652, 124], [688, 124], [688,150], [680,150]);
+// path1.strokeColor = 'black'
+// const path2 = new Path([660, 138], [660,183], [670, 183], [670, 156], [670,183], [680,183], [680, 138]);
+// path2.strokeColor = 'black'
+// const man = new Group(head, path1, path2);
+// man.scale(0.65)
+// man.strokeWidth = 2;
+// man.fillColor = 'white'
 
 
 var taskNames = ['pick up kid from kindergarten', 'buy a flower', 'buy milk from supermarket', 'go to the bank']
@@ -54,48 +63,185 @@ var taskNames = ['pick up kid from kindergarten', 'buy a flower', 'buy milk from
 const createMan = () => {
 
     var head = new Shape.Circle(new Point(670, 110), 10);
-    head.strokeWidth =3;
-     var path1 = new Path([660, 150], [652,150], [652, 124], [688, 124], [688,150], [680,150]);
-    const path2 = new Path([660, 138], [660,183], [670, 183], [670, 156], [670,183], [680,183], [680, 138]);
+    head.strokeWidth = 3;
+    var path1 = new Path([660, 150], [652, 150], [652, 124], [688, 124], [688, 150], [680, 150]);
+    const path2 = new Path([660, 138], [660, 183], [670, 183], [670, 156], [670, 183], [680, 183], [680, 138]);
     const man = new Group(head, path1, path2);
     man.strokeColor = 'black'
     man.scale(0.55)
-    man.strokeWidth = 2;
+    man.strokeWidth = 1.5;
     man.fillColor = 'white'
     man.position = Point.random() * 804;
-    man.vec = Point.random() - Point.random() * 2
+    man.vec = Point.random() - Point.random() * 3
     console.log(man.vec.length)
     return man
 }
 
+
 const main = () => {
-    let GameStarted=false
+    var first = true
+    //choosenext()
+    let GameStarted = false
     document.addEventListener('keyup', event => {
         if (event.code === 'Space') {
-            GameStarted = true
             GS.position = view.bounds.center;
-            setTimeout(function(){GS.position = [-1000, -1000]}, 1000);
-            setTimeout(function(){choose.position = view.bounds.center}, 1000);
-            setTimeout(function(){men[ran].fillColor = 'red'
-                men[ran].vec = Point.random() - Point.random() * 4}, 1000);
+            setTimeout(function () {
+                GS.position = [-1000, -1000]
+                GS = new Raster('assets/images/blank.png');
+            }, 1000);
+            setTimeout(function () { choosenext().position = view.bounds.center }, 1000);
+
+
         }
     })
 
+
     const men = []
-    const num =  12
-    const n = Math.random()*12
-    const ran =Math.round(n)+1
+    const num = 12
+    const n = Math.random() * 12
+    const ran = Math.round(n) + 1
     console.log(ran)
     for (let i = 0; i < num; i++) {
-        men.push(createMan()) 
+        men.push(createMan())
     }
 
-    
+    const missions = []
     var GS = new Raster('assets/images/gameStarted.png');
     GS.position = [-1000, -1000]
-    
+
     var choose = new Raster('assets/images/choose.png');
-    choose.position = [-1000, -1000]    
+    choose.position = view.bounds.center
+
+    var success1 = new Raster('assets/images/success.png');
+    success1.position = [-1000, -1000]
+    const cor1 = new Point(891, 300)
+    const s1 = new Size(55, 55)
+    var p1 = new Path.Rectangle(cor1, s1)
+
+    const cor2 = new Point(454, 254);
+    const s2 = new Size(60, 60)
+    var p2 = new Path.Rectangle(cor2, s2)
+
+    var cor3 = new Point(800, 120)
+    var s3 = new Size(60, 60)
+    var p3 = new Path.Rectangle(cor3, s3)
+
+    var pickup = new Raster('assets/images/pickup.png');
+    pickup.position = [640, 210]
+    pickup.onClick = function (event) {
+        choosenext().position = [-1000, -1000]
+        Over = false;
+        first=false
+        var pickupmsg = new Raster('assets/images/pickupmsg.png');
+        pickupmsg.position = view.bounds.center;
+        setTimeout(function () {
+            pickupmsg.position = [-1000, -1000]
+            GameStarted = true;
+        }, 5000);
+        var kid = new Raster('assets/images/kid.png');
+        kid.position = [940, 330]
+        document.addEventListener('keyup', event => {
+            if (event.code === 'KeyK') {
+                console.log(success)
+                if (success){
+                    GameStarted=false
+                    missions.splice(0,1)
+                    choosenext().position = view.bounds.center
+                }
+
+            }
+        })
+
+    }
+
+    var flower = new Raster('assets/images/flower.png');
+    flower.position = [640, 280]
+    flower.onClick = function (event) {
+        choosenext().position = [-1000, -1000]
+        Over = false;
+        sunflower.position = [484, 277]
+        var flowermsg = new Raster('assets/images/flowermsg.png');
+        flowermsg.position = view.bounds.center;
+        setTimeout(function () {
+            flowermsg.position = [-1000, -1000]
+            GameStarted = true;
+        }, 5000);
+        
+        document.addEventListener('keyup', event => {
+            if (event.code === 'KeyF') {
+                console.log(success)
+                if (success2){
+                    GameStarted=false
+                    if (first){
+                        choosenext().position = view.bounds.center
+                    }
+                    else{
+                        choosetask.position = view.bounds.center;
+                    }
+                    first=false
+                }
+
+            }
+        })
+
+    }
+
+    var banktask = new Raster('assets/images/banktask.png');
+    banktask.position = [640, 350]
+    banktask.onClick = function (event) {
+        choosetask.position = [-1000, -1000]
+        Over = false;
+        var bankmsg = new Raster('assets/images/bankmsg.png');
+        bankmsg.position = view.bounds.center;
+        dollar.position = [840, 140]
+        setTimeout(function () {
+            bankmsg.position = [-1000, -1000]
+            GameStarted = true;
+        }, 5000);
+        
+        document.addEventListener('keyup', event => {
+            if (event.code === 'KeyB') {
+                console.log(success)
+                if (success3){
+                    GameStarted=false
+                    if (first){
+                        choosenext().position = view.bounds.center
+                    }
+                    else{
+                        choosenext().position = view.bounds.center;
+                    }
+                    first=false
+                }
+
+            }
+        })
+
+    }
+
+    choosenext = () =>{
+        var choosetask = new Group(choose)
+        if (!first){
+            console.log("choose not first")
+            choosetask.addChild(success1)
+        }
+        var choosetask = new Group(choose)
+        for (let i = 0; i < missions.length; i++) {
+            choosetask.addChild(missions[i])
+        }
+        choosetask.position = [-1000, -1000]
+        return choosetask
+        }
+
+
+    missions.push(pickup)
+    missions.push(flower)
+    missions.push(banktask)
+    var choosetask = new Group(choose)
+    for (let i = 0; i < missions.length; i++) {
+        choosetask.addChild(missions[i])
+    }
+    choosetask.position = [-1000, -1000]
+
     
 
 
@@ -105,36 +251,32 @@ const main = () => {
 
     onKeyDown = (event) => {
 
-        // if (!GameStarted && !GameEnded) {
-        //     GameStarted = true
-        // }
+
         switch (event.key) {
 
             case 'up':
-                nurse.position.y -= +2
+                nurse.position.y -= +3
                 break;
             case 'down':
-                nurse.position.y +=2
+                nurse.position.y += 3
                 break;
             case 'right':
-                nurse.position.x+=2
+                nurse.position.x += 3
                 break;
             case 'left':
-                nurse.position.x-=2
+                nurse.position.x -= 3
                 break;
 
         }
-        console.log(ship.vec)
     }
     checkCollision = () => {
         for (let i = 0; i < num; i++) {
             for (let j = 0; j < num; j++) {
                 if (men[i].intersects(men[j])) {
-                    console.log("hi")
-                    if (men[i].fillColor=='red') {
-                        men[j].fillColor = 'red'   
+                    if (men[i].fillColor == 'red') {
+                        men[j].fillColor = 'red'
                     }
-                    if (men[j].fillColor=='red') {
+                    if (men[j].fillColor == 'red') {
                         men[i].fillColor = 'red'
                     }
 
@@ -142,30 +284,73 @@ const main = () => {
             }
 
         }
+
+
+        for (let i = 0; i < num; i++) {
+            if (nurse.intersects(men[i])) {
+                if (men[i].fillColor == 'red') {
+                    console.log("game over")
+                    Over = true;
+
+                }
+            }
+        }
+
+        if (nurse.intersects(p1)) {
+            success = true
+        }
+
+        if (nurse.intersects(p2)){
+            success2 =true
+        }
+        if (nurse.intersects(p3)){
+            success3 =true
+        }
+
     }
 
-    onFrame = (event)=>{
-        for(let i=0; i<num; i++){
-            const currMan = men[i]
-            currMan.position+=currMan.vec
+    const GO = new Raster('assets/images/gameover.png')
+    GO.position = [-1000, -1000]
 
-            if(currMan.position.x>1090){
+    onFrame = (event) => {
+        for (let i = 0; i < num; i++) {
+            const currMan = men[i]
+            currMan.position += currMan.vec
+
+            if (currMan.position.x > 1090) {
                 currMan.position.x = 195;
             }
-            if(currMan.position.x<195){
+            if (currMan.position.x < 195) {
                 currMan.position.x = 1090;
             }
-            if(currMan.position.y>520){
+            if (currMan.position.y > 520) {
                 currMan.position.x = 35;
             }
-            if(currMan.position.y<35){
+            if (currMan.position.y < 35) {
                 currMan.position.y = 520;
             }
         }
-        checkCollision()
+
+        if (GameStarted) {
+            checkCollision();
+            men[1].fillColor = 'red'
+        }
+
+        
+
+        if (Over) {
+            GO.position = view.bounds.center
+
+            var something = true;
+
+
+        }
+        if (something) {
+            for (let i = 0; i < num; i++) {
+                men[i].position = [-1000, -1000]
+            }
+        }
     }
-
-
 }
 
 main()
