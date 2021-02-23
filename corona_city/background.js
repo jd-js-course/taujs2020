@@ -40,11 +40,6 @@ bank.position = [940, 100]
 const nurse = new Raster('assets/images/nurse2.png');
 nurse.position = [800, 510]
 
-const sunflower = new Raster('assets/images/sunflower.png');
-sunflower.position=[-1000, -1000]
-
-var dollar = new Raster('assets/images/dollar.png');
-dollar.position = [-1000, -1000]
 
 // var head = new Shape.Circle(new Point(670, 110), 10);
 // head.strokeColor = 'black';
@@ -76,7 +71,11 @@ const createMan = () => {
     console.log(man.vec.length)
     return man
 }
+const choose = new Raster('assets/images/choose.png');
+choose.position = view.bounds.center
 
+const success1 = new Raster('assets/images/success.png');
+success1.position = [-1000, -1000]
 
 const main = () => {
     var first = true
@@ -109,11 +108,7 @@ const main = () => {
     var GS = new Raster('assets/images/gameStarted.png');
     GS.position = [-1000, -1000]
 
-    var choose = new Raster('assets/images/choose.png');
-    choose.position = view.bounds.center
 
-    var success1 = new Raster('assets/images/success.png');
-    success1.position = [-1000, -1000]
     const cor1 = new Point(891, 300)
     const s1 = new Size(55, 55)
     var p1 = new Path.Rectangle(cor1, s1)
@@ -142,75 +137,64 @@ const main = () => {
         kid.position = [940, 330]
         document.addEventListener('keyup', event => {
             if (event.code === 'KeyK') {
-                console.log(success)
                 if (success){
                     GameStarted=false
-                    missions.splice(0,1)
+                    const index1 = missions.indexOf(pickup)
+                    missions.splice(index1,1)
                     choosenext().position = view.bounds.center
                 }
-
             }
         })
-
     }
 
     var flower = new Raster('assets/images/flower.png');
-    flower.position = [640, 280]
+    flower.position = [640, 275]
     flower.onClick = function (event) {
         choosenext().position = [-1000, -1000]
         Over = false;
-        sunflower.position = [484, 277]
+        first=false   
         var flowermsg = new Raster('assets/images/flowermsg.png');
         flowermsg.position = view.bounds.center;
         setTimeout(function () {
             flowermsg.position = [-1000, -1000]
             GameStarted = true;
         }, 5000);
-        
+        var sunflower = new Raster('assets/images/sunflower.png');
+        sunflower.position = [484, 277]   
         document.addEventListener('keyup', event => {
             if (event.code === 'KeyF') {
-                console.log(success)
                 if (success2){
                     GameStarted=false
-                    if (first){
-                        choosenext().position = view.bounds.center
-                    }
-                    else{
-                        choosetask.position = view.bounds.center;
-                    }
-                    first=false
+                    const index2 = missions.indexOf(flower)
+                    missions.splice(index2,1)
+                    choosenext().position = view.bounds.center
                 }
 
             }
         })
-
     }
 
     var banktask = new Raster('assets/images/banktask.png');
-    banktask.position = [640, 350]
+    banktask.position = [640, 340]
     banktask.onClick = function (event) {
-        choosetask.position = [-1000, -1000]
+        choosenext().position = [-1000, -1000]
         Over = false;
+        fisrt = false
         var bankmsg = new Raster('assets/images/bankmsg.png');
         bankmsg.position = view.bounds.center;
-        dollar.position = [840, 140]
         setTimeout(function () {
             bankmsg.position = [-1000, -1000]
             GameStarted = true;
         }, 5000);
-        
+        var dollar = new Raster('assets/images/dollar.png');
+        dollar.position = [840, 140]
         document.addEventListener('keyup', event => {
             if (event.code === 'KeyB') {
-                console.log(success)
                 if (success3){
                     GameStarted=false
-                    if (first){
-                        choosenext().position = view.bounds.center
-                    }
-                    else{
-                        choosenext().position = view.bounds.center;
-                    }
-                    first=false
+                    const index3 = missions.indexOf(banktask);
+                    missions.splice(index3,1)
+                    choosenext().position = view.bounds.center
                 }
 
             }
@@ -221,7 +205,8 @@ const main = () => {
     choosenext = () =>{
         var choosetask = new Group(choose)
         if (!first){
-            console.log("choose not first")
+            success1.position = view.bounds.center
+            success1.position.y-=200
             choosetask.addChild(success1)
         }
         var choosetask = new Group(choose)
