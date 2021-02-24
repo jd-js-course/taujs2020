@@ -12,6 +12,7 @@ road.fillColor = '#c7c6c5'
 road.strokeColor = '#575655'
 
 var Over = false;
+var started = false
 
 var success = false
 var success2 = false
@@ -67,15 +68,37 @@ const success1 = new Raster('assets/images/success.png');
 success1.position = [-1000, -1000]
 
 const main = () => {
+
+    var gamesound = new Howl({
+        src: ['assets/sounds/background.mp3'],
+        loop: true,
+        volume: 0.2
+    });
+
+    var check = new Howl({
+        src: ['assets/sounds/check.wav'],
+        loop: false,
+        volume: 0.2
+    });
+
+    var cheer = new Howl({
+        src: ['assets/sounds/cheer.mp3'],
+        loop: false,
+        volume: 0.2
+    });
+
+    gamesound.play()
     var first = true
     var tasks = 0
     var something = false
     var something2 = false
     //choosenext()
     let GameStarted = false
+
+
     document.addEventListener('keyup', event => {
-        if (first){
-            if (event.code === 'Space') {
+        if (first) {
+            if (event.code == 'Space') {
                 instructions.position = [-1000, -1000]
                 GS.position = view.bounds.center;
                 setTimeout(function () {
@@ -83,10 +106,10 @@ const main = () => {
                     GS = new Raster('assets/images/blank.png');
                 }, 1000);
                 setTimeout(function () { choosenext().position = view.bounds.center }, 1000);
-    
+
             }
         }
-        
+
     })
 
 
@@ -104,6 +127,14 @@ const main = () => {
     const missions = []
     var GS = new Raster('assets/images/gameStarted.png');
     GS.position = [-1000, -1000]
+    var pu = new Raster('assets/images/pressK.png');
+    pu.position = [-1000, -1000]
+    var fl = new Raster('assets/images/pressF.png');
+    fl.position = [-1000, -1000]
+    var ba = new Raster('assets/images/pressB.png');
+    ba.position = [-1000, -1000]
+    var su = new Raster('assets/images/pressM.png');
+    su.position = [-1000, -1000]
 
 
     const cor1 = new Point(894, 288)
@@ -115,7 +146,7 @@ const main = () => {
     var p2 = new Path.Rectangle(cor2, s2)
 
     var cor3 = new Point(838, 80)
-    var s3 = new Size(90, 90)
+    var s3 = new Size(110, 100)
     var p3 = new Path.Rectangle(cor3, s3)
 
     var cor4 = new Point(402, 411)
@@ -135,8 +166,18 @@ const main = () => {
         var ok = new Raster('assets/images/ok.png');
         pickupmsg.position = view.bounds.center;
         ok.position = view.bounds.center
-        ok.position.y +=160
+        ok.position.y += 160
+
+        document.addEventListener('keyup', event => {
+            if (event.code == 'Space') {
+                pu.position = [640, 30]
+                pickupmsg.position = [-1000, -1000]
+                ok.position = [-1000, -1000]
+                GameStarted = true
+            }
+        })
         ok.onClick = function (event) {
+            pu.position = [640, 30]
             pickupmsg.position = [-1000, -1000]
             ok.position = [-1000, -1000]
             GameStarted = true
@@ -146,7 +187,9 @@ const main = () => {
         document.addEventListener('keyup', event => {
             if (event.code === 'KeyK') {
                 if (success) {
+                    check.play()
                     tasks++
+                    pu.remove()
                     GameStarted = false
                     const index1 = missions.indexOf(pickup)
                     missions.splice(index1, 1)
@@ -169,8 +212,17 @@ const main = () => {
         flowermsg.position = view.bounds.center;
         var ok = new Raster('assets/images/ok.png');
         ok.position = view.bounds.center
-        ok.position.y +=160
+        ok.position.y += 160
+        document.addEventListener('keyup', event => {
+            if (event.code == 'Space') {
+                fl.position = [640, 30]
+                flowermsg.position = [-1000, -1000]
+                ok.position = [-1000, -1000]
+                GameStarted = true
+            }
+        })
         ok.onClick = function (event) {
+            fl.position = [640, 30]
             flowermsg.position = [-1000, -1000]
             ok.position = [-1000, -1000]
             GameStarted = true
@@ -179,7 +231,9 @@ const main = () => {
         document.addEventListener('keyup', event => {
             if (event.code === 'KeyF') {
                 if (success2) {
+                    check.play()
                     tasks++
+                    fl.remove()
                     GameStarted = false
                     const index2 = missions.indexOf(flower)
                     missions.splice(index2, 1)
@@ -202,8 +256,17 @@ const main = () => {
         bankmsg.position = view.bounds.center;
         var ok = new Raster('assets/images/ok.png');
         ok.position = view.bounds.center
-        ok.position.y +=160
+        ok.position.y += 160
+        document.addEventListener('keyup', event => {
+            if (event.code == 'Space') {
+                ba.position = [640, 30]
+                bankmsg.position = [-1000, -1000]
+                ok.position = [-1000, -1000]
+                GameStarted = true
+            }
+        })
         ok.onClick = function (event) {
+            ba.position = [640, 30]
             bankmsg.position = [-1000, -1000]
             ok.position = [-1000, -1000]
             GameStarted = true
@@ -213,6 +276,8 @@ const main = () => {
         document.addEventListener('keyup', event => {
             if (event.code === 'KeyB') {
                 if (success3) {
+                    check.play()
+                    ba.remove()
                     tasks++
                     GameStarted = false
                     const index3 = missions.indexOf(banktask);
@@ -236,8 +301,17 @@ const main = () => {
         supermsg.position = view.bounds.center;
         var ok = new Raster('assets/images/ok.png');
         ok.position = view.bounds.center
-        ok.position.y +=160
+        ok.position.y += 160
+        document.addEventListener('keyup', event => {
+            if (event.code == 'Space') {
+                su.position = [640, 30]
+                supermsg.position = [-1000, -1000]
+                ok.position = [-1000, -1000]
+                GameStarted = true
+            }
+        })
         ok.onClick = function (event) {
+            su.position = [640, 30]
             supermsg.position = [-1000, -1000]
             ok.position = [-1000, -1000]
             GameStarted = true
@@ -247,6 +321,8 @@ const main = () => {
         document.addEventListener('keyup', event => {
             if (event.code == 'KeyM') {
                 if (success4) {
+                    check.play()
+                    su.remove()
                     tasks++
                     GameStarted = false
                     const index4 = missions.indexOf(supertask)
@@ -259,12 +335,12 @@ const main = () => {
         })
     }
 
-    
+
     choosenext = () => {
         var blank = new Raster('assets/images/blank.png');
         if (tasks == 4) {
             done()
-            return blank ;
+            return blank;
         }
         var choosetask = new Group(choose, success1)
         // if (!first) {
@@ -280,11 +356,12 @@ const main = () => {
         return choosetask;
     }
 
-    
+
     var congradulations = new Raster('assets/images/congradulations.png');
     congradulations.position = [-1000, -1000]
 
-
+    var vaccine = new Raster('assets/images/vaccine.png');
+    vaccine.position = [-1000, -1000]
     done = () => {
         console.log(GameStarted)
         gamesuccess = new Raster('assets/images/gamesuccess.png');
@@ -292,11 +369,18 @@ const main = () => {
         congradulations.position = view.bounds.center;
         var ok2 = new Raster('assets/images/ok.png');
         ok2.position = view.bounds.center
-        ok2.position.y +=220
-        var vaccine = new Raster('assets/images/vaccine.png');
+        ok2.position.y += 220
         vaccine.position = [-1000, -1000]
+        document.addEventListener('keyup', event => {
+            if (event.code == 'Space') {
+                ssetTimeout(function () { GameStarted = true }, 100);
+                congradulations.position = [-1000, -1000]
+                ok2.position = [-1000, -1000]
+                vaccine.position = [639, 142]
+            }
+        })
         ok2.onClick = function (event) {
-            setTimeout(function () {GameStarted=true}, 100);
+            setTimeout(function () { GameStarted = true }, 100);
             congradulations.position = [-1000, -1000]
             ok2.position = [-1000, -1000]
             vaccine.position = [639, 142]
@@ -313,6 +397,7 @@ const main = () => {
                         men[i].position = [-1000, -1000]
                     }
                     gamesuccess.position = view.bounds.center
+                    cheer.play()
                 }
             }
         })
@@ -345,10 +430,10 @@ const main = () => {
                 case 'left':
                     nurse.position.x -= 4
                     break;
-    
+
             }
         }
-        
+
     }
     checkCollision = () => {
         for (let i = 0; i < num; i++) {
@@ -424,10 +509,14 @@ const main = () => {
 
 
         if (Over) {
+            pu.position = [-1000, -1000]
+            fl.position = [-1000, -1000]
+            su.position = [-1000, -1000]
+            ba.position = [-1000, -1000]
+            vaccine.position = [-1000, -1000]
             GO.position = view.bounds.center
             GameStarted = false;
             something = true;
-
         }
         if (something) {
             for (let i = 0; i < num; i++) {

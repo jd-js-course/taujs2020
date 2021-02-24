@@ -1,24 +1,8 @@
-
-
-
-var myPath;
-
-function onMouseDown(event){
-    myPath = new Path();
-    myPath.strokeColor = 'white';
-    myPath.add(event.point);
-}
-
-function onMouseUp(event){
-    myPath.add(event.point);
-}
-
-
 const createShip = () => {
     var path = new Path([-10, -8], [10, 0], [-10, 8], [-8, 4], [-8, -4])
     path.closed = true;
     //path.strokeColor = "white"
-    var thrust = new Path([-8, -8], [-14, 0], [-8, 4]);
+    var thrust = new Path([-8, -4], [-14, 0], [-8, 4]);
     var group = new Group(path, thrust);
     group.position = view.bounds.center;
     group.strokeColor = "pink"
@@ -46,6 +30,9 @@ const main = () => {
     let shipExploding = false
     let GameStarted = false
     let GameEnded = false
+
+    var input = document.getElementById(input)
+    input.position.x = 50
 
     const ship = createShip()
 
@@ -77,8 +64,6 @@ const main = () => {
 
 
     // bgMusic.play()
-
-    var button = document. createElement("button");
 
     onKeyDown = (event) => {
 
