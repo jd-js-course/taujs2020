@@ -31,7 +31,9 @@ const art1 = () => {
     art.src = '/MuseumGame/Assets/mona.jpg';
     art.onload = () => {
         context.drawImage(art, 150, 30);
+        $("#zoom01").ezPlus();
         }
+    
 } 
 
 const art2 = () => {
@@ -39,7 +41,9 @@ const art2 = () => {
     artM.src = '/MuseumGame/Assets/memory.jpg';
     artM.onload = () => {
         context.drawImage(artM, 550, 30);
+        $("#zoom02").ezPlus();
         }
+    
 } 
 
 const art3 = () => {
@@ -47,20 +51,25 @@ const art3 = () => {
     artD.src = '/MuseumGame/Assets/night.jpg';
     artD.onload = () => {
         context.drawImage(artD, 1150, 50);
+        $("#zoom03").ezPlus();
         }
+        
 } 
 const art4 = () => {
     artC = new Image();
     artC.src = '/MuseumGame/Assets/statue.png';
     artC.onload = () => {
         context.drawImage(artC, 150, 800);
+        $("#zoom04").ezPlus();
         }
+
 } 
 const art5 = () => {
     artF = new Image();
     artF.src = '/MuseumGame/Assets/afternoon.jpg';
     artF.onload = () => {
         context.drawImage(artF, 550, 800);
+        $("#zoom05").ezPlus();
         }
 } 
 const art6 = () => {
@@ -68,6 +77,7 @@ const art6 = () => {
     artA.src = '/MuseumGame/Assets/medusa.jpg';
     artA.onload = () => {
         context.drawImage(artA, 1300, 770);
+        $("#zoom06").ezPlus();
         }
 } 
 
@@ -82,6 +92,7 @@ const main = () => {
     art4();
     art5();
     art6();
+
 }
 
 main();
