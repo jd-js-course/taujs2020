@@ -135,6 +135,8 @@ const main = () => {
     ba.position = [-1000, -1000]
     var su = new Raster('assets/images/pressM.png');
     su.position = [-1000, -1000]
+    var pressenter = new Raster('assets/images/enter.png');
+    pressenter.position = [-1000, -1000]
 
 
     const cor1 = new Point(894, 288)
@@ -196,6 +198,7 @@ const main = () => {
                     choosenext().position = view.bounds.center
                     kid.position = [-1000, -1000]
                     success = false;
+                    k.remove()
                 }
             }
         })
@@ -240,6 +243,7 @@ const main = () => {
                     sunflower.position = [-1000, -1000]
                     choosenext().position = view.bounds.center
                     success2 = false;
+                    f.remove() 
                 }
 
             }
@@ -285,6 +289,7 @@ const main = () => {
                     choosenext().position = view.bounds.center
                     dollar.position = [-1000, -1000]
                     success3 = false;
+                    b.remove()
                 }
 
             }
@@ -330,6 +335,7 @@ const main = () => {
                     milk.position = [-1000, -1000]
                     choosenext().position = view.bounds.center
                     success4 = false;
+                    m.remove()
                 }
             }
         })
@@ -377,6 +383,7 @@ const main = () => {
                 congradulations.position = [-1000, -1000]
                 ok2.position = [-1000, -1000]
                 vaccine.position = [639, 142]
+                pressenter.position = [640, 30]
             }
         })
         ok2.onClick = function (event) {
@@ -384,6 +391,7 @@ const main = () => {
             congradulations.position = [-1000, -1000]
             ok2.position = [-1000, -1000]
             vaccine.position = [639, 142]
+            pressenter.position = [640, 30]
         }
         document.addEventListener('keyup', event => {
             if (event.code == 'Enter') {
@@ -393,6 +401,7 @@ const main = () => {
                     console.log("done!")
                     GameStarted = false
                     something = true;
+                    pressenter.position = [-1000, -1000]
                     for (let i = 0; i < num; i++) {
                         men[i].position = [-1000, -1000]
                     }
@@ -505,6 +514,9 @@ const main = () => {
         if (GameStarted) {
             checkCollision();
             men[1].fillColor = 'red'
+        }
+        if (success){
+            k.remove()
         }
 
 
