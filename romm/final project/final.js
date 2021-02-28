@@ -92,7 +92,7 @@ class Rectangle {
     }
 }
 
-var canvas = document.getElementById('doodle')
+var canvas = document.getElementById('mondrian')
 var ctx = canvas.getContext('2d')
 
 ctx.beginPath()
