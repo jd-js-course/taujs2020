@@ -16,7 +16,6 @@ const detective = () => {
     baseImg2.src = '/MuseumGame/Assets/detective.png';
     baseImg2.onload = () => {
         context.drawImage(baseImg2, 0, 400);
-        $("#zoom01").elevateZoom();
         }
 }
 
@@ -31,8 +30,7 @@ const art1 = () => {
     art = new Image();
     art.src = '/MuseumGame/Assets/mona.jpg';
     art.onload = () => {
-        context.drawImage(art, 150, 30);
-        $("#zoom01").elevateZoom();
+        context.drawImage(art, 150, 30);        
         }
     
 } 
@@ -42,7 +40,6 @@ const art2 = () => {
     artM.src = '/MuseumGame/Assets/memory.jpg';
     artM.onload = () => {
         context.drawImage(artM, 550, 30);
-        $("#zoom02").elevateZoom();
         }
     
 } 
@@ -52,7 +49,6 @@ const art3 = () => {
     artD.src = '/MuseumGame/Assets/night.jpg';
     artD.onload = () => {
         context.drawImage(artD, 1150, 50);
-        $("#zoom03").elevateZoom();
         }
         
 } 
@@ -61,7 +57,6 @@ const art4 = () => {
     artC.src = '/MuseumGame/Assets/statue.png';
     artC.onload = () => {
         context.drawImage(artC, 150, 800);
-        $("#zoom04").elevateZoom();
         }
 
 } 
@@ -70,7 +65,6 @@ const art5 = () => {
     artF.src = '/MuseumGame/Assets/afternoon.jpg';
     artF.onload = () => {
         context.drawImage(artF, 550, 800);
-        $("#zoom05").elevateZoom();
         }
 } 
 const art6 = () => {
@@ -78,7 +72,6 @@ const art6 = () => {
     artA.src = '/MuseumGame/Assets/medusa.jpg';
     artA.onload = () => {
         context.drawImage(artA, 1300, 770);
-        $("#zoom06").elevateZoom();
         }
 } 
 
