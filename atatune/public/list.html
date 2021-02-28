@@ -6,13 +6,18 @@
     <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <body>
-
-    <a href="record.html">New Recording</a>
+<style>h3, a, h4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
+<a href = "index.html"> <img src="images/start record.png" class="responsive"> </a>
+    <a href="record.html">חזור להקלטה</a>
     <ul id="records">
 
     </ul>
-
-    <h3>Add Effects:</h3>
+    <h4>בחר אודיו ורחף על הפילטר הרצוי</h4>
     <ul>
         <li>
             <a onclick="sound.addEffect(ringModulator);">Ring Modulator</a>

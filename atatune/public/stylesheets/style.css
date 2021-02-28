@@ -1,10 +1,25 @@
+li{
+  list-style-type: none;
+  text-align: center;
+}
 body {
+  vertical-align: middle;
+  margin: auto;
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+h1{
+
+}
+h2{
+
+}
+h3, h4{
+  color: #62b405;
 }
 
 a {
-  color: #00B7FF;
+  color: #eb1313;
 }
 
 audio.for-record {
@@ -18,3 +33,10 @@ audio.for-record {
 ul li button {
   margin-left: 20px;
 }
+
+.responsive {
+  width: 30%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;}

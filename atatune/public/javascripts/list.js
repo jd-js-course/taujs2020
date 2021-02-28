@@ -42,7 +42,7 @@ function selectFile(file){
                 const date = new Date(parseInt(time));
                 li.innerText = date.toLocaleString();
                 const btn = document.createElement('button');
-                btn.innerText = "Select";
+                btn.innerText = "בחר";
                 btn.addEventListener('click', function (ev) {
                     selectFile(file);
                 });
