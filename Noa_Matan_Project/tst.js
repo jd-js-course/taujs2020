@@ -297,7 +297,7 @@ var Music = new Howl({
                 playerHP = playerHP - 10
                 OutchSound.play()
 
-                alert("you have been hit you have "+playerHP+" life remained")
+                alert("you have been hit! you have "+playerHP+" life remained")
 
 
                 console.log(playerHP)
