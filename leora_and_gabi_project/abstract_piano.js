@@ -5,7 +5,14 @@ const note_to_color = {
   "F": "#d9a944",
   "G": "#bc706b",
   "A": "#8a2813",
-  "B": "#b45d1a"
+  "B": "#b45d1a",
+  "C#": "#20134d",
+  "D#": "#76a5af",
+  "E#": "#8988ad",
+  "F#": "#d9a944",
+  "G#": "#bc706b",
+  "A#": "#8a2813",
+  "B#": "#b45d1a"
 }
 
 const note_to_position = {
@@ -15,7 +22,14 @@ const note_to_position = {
   "F": 3,
   "G": 4,
   "A": 5,
-  "B": 6
+  "B": 6,
+  "C#": 0,
+  "D#": 1,
+  "E#": 2,
+  "F#": 3,
+  "G#": 4,
+  "A#": 5,
+  "B#": 6
 }
 
 const note_to_key = {
@@ -25,7 +39,14 @@ const note_to_key = {
   "F": "F",
   "G": "G",
   "A": "H",
-  "B": "J"
+  "B": "J",
+  "C#": "A",
+  "D#": "S",
+  "E#": "D",
+  "F#": "F",
+  "G#": "G",
+  "A#": "H",
+  "B#": "J"
 }
 
 class GradiantWidthPath {
@@ -133,6 +154,10 @@ class GradiantWidthPath {
   }
 };
 
+var Synth = new AudioSynth();
+var piano = Synth.createInstrument('piano');
+var wrong_piano = Synth.createInstrument('edm');
+
 class Note {
   constructor(note, duration, octave, rate) {
     this.note_char = note;
@@ -141,9 +166,11 @@ class Note {
   }
 
   playSound() {
+    piano.play(this.note_char, this.octave, this.duration);
   }
 
   playWrongSound() {
+    wrong_piano.play(this.note_char, this.octave, 0.3*this.duration);
   }
 }
 
@@ -376,35 +403,294 @@ var app = null;
 
 /* Call this fucntion with a the list of notes instance after you picked a song */
 const initializeApp = (rate, notes) => {
+  const gamescreen = new Layer();
+  gamescreen.activate();
   console.log(notes);
   var song = new Song(rate, notes)
   app = new AbstractPiano(song);
 };
 
 const showHomePage = () => {
-  /* Insert initialization of home page here - show all objects etc.
-  include here all event listeners */
-};
 
-/****************************************************************************/
-/* This is just an exmaple, we will delete this!
- on mouse down causes game to start. */
-const homePageHandleMouseDown = (event) => {
-  if (app)
-    return;
+  document.getElementById("taulogoImg").style.display = "none";
+  document.getElementById("githubImgGabi").style.display = "none";
+  document.getElementById("githubImgLeora").style.display = "none";
 
-  var random_notes = [];
-  for (let i = 0; i < 100; i++) {
-    const ns = ["C", "D", "E", "F", "G", "A", "B"]
-    var rand = ns[Math.floor(Math.random() * ns.length)];
-    random_notes.push({ "note": rand, "octave": 4, "duration": 2 });
-  }
+  const homePageLayer = new Layer();
+  homePageLayer.activate();
 
-  /* You can play random notes by changing "yonatan_song.notes" to "random_notes" */
-  initializeApp(yonatan_song.rate, yonatan_song.notes);
+  //Greeting Text for the user
+  
+
+  const welcomeText = new PointText({
+    position: view.center + [0,-100],
+    justification: 'center',
+    content: 'Welcome to Abstract Piano',
+    fillColor: '#fff',
+    fontFamily: 'Times New Roman',
+    fontWeight: 'italic',
+    fontSize: 36
+  });
+
+    var welcomeBtn = new Path.Rectangle(welcomeText.bounds);
+    welcomeBtn.scale(1.3)
+    welcomeBtn.fillColor = '#000'
+    welcomeBtn.opacity = 0.5
+    welcomeBtn.shadowColor = new Color(0,0,0)
+    welcomeBtn.shadowBlur = 10,
+    welcomeBtn.shadowOffset = new Point(1, 1)
+
+    welcomeText.bringToFront()
+
+    welcomeText.onMouseEnter = function(event) {
+      this.scale(1.05)
+    }
+  
+    welcomeText.onMouseLeave = function(event) {
+      this.scale(1/1.05)
+    }
+
+
+    const studentsText = new PointText({
+      position: welcomeText.position + [0,100],
+      justification: 'center',
+      content: 'an open-source university project by Leora Kowen and Gabriel Abboud',
+      fillColor: 'black',
+      fontFamily: 'Times New Roman',
+      fontWeight: 'italic',
+      fontSize: 24
+    });
+
+    const lecturerText = new PointText({
+      position: studentsText.position + [0,40],
+      justification: 'center',
+      content: 'Lecturer: Jonathan Dortheimer',
+      fillColor: 'black',
+      fontFamily: 'Times New Roman',
+      fontWeight: 'italic',
+      fontSize: 24
+    });
+
+    const tauImg = new Raster('taulogoImg');
+    tauImg.position = lecturerText.position + [200,100];
+    tauImg.justification = 'center'
+    tauImg.scale(0.5);
+
+    tauImg.onMouseEnter = function(event) {
+      this.scale(1.05)
+    }
+  
+    tauImg.onMouseLeave = function(event) {
+        this.scale(1/1.05)
+    }
+    
+
+    const gitImgGab = new Raster('githubImgGabi');
+    gitImgGab.position = tauImg.position + [-400,-20];
+    gitImgGab.justification = 'center'
+    gitImgGab.scale(0.09);
+
+    gitImgGab.onMouseEnter = function(event) {
+      this.scale(1.05)
+    }
+  
+    gitImgGab.onMouseLeave = function(event) {
+        this.scale(1/1.05)
+    }
+
+    const gitImgLeo = new Raster('githubImgLeora');
+    gitImgLeo.position = gitImgGab.position + [0,40];
+    gitImgLeo.justification = 'center'
+    gitImgLeo.scale(0.09);
+
+    gitImgLeo.onMouseEnter = function(event) {
+      this.scale(1.05)
+    }
+  
+    gitImgLeo.onMouseLeave = function(event) {
+        this.scale(1/1.05)
+    }
+
+
+    tauImg.onClick = function(event){
+    window.open("https://en-arts.tau.ac.il/");
+    }
+
+    gitImgGab.onClick = function(event) {
+      window.open("https://github.com/gabi-abb");
+    }
+
+    gitImgLeo.onClick = function(event) {
+      window.open("https://github.com/LeoraKowen");
+    }
+
+
+    
+    
+    //This function displays the song list and sets a new layer as active in PaperJs
+    const showSongList = () => {
+
+      //Activating a new layer in PaperJs
+      const songListLayer = new Layer();
+      songListLayer.activate();
+
+        //These are the children of the active layer (songListLayer)
+        const pickSongText = new PointText({
+          position: view.center + [0,-100],
+          justification: 'center',
+          content: 'Pick a song:',
+          fillColor: 'black',
+          fontFamily: 'Times New Roman',
+          fontWeight: 'italic',
+          fontSize: 48
+          });
+ /********************************************************************************/
+       
+
+        const song1 = new PointText({
+          position: pickSongText.position + [0,100],
+          justification: 'center',
+          content: 'Yonatan Hakatan',
+          fillColor: '#fff',
+          fontFamily: 'Times New Roman',
+          fontSize: 24,
+        });
+      
+        var song1Btn = new Path.Rectangle(song1.bounds);
+        song1Btn.scale(1.3);
+        song1Btn.fillColor = '#000'
+        song1Btn.opacity = 0.5
+        song1Btn.shadowColor = new Color(0,0,0)
+        song1Btn.shadowBlur = 10,
+        song1Btn.shadowOffset = new Point(1, 1)  
+        song1.bringToFront()
+      
+
+          song1.onMouseEnter = function(event) {
+            this.scale(1.1)
+          }
+        
+          song1.onMouseLeave = function(event) {
+              this.scale(1/1.1)
+          }
+
+          /********************************************************************************/
+          
+
+          const song2 = new PointText({
+            position: song1.position + [0,100],
+            justification: 'center',
+            content: 'Jingle Bells',
+            fillColor: '#fff',
+            fontFamily: 'Times New Roman',
+            fontSize: 24
+          });
+      
+          var song2Btn = new Path.Rectangle(song2.bounds);
+          song2Btn.scale(1.3);
+          song2Btn.fillColor = '#000'
+          song2Btn.opacity = 0.5
+          song2Btn.shadowColor = new Color(0,0,0)
+          song2Btn.shadowBlur = 10,
+          song2Btn.shadowOffset = new Point(1, 1)  
+          song2.bringToFront()
+
+            song2.onMouseEnter = function(event) {
+              this.scale(1.1)
+            }
+          
+            song2.onMouseLeave = function(event) {
+                this.scale(1/1.1)
+            }
+
+         
+
+          /********************************************************************************/
+
+          const song3 = new PointText({
+          position: song2.position + [0,100],
+          justification: 'center',
+          content: 'Astronomia',
+          fillColor: '#fff',
+          fontFamily: 'Times New Roman',
+          fontSize: 24
+          });
+      
+          var song3Btn = new Path.Rectangle(song3.bounds);
+          song3Btn.scale(1.3);
+          song3Btn.fillColor = '#000'
+          song3Btn.opacity = 0.5
+          song3Btn.shadowColor = new Color(0,0,0)
+          song3Btn.shadowBlur = 10,
+          song3Btn.shadowOffset = new Point(1, 1)  
+          song3.bringToFront()
+
+          song3.onMouseEnter = function(event) {
+            this.scale(1.1)
+          }
+        
+          song3.onMouseLeave = function(event) {
+              this.scale(1/1.1)
+          }
+      
+          /********************************************************************************/
+
+          const expText = new PointText({
+            position: song3.position + [0,100],
+            justification: 'center',
+            content: 'To create your abstract masterpiece, try to match the flowing lines with the boxes below according to each letter on the keyboard',
+            fillColor: 'black',
+            fontFamily: 'Times New Roman',
+            fontWeight: 'italic',
+            fontSize: 20
+            });
+
+          /********************************************************************************/
+
+          /*const songRandom = new PointText({
+            position: song3.position + [0,100],
+            justification: 'center',
+            content: 'Random',
+            fillColor: 'black',
+            fontFamily: 'Times New Roman',
+            fontSize: 24
+            });
+  
+            songRandom.onMouseEnter = function(event) {
+              this.scale(1.1)
+            }
+          
+            songRandom.onMouseLeave = function(event) {
+                this.scale(1/1.1)
+            }*/
+
+            /********************************************************************************/
+
+            /*When the user clicks the layer and it's children are removed 
+            and a new layer is created and activated in the initializeApp function*/
+    
+            song1.onClick = function(event) {
+              paper.project.activeLayer.removeChildren();
+              initializeApp(yonatan_song.rate, yonatan_song.notes);
+            }
+            
+            song2.onClick = function(event) {
+              paper.project.activeLayer.removeChildren();
+              initializeApp(jinglebells_song.rate, jinglebells_song.notes);
+            }
+
+            song3.onClick = function(event) {
+              paper.project.activeLayer.removeChildren();
+              initializeApp(astronomia_song.rate, astronomia_song.notes);
+            }
 }
-/* end of example code - we will delete*/
-/****************************************************************************/
+
+    welcomeText.onClick = function(event) {
+        paper.project.activeLayer.removeChildren();
+        showSongList();
+    }
+
+}
 
 
 const main = () => {
@@ -417,11 +703,6 @@ const main = () => {
   onFrame = (event) => {
     if (app)
       app.handleNewFrame(event);
-  };
-
-  onMouseDown = (event) => {
-    if (app == null)
-      homePageHandleMouseDown(event);
   };
 
   onKeyDown = (event) => {
