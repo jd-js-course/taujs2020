@@ -174,9 +174,7 @@ const openScreen = () => {
 const main = () => {
 
     openScreen()
-
-
-
+    
     let gameStarted = false
     let gameEnded = false
 
