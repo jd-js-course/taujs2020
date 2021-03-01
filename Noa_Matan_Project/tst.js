@@ -172,10 +172,8 @@ const openScreen = () => {
 
 const main = () => {
 
-<<<<<<< HEAD
     openScreen()
     
-=======
     
 var Music = new Howl({
         src: ['assets/sound/MYSTERY_MUSIC.mp3'],
@@ -187,7 +185,6 @@ var Music = new Howl({
 
     Music.play()
 
->>>>>>> d26e70ed4af8c3d75afe4fd9c49f31a5662d13b7
     let gameStarted = false
     let gameEnded = false
 
