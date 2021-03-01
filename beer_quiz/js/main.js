@@ -3,7 +3,7 @@ const startButton = document.getElementById("start-btn");
 
 
 
-const player = new Tone.Player("/beer_quiz/music/pubambience.mp3").toDestination();
+const player = new Tone.Player("./music/pubambience.mp3").toDestination();
 
 
 startButton.addEventListener("click", function () {
