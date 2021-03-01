@@ -22,12 +22,14 @@ const detective = () => {
 const safe = () => {
     baseImg3 = new Image();
     baseImg3.src = '/MuseumGame/Assets/safe.png';
+    baseImg3.id = "passCode"
     baseImg3.onload = () => {
         context.drawImage(baseImg3, 1700, 500);
         }
 } 
-const art1 = () => {
+const art1 = () => {    
     art = new Image();
+    art.id ="mona"
     art.src = '/MuseumGame/Assets/mona.jpg';
     art.onload = () => {
         context.drawImage(art, 150, 30);        
@@ -90,3 +92,4 @@ const main = () => {
 }
 
 main();
+
