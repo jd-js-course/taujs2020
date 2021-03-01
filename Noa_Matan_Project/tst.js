@@ -211,7 +211,7 @@ var Music = new Howl({
     const ShotSynth = new Tone.Synth().toDestination();
 
     var playerHP = 50
-    var round = 2
+    var round = 6
 
     for (var x=0;x<round;x++){
         zombies.push(createZombie())
@@ -296,6 +296,8 @@ var Music = new Howl({
             if (player.intersects(zombies[i])) {
                 playerHP = playerHP - 10
                 OutchSound.play()
+
+                alert("you have been hit you have "+playerHP+" life remained")
 
 
                 console.log(playerHP)
