@@ -42,9 +42,6 @@ const nurse = new Raster('assets/images/nurse2.png');
 nurse.position = [800, 510]
 
 
-
-var taskNames = ['pick up kid from kindergarten', 'buy a flower', 'buy milk from supermarket', 'go to the bank']
-
 const createMan = () => {
 
     var head = new Shape.Circle(new Point(670, 110), 10);
@@ -69,6 +66,7 @@ success1.position = [-1000, -1000]
 
 const main = () => {
 
+    let start = true
     var gamesound = new Howl({
         src: ['assets/sounds/background.mp3'],
         loop: true,
@@ -87,8 +85,14 @@ const main = () => {
         volume: 0.2
     });
 
+    var uhoh = new Howl({
+        src: ['assets/sounds/uhoh.mp3'],
+        loop: false,
+        volume: 0.2
+    });
+
     gamesound.play()
-    var first = true
+    var first = false
     var tasks = 0
     var something = false
     var something2 = false
@@ -96,25 +100,9 @@ const main = () => {
     let GameStarted = false
 
 
-    document.addEventListener('keyup', event => {
-        if (first) {
-            if (event.code == 'Space') {
-                instructions.position = [-1000, -1000]
-                GS.position = view.bounds.center;
-                setTimeout(function () {
-                    GS.position = [-1000, -1000]
-                    GS = new Raster('assets/images/blank.png');
-                }, 1000);
-                setTimeout(function () { choosenext().position = view.bounds.center }, 1000);
-
-            }
-        }
-
-    })
-
 
     const men = []
-    const num = 12
+    const num = 10
     const n = Math.random() * 12
     const ran = Math.round(n) + 1
     console.log(ran)
@@ -122,8 +110,61 @@ const main = () => {
         men.push(createMan())
     }
 
+
     const instructions = new Raster('assets/images/instructions.png');
     instructions.position = view.bounds.center
+    const pre = new Raster('assets/images/pre.png');
+    pre.position = view.bounds.center
+    const opening = new Raster('assets/images/opening.png');
+    opening.position = view.bounds.center
+    const faculty =  new Raster('assets/images/faculty.png');
+    faculty.position = [800,400]
+    faculty.onClick = function (event) {
+        window.location = 'https://arts.tau.ac.il/'
+    }
+
+    const git =  new Raster('assets/images/git.png');
+    git.position = [480,400]
+    git.onClick = function (event) {
+        window.location = 'https://github.com/mayageier'
+    }
+
+    const firstScreen = new Group(opening, faculty, git)
+    document.addEventListener('keyup', event => {
+        if (start){
+            if (event.code == 'Space') {
+                firstScreen.position = [-1000, -1000]
+                document.addEventListener('keyup', event => {
+                    if (event.code == 'Space') {
+                    pre.position = [-1000, -1000]
+                    first = true
+                    document.addEventListener('keyup', event => {
+                        if (first) {
+                            if (event.code == 'Space') {
+                                instructions.position = [-1000, -1000]
+                                GS.position = view.bounds.center;
+                                setTimeout(function () {
+                                    GS.position = [-1000, -1000]
+                                    GS = new Raster('assets/images/blank.png');
+                                }, 1000);
+                                if (start){
+                                    setTimeout(function () { choosenext().position = view.bounds.center }, 1000);
+                                }   
+                                start = false
+                                console.log("maya")
+                            }
+                        }
+                
+                    })
+                    }
+                })
+                }
+        }
+        
+    })
+
+
+
     const missions = []
     var GS = new Raster('assets/images/gameStarted.png');
     GS.position = [-1000, -1000]
@@ -198,7 +239,7 @@ const main = () => {
                     choosenext().position = view.bounds.center
                     kid.position = [-1000, -1000]
                     success = false;
-                    k.remove()
+
                 }
             }
         })
@@ -348,12 +389,7 @@ const main = () => {
             done()
             return blank;
         }
-        var choosetask = new Group(choose, success1)
-        // if (!first) {
-        //     success1.position = view.bounds.center
-        //     success1.position.y -= 200
-        //     missions.addChild(success1)
-        // }
+
         var choosetask = new Group(choose)
         for (let i = 0; i < missions.length; i++) {
             choosetask.addChild(missions[i])
@@ -379,7 +415,7 @@ const main = () => {
         vaccine.position = [-1000, -1000]
         document.addEventListener('keyup', event => {
             if (event.code == 'Space') {
-                ssetTimeout(function () { GameStarted = true }, 100);
+                setTimeout(function () { GameStarted = true }, 100);
                 congradulations.position = [-1000, -1000]
                 ok2.position = [-1000, -1000]
                 vaccine.position = [639, 142]
@@ -407,6 +443,7 @@ const main = () => {
                     }
                     gamesuccess.position = view.bounds.center
                     cheer.play()
+                    setTimeout(function () {gamesound.sound.fade(0, 1, 500); }, 3000);
                 }
             }
         })
@@ -466,6 +503,8 @@ const main = () => {
                 if (men[i].fillColor == 'red') {
                     console.log("game over")
                     Over = true;
+                    uhoh.play()
+                    gamesound.pause()
 
                 }
             }
@@ -515,20 +554,19 @@ const main = () => {
             checkCollision();
             men[1].fillColor = 'red'
         }
-        if (success){
-            k.remove()
-        }
-
 
         if (Over) {
+            choosenext().position =[-1000, -1000] 
             pu.position = [-1000, -1000]
             fl.position = [-1000, -1000]
             su.position = [-1000, -1000]
             ba.position = [-1000, -1000]
+            congradulations.position = [-1000, -1000]
             vaccine.position = [-1000, -1000]
             GO.position = view.bounds.center
             GameStarted = false;
             something = true;
+
         }
         if (something) {
             for (let i = 0; i < num; i++) {
