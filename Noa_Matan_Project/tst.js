@@ -167,14 +167,27 @@ const openScreen = () => {
 
         console.log("clicked")
 
-
     })
 }
 
 const main = () => {
 
+<<<<<<< HEAD
     openScreen()
     
+=======
+    
+var Music = new Howl({
+        src: ['assets/sound/MYSTERY_MUSIC.mp3'],
+        loop: true,
+        volume: 0.05,
+    });
+
+    openScreen()
+
+    Music.play()
+
+>>>>>>> d26e70ed4af8c3d75afe4fd9c49f31a5662d13b7
     let gameStarted = false
     let gameEnded = false
 
@@ -185,11 +198,6 @@ const main = () => {
     const shots = []
     const zombies = []
 
-    var Music = new Howl({
-        src: ['assets/sound/MYSTERY_MUSIC.mp3'],
-        loop: true,
-        volume: 0.05,
-    });
 
     var ScreamSound = new Howl({
         src: ['assets/sound/SCREAM.mp3'],
@@ -229,7 +237,7 @@ const main = () => {
     onKeyDown = (event) => {
 
 
-        Music.play()
+        
 
         switch (event.key) {
 
@@ -267,7 +275,7 @@ const main = () => {
 
 
 
-    checkIntersection = () => {
+    checkIntersection = () => {        
 
         if (playerHP <= 0) {
 
@@ -281,7 +289,6 @@ const main = () => {
 
                 playerHP = 50
                 round = 3
-
                 openScreen()
 
             })
@@ -293,11 +300,9 @@ const main = () => {
                 playerHP = playerHP - 10
                 OutchSound.play()
 
+
                 console.log(playerHP)
 
-                if (playerHP <= 0) {
-                    return;
-                }
 
                 zombies[i].remove();
                 zombies.splice(i, 1)
