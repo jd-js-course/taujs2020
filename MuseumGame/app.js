@@ -29,10 +29,10 @@ const safe = () => {
 } 
 const art1 = () => {    
     art = new Image();
-    art.id ="mona"
+    art.id ="mona";
     art.src = '/MuseumGame/Assets/mona.jpg';
     art.onload = () => {
-        context.drawImage(art, 150, 30);        
+        context.drawImage(art, 150, 30);
         }
     
 } 
@@ -40,6 +40,7 @@ const art1 = () => {
 const art2 = () => {
     artM = new Image();
     artM.src = '/MuseumGame/Assets/memory.jpg';
+    artM.id = "memory";
     artM.onload = () => {
         context.drawImage(artM, 550, 30);
         }
@@ -49,6 +50,7 @@ const art2 = () => {
 const art3 = () => {
     artD = new Image();
     artD.src = '/MuseumGame/Assets/night.jpg';
+    artD.id = "night";
     artD.onload = () => {
         context.drawImage(artD, 1150, 50);
         }
@@ -57,6 +59,7 @@ const art3 = () => {
 const art4 = () => {
     artC = new Image();
     artC.src = '/MuseumGame/Assets/statue.png';
+    artC.id = "statue";
     artC.onload = () => {
         context.drawImage(artC, 150, 800);
         }
@@ -65,6 +68,7 @@ const art4 = () => {
 const art5 = () => {
     artF = new Image();
     artF.src = '/MuseumGame/Assets/afternoon.jpg';
+    artF.id = 'afternoon';
     artF.onload = () => {
         context.drawImage(artF, 550, 800);
         }
@@ -72,6 +76,7 @@ const art5 = () => {
 const art6 = () => {
     artA = new Image();
     artA.src = '/MuseumGame/Assets/medusa.jpg';
+    artA.id = 'medusa';
     artA.onload = () => {
         context.drawImage(artA, 1300, 770);
         }

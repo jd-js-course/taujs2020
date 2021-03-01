@@ -16,6 +16,13 @@
 
     <script type="text/paperscript" canvas="paper" src="app.js"></script>
 
+    <img id="mona" src ="/MuseumGame/Assets/mona.jpg" onclick="window.open(this.src)">
+    <img id="memory" src ="/MuseumGame/Assets/memory.jpg" onclick="window.open(this.src)">
+    <img id="night" src ="/MuseumGame/Assets/night.jpg" onclick="window.open(this.src)">
+    <img id="statue" src ="/MuseumGame/Assets/statue.png" onclick="window.open(this.src)">
+    <img id="afternoon" src ="/MuseumGame/Assets/afternoon.jpg" onclick="window.open(this.src)">
+    <img id="medusa" src ="/MuseumGame/Assets/medusa.jpg" onclick="window.open(this.src)">
+
 
 
 <canvas id="paper" resize></canvas>
@@ -42,8 +49,35 @@
         height: 100%;
     }
 
-    .mona {
-        position: fixed;
+    #mona {
+        position: absolute;
+        left: 150px;
+        top: 30px;
+    }
+    #memory{
+        position: absolute;
+        left: 550px;
+        top: 30px;
+    }
+    #night{
+        position: absolute;
+        left: 1150px;
+        top: 50px;
+    }
+    #statue{
+        position: absolute;
+        left: 150px;
+        top: 800px;
+    }
+    #afternoon{
+        position: absolute;
+        left: 550px;
+        top: 800px;
+    }
+    #medusa{
+        position: absolute;
+        left: 1300px;
+        top: 770px;
     }
    
 </style>
