@@ -74,7 +74,7 @@ function handleGuess(chosenLetter) {
 /* פונקציה שמשנה את התמונה של האיש התלוי בהתאם לכמות הטעויות שהשחקן צבר
 כאשר השמות של התמונות מתאימים למספר הטעויות שמתעדכן בתוך המשתנה*/
 function updateHangmanPicture() {
-    document.getElementById('hangmanPic').src = './images/hard' + mistakes + '.PNG';
+    document.getElementById('hangmanPic').src = './images/hard/' + mistakes + '.PNG';
 }
 
 /* פונקציה שלוקחת את המילה שצריך לנחש ומכניסה אותה למערך שכל איבר בו הוא אות אחרת של המילה
