@@ -10,18 +10,19 @@
         integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ=="
         crossorigin="anonymous"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.2/Tone.js"
-        integrity="sha512-mC+4OB44BnfNO5Tgllht1G+rdH82tMFKIM9pPNoQSMFqYm8PnPCffmmqTt68XpkAiJrmsQJwvFWDl8Br1o6vUw=="
-        crossorigin="anonymous"></script>
 
     <script type="text/paperscript" canvas="paper" src="app.js"></script>
-
+<!-- making the art images clickable and opens them in a new tab -->
     <img id="mona" src ="/MuseumGame/Assets/mona.jpg" onclick="window.open(this.src)">
     <img id="memory" src ="/MuseumGame/Assets/memory.jpg" onclick="window.open(this.src)">
     <img id="night" src ="/MuseumGame/Assets/night.jpg" onclick="window.open(this.src)">
     <img id="statue" src ="/MuseumGame/Assets/statue.png" onclick="window.open(this.src)">
     <img id="afternoon" src ="/MuseumGame/Assets/afternoon.jpg" onclick="window.open(this.src)">
     <img id="medusa" src ="/MuseumGame/Assets/medusa.jpg" onclick="window.open(this.src)">
+
+    <!-- making the safe clickable and open a prompt (soon will be how we enter the password to end the game) -->
+
+    <img id="passCode" src ="/MuseumGame/Assets/safe.png" onclick="prompt()">
 
 
 
@@ -78,6 +79,11 @@
         position: absolute;
         left: 1300px;
         top: 770px;
+    }
+    #passCode{
+        position: absolute;
+        left: 1700px;
+        top: 500px;
     }
    
 </style>

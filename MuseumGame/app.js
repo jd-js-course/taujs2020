@@ -1,8 +1,9 @@
 
-
+//Making the canvas to draw on
 var canvas =  document.getElementById('paper');
 context = canvas.getContext('2d');
 
+//backgroup img
 const bg = () => {
     baseImg = new Image();
     baseImg.src = '/MuseumGame/Assets/bg2.jpg';
@@ -10,7 +11,7 @@ const bg = () => {
         context.drawImage(baseImg, 0, 0);
         }
 } 
-
+//detectve img
 const detective = () => {
     baseImg2 = new Image();
     baseImg2.src = '/MuseumGame/Assets/detective.png';
@@ -18,7 +19,7 @@ const detective = () => {
         context.drawImage(baseImg2, 0, 400);
         }
 }
-
+//safe img
 const safe = () => {
     baseImg3 = new Image();
     baseImg3.src = '/MuseumGame/Assets/safe.png';
@@ -27,6 +28,7 @@ const safe = () => {
         context.drawImage(baseImg3, 1700, 500);
         }
 } 
+//art img #1
 const art1 = () => {    
     art = new Image();
     art.id ="mona";
@@ -36,7 +38,7 @@ const art1 = () => {
         }
     
 } 
-
+//art img #2
 const art2 = () => {
     artM = new Image();
     artM.src = '/MuseumGame/Assets/memory.jpg';
@@ -46,7 +48,7 @@ const art2 = () => {
         }
     
 } 
-
+//art img #3
 const art3 = () => {
     artD = new Image();
     artD.src = '/MuseumGame/Assets/night.jpg';
@@ -56,6 +58,7 @@ const art3 = () => {
         }
         
 } 
+//art img #4
 const art4 = () => {
     artC = new Image();
     artC.src = '/MuseumGame/Assets/statue.png';
@@ -65,6 +68,7 @@ const art4 = () => {
         }
 
 } 
+//art img #5
 const art5 = () => {
     artF = new Image();
     artF.src = '/MuseumGame/Assets/afternoon.jpg';
@@ -73,6 +77,7 @@ const art5 = () => {
         context.drawImage(artF, 550, 800);
         }
 } 
+//art img #6
 const art6 = () => {
     artA = new Image();
     artA.src = '/MuseumGame/Assets/medusa.jpg';
@@ -82,7 +87,16 @@ const art6 = () => {
         }
 } 
 
+//calculatin random number between 0-9
+digit1 = Math.floor(Math.random() * 10);
+digit2 = Math.floor(Math.random() * 10);
+digit3 = Math.floor(Math.random() * 10);
+digit4 = Math.floor(Math.random() * 10);
+digit5 = Math.floor(Math.random() * 10);
+digit6 = Math.floor(Math.random() * 10);
 
+
+//main function
 const main = () => {
     bg();
     detective();
