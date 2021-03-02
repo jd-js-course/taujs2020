@@ -98,7 +98,7 @@ span.fade {
 }
 
 
-a.button1 {
+.button1 {
     grid-row: 8/9;
     grid-column: 8/11; 
     align-self: center;
@@ -117,16 +117,16 @@ a.button1 {
    
     }
 
-    a.button1:hover{
+    .button1:hover{
     color:#DDDDDD;
     border-color:#DDDDDD;
     }
-    a.button1:active{
+    .button1:active{
     color:#757373;
     border-color:#757373;
     }
     @media all and (max-width:30em){
-    a.button1{
+    .button1{
     display:block;
     margin:0.4em auto;
     } }
