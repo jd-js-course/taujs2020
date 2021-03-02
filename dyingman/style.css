@@ -19,7 +19,7 @@
 nav {
     color: rgb(218, 210, 210);
     position: absolute;
-    top: 90%;
+    top: 88%;
     left: 1%;
 }
 #credit {
@@ -33,6 +33,14 @@ nav {
     color: rgb(218, 210, 210);
     font-family: Georgia, Times, 'Times New Roman';
 
+}
+.GITHubLink{
+    font-size: 14px;
+    color: rgb(218, 210, 210);
+    font-family: Georgia, Times, 'Times New Roman';
+    position: absolute;
+    top: 94%;
+    left: 1%;
 }
 section {
     
@@ -108,6 +116,7 @@ span.fade {
     border:0.16em solid #FFFFFF;
     margin:0 0.3em 0.3em 0;
     box-sizing: border-box;
+    background:transparent;
     text-decoration:none;
     font-family: 'Gisha', 'Arial Narrow', Arial, sans-serif;
     font-weight:300;
@@ -118,10 +127,12 @@ span.fade {
     }
 
     .button1:hover{
-    color:#DDDDDD;
+    background: rgb(230, 230, 230);
+    color: rgb(59, 59, 59); 
     border-color:#DDDDDD;
     }
     .button1:active{
+    background: rgb(158, 156, 156);
     color:#757373;
     border-color:#757373;
     }
@@ -131,7 +142,7 @@ span.fade {
     margin:0.4em auto;
     } }
 
-    a.button2 {
+    .button2 {
         grid-row: 8/9;
         grid-column: 10/13; 
         align-self: center;
@@ -141,6 +152,7 @@ span.fade {
         border:0.16em solid #FFFFFF;
         margin:0 0.3em 0.3em 0;
         box-sizing: border-box;
+        background:transparent;
         text-decoration:none;
         font-family: 'Gisha', 'Arial Narrow', Arial, sans-serif;
         font-weight:500;
@@ -149,16 +161,18 @@ span.fade {
         transition: all 0.15s;
         
         }
-        a.button2:hover{
-        color:#DDDDDD;
+        .button2:hover{
+        background: rgb(230, 230, 230);
+        color: rgb(59, 59, 59); 
         border-color:#DDDDDD;
         }
-        a.button2:active{
+        .button2:active{
+        background: rgb(158, 156, 156);
         color:#757373;
         border-color:#757373;
         }
         @media all and (max-width:30em){
-        a.button2{
+        .button2{
         display:block;
         margin:0.4em auto;
         }
