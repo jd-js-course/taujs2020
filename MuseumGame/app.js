@@ -87,14 +87,6 @@ const art6 = () => {
         }
 } 
 
-//calculatin random number between 0-9
-digit1 = Math.floor(Math.random() * 10);
-digit2 = Math.floor(Math.random() * 10);
-digit3 = Math.floor(Math.random() * 10);
-digit4 = Math.floor(Math.random() * 10);
-digit5 = Math.floor(Math.random() * 10);
-digit6 = Math.floor(Math.random() * 10);
-
 
 //main function
 const main = () => {
