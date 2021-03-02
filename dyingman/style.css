@@ -130,6 +130,7 @@ span.fade {
     background: rgb(230, 230, 230);
     color: rgb(59, 59, 59); 
     border-color:#DDDDDD;
+    transition: all ease-in-out 1s;
     }
     .button1:active{
     background: rgb(158, 156, 156);
@@ -165,6 +166,7 @@ span.fade {
         background: rgb(230, 230, 230);
         color: rgb(59, 59, 59); 
         border-color:#DDDDDD;
+        transition: all ease-in-out 1s;
         }
         .button2:active{
         background: rgb(158, 156, 156);
