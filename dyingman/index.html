@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h3 id="credit">
+                הפקולטה לאומנות, אוניברסיטה תל אביב
+            </h3>
+            <a href="https://arts.tau.ac.il" class=TAULink>www.arts.tau.ac.il</a>
+            
+        </nav>
+        <section
+             class="chalkboard">
+                <img src="./img/board.jpg" alt="chalkboard">
+               <h1 class="DyingMan">DyingMan</h1>
+                <a href="hard" class="button1">קשוח</a>
+                <a href="easy" class="button2">קליל</a>
+                <h2 id ="thisIsUs">תום הדר ודנה גרוס, בהנחית יונתן דורטהיימר</h2> 
+                <video width="320" height="240" autoplay>
+                    <source src="./img/deadmanwalking.mp4" type="video/mp4">
+                </video>
+                
+            
+        </section>
+    </header>
+    
+    <div class="slider"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+    
+    <script src="app.js"></script>
+
+    <script>
+var tl = gsap.timeline();
+    tl.from("video", { x:-50, stagger: 0.8, duration: 2})
+ .fromTo("img", 1, { height: "0%"}, {height: "100%", ease: Bounce.Out})
+    .fromTo("img", 1.2, {width: "70%" }, {width: "100%", ease: Power2.easeInOut})
+   //.from("h1", {opacity: 0, y:500, duration: 0.8, ease: "back.out(1.7)"})
+    .from(".button1", {delay: 1, opacity: 0, y:500, duration: 0.8, ease: "back.out(1.7)"})
+    .from(".button2", {opacity: 0, y:500, duration: 0.8, ease: "back.out(1.7)"}, "-=0.8")
+    .from("h2", {opacity: 0, y:5, duration: 0.5 })
+    
+
+    </script>
+ 
+</body>
+
+</html>
