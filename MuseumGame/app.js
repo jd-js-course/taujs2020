@@ -90,6 +90,7 @@ const art6 = () => {
 
 //main function
 const main = () => {
+
     bg();
     detective();
     safe();
@@ -99,6 +100,7 @@ const main = () => {
     art4();
     art5();
     art6();
+    alert("This Game Is With A lot of errors unfortunately, We Did our best, but this is Alpha Version, To Solve the code Press F12/Open Console");
 
 }
 
