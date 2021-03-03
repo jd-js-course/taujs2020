@@ -553,7 +553,9 @@ const main = () => {
         if (GameStarted) {
             checkCollision();
             men[1].fillColor = 'red'
+            men[9].fillColor = 'red'
         }
+
 
         if (Over) {
             choosenext().position =[-1000, -1000] 
