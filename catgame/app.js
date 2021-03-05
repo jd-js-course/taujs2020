@@ -223,7 +223,7 @@ class Cat {
                     break;
                 case 'sit_upset':
                     this.mood = 'scratch2'
-                    set_hand('hand_side_scrach')
+                    set_hand('hand_side_scratch')
                     break;
                 case 'restive':
                     this.mood = 'restive_upset'
@@ -239,7 +239,7 @@ class Cat {
                     break
                 case 'lies_upset':
                     this.mood = 'scratch2'
-                    set_hand('hand_side_scrach')
+                    set_hand('hand_side_scratch')
                     break
 
             }
