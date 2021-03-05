@@ -1,3 +1,18 @@
+/* the cursor should be hidden so we can show instead of it the hand graphics */
+body {
+    cursor: none; 
+}
+
+button {
+    cursor: none;
+}
+
 .hidden {
     visibility: hidden;
+}
+
+#hand {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
 }

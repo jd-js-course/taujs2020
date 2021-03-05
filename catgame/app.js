@@ -28,12 +28,14 @@ function gameMenu(id) { //decides what screen is displayed
 
             show("game");
             show("julio");
+            set_hand("hand_rest");
             hide("start");
             hide("gameOver");
             hide("splashscreen");
             julio.reset();
             break;
         case 4:
+            set_hand("hand_side_scratch");
             show("gameOver");
             hide("julio");
             hide("start");
@@ -213,6 +215,7 @@ class Cat {
                     break;
                 case 'stand_upset':
                     this.mood = 'scratch1'
+                    set_hand('hand_side_scratch')
                     break;
                 case 'sit':
                     this.mood = 'sit_upset'
@@ -220,6 +223,7 @@ class Cat {
                     break;
                 case 'sit_upset':
                     this.mood = 'scratch2'
+                    set_hand('hand_side_scrach')
                     break;
                 case 'restive':
                     this.mood = 'restive_upset'
@@ -227,6 +231,7 @@ class Cat {
                     break;
                 case 'restive_upset':
                     this.mood = 'scratch1'
+                    set_hand('hand_side_scratch')
                     break;
                 case 'lie':
                     this.mood = 'lies_upset'
@@ -234,6 +239,7 @@ class Cat {
                     break
                 case 'lies_upset':
                     this.mood = 'scratch2'
+                    set_hand('hand_side_scrach')
                     break
 
             }
@@ -253,6 +259,9 @@ class Cat {
         let image = this.graphics[this.mood].image
 
         var catElement = document.getElementById('julio')
+        catElement.ondragstart = function () { //this cancels the 'tiny ghost' that appears when trying to drag the cursor on the cat.
+            return false;
+        }
         var mapElement = document.getElementById('julio-map');
 
         var mapImg = new Image()
@@ -288,6 +297,14 @@ class Cat {
                             break;
                     }
                 })
+
+                catElement.addEventListener('mousedown', () =>
+                    set_hand('hand_pet2')
+                )
+
+                catElement.addEventListener('mouseup', () => 
+                    set_hand('hand_rest')
+                )
 
                 cat.clickEventAdded = true
             }
@@ -412,14 +429,23 @@ const tail_wag4 = () => {
 
 }
 
-
 const julio = new Cat() //starting the game - a cat appears on screen
 
 const main = () => { //WHAT DOES THIS FUNCTION DO?
-
     julio.render()
 }
 
-
 window.addEventListener('load', main)
+// embedding the hands graphics instead of the mouse cursor
+var handElement = document.getElementById('hand');
+window.addEventListener('mousemove', (event) => {
+    handElement.style.left = event.pageX+'px'
+    handElement.style.top = event.pageY+'px'
+})
+// switching between the deferent hand graphics - hand point, hand rest, hand pet, hand scratch. 
+const set_hand = (hand) => {
+    var handElement = document.getElementById('hand');
+    handElement.src = hand + ".png"
+}
+
 splashscreen(); //starts the game at the splash screen
