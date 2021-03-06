@@ -4,6 +4,15 @@ body {
 }
 
 button {
+    background-color: #d1c62d;
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 60px;
+    margin: 4px 2px;
     cursor: none;
 }
 

@@ -62,10 +62,25 @@ function gameOver() {
     gameMenu(4);
 }
 
-//accept clicks on images
-document.getElementById("splashscreen").addEventListener("click", startscreen); //send to start screen
-document.getElementById("startbutton").addEventListener("click", startThegame); //send to game screen
-document.getElementById("gameOver").addEventListener("click", startscreen); //send to game screen
+//accept clicks on images & manage sounds
+const open_theme = new Howl({
+    src: ['Catgame-open_theme_1.mp3'],
+        html5: true,
+        loop: true,
+    });
+const in_game_music = new Howl({
+    src: ['Catgame-in_game_music.mp3'],
+        html5: true,
+        loop: true,
+    });
+const gameover = new Howl({
+    src: ['Catgame-gameover.mp3'],
+        html5: true,
+        loop: false,
+    });
+document.getElementById("splashscreen").addEventListener("click", startscreen, in_game_music.play); //send to start screen
+document.getElementById("startbutton").addEventListener("click", startThegame, gameover.stop,open_theme.stop,in_game_music.play); //send to game screen
+document.getElementById("gameOver").addEventListener("click", startscreen, in_game_music.stop,gameover.play); //send to game screen
 
 
 //////////////////////Menu part end//////////////////////////////////////////////
