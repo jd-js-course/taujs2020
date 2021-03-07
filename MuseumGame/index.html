@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.11/paper-full.js"></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/acorn/4.0.11/acorn.js'></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"
+        integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ=="
+        crossorigin="anonymous"></script>
+
+
+    <script type="text/paperscript" canvas="paper" src="app.js"></script>
+    <!-- making the art images clickable and opens them in a new tab -->
+    <img id="mona" src="/MuseumGame/Assets/mona.jpg" onclick="window.open(this.src)">
+    <img id="memory" src="/MuseumGame/Assets/memory.jpg" onclick="window.open(this.src)">
+    <img id="night" src="/MuseumGame/Assets/night.jpg" onclick="window.open(this.src)">
+    <img id="statue" src="/MuseumGame/Assets/statue.png" onclick="window.open(this.src)">
+    <img id="afternoon" src="/MuseumGame/Assets/afternoon.jpg" onclick="window.open(this.src)">
+    <img id="medusa" src="/MuseumGame/Assets/medusa.jpg" onclick="window.open(this.src)">
+
+    <!-- making the safe clickable and open a prompt (soon will be how we enter the password to end the game) -->
+
+    <img id="passCode" src="/MuseumGame/Assets/safe.png" onclick="enterCode()">
+
+    <script>
+
+        //This code is pasted here because we were not able to make it work in the app.js document
+        //calculatin random number between 0-9
+        digit1 = Math.floor(Math.random() * 10);
+        digit2 = Math.floor(Math.random() * 10);
+        digit3 = Math.floor(Math.random() * 10);
+        digit4 = Math.floor(Math.random() * 10);
+        digit5 = Math.floor(Math.random() * 10);
+        digit6 = Math.floor(Math.random() * 10);
+
+        var digits = [digit1, digit2, digit3, digit4, digit5, digit6];
+        var numbers = ["/MuseumGame/Assets/Numbers/0.png", "/MuseumGame/Assets/Numbers/1.png",
+         "/MuseumGame/Assets/Numbers/2.png", "/MuseumGame/Assets/Numbers/3.png", "/MuseumGame/Assets/Numbers/4.png",
+         "/MuseumGame/Assets/Numbers/5.png", "/MuseumGame/Assets/Numbers/6.png", "/MuseumGame/Assets/Numbers/7.png",
+         "/MuseumGame/Assets/Numbers/8.png", "/MuseumGame/Assets/Numbers/9.png"];
+
+        for(i=0; i<numbers.lenght; i++){
+            for(j=0; j<digits.lenght; j++){
+                if(i==digits[j]){
+                context.drawImage(numbers[i],0,0)
+            }
+            }
+        }
+
+
+        //if you wanna check if your answer is correct
+        var num1 = digit1.toString();
+        var num2 = digit2.toString();
+        var num3 = digit3.toString();
+        var num4 = digit4.toString();
+        var num5 = digit5.toString();
+        var num6 = digit6.toString();
+        var randomPassword = [num1 + num2 + num3 + num4 + num5 + num6];
+        console.log(randomPassword)
+
+
+        function enterCode() {
+            var userInput = prompt("Please enter 6 figure code:");
+            if (userInput != randomPassword) {
+                alert("Wrong Code, The Police is on it's way!")
+            }
+            else if (userInput == randomPassword) {
+                alert("Code Is Correct, Theft Value = 4,500,000$")
+            }
+
+        }
+    </script>
+
+    <canvas id="paper" resize></canvas>
+
+
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            overflow: hidden;
+            height: 100%;
+            background: #000;
+        }
+
+        /* Scale canvas with resize attribute to full size */
+        canvas[resize] {
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        #mona {
+            position: absolute;
+            left: 150px;
+            top: 30px;
+        }
+
+        #memory {
+            position: absolute;
+            left: 550px;
+            top: 30px;
+        }
+
+        #night {
+            position: absolute;
+            left: 1150px;
+            top: 50px;
+        }
+
+        #statue {
+            position: absolute;
+            left: 150px;
+            top: 800px;
+        }
+
+        #afternoon {
+            position: absolute;
+            left: 550px;
+            top: 800px;
+        }
+
+        #medusa {
+            position: absolute;
+            left: 1300px;
+            top: 770px;
+        }
+
+        #passCode {
+            position: absolute;
+            left: 1700px;
+            top: 500px;
+        }
+    </style>
+
+</head>
+
+
+
+
+<body>
+
+
+
+</body>
+
+
+</html>
