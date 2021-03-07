@@ -23,8 +23,12 @@ function gameMenu(id) { //decides what screen is displayed
             hide("gameOver");
             hide("splashscreen");
             hide("julio");
+            in_game_music.play()
+            gameover.stop()
             break;
         case 3:
+            in_game_music.stop()
+            open_theme.play()
 
             show("game");
             show("julio");
@@ -32,9 +36,12 @@ function gameMenu(id) { //decides what screen is displayed
             hide("start");
             hide("gameOver");
             hide("splashscreen");
+            in_game_music.stop()
             julio.reset();
             break;
         case 4:
+            open_theme.stop()
+            gameover.play()
             set_hand("hand_side_scratch");
             show("gameOver");
             hide("julio");
@@ -78,9 +85,9 @@ const gameover = new Howl({
         html5: true,
         loop: false,
     });
-document.getElementById("splashscreen").addEventListener("click", startscreen, in_game_music.play); //send to start screen
-document.getElementById("startbutton").addEventListener("click", startThegame, gameover.stop,open_theme.stop,in_game_music.play); //send to game screen
-document.getElementById("gameOver").addEventListener("click", startscreen, in_game_music.stop,gameover.play); //send to game screen
+document.getElementById("splashscreen").addEventListener("click", startscreen); //send to start screen
+document.getElementById("startbutton").addEventListener("click", startThegame); //send to game screen
+document.getElementById("gameOver").addEventListener("click", startscreen); //send to game screen
 
 
 //////////////////////Menu part end//////////////////////////////////////////////
