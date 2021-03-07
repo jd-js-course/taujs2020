@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h3 id="credit">
+                הפקולטה לאומנות, אוניברסיטה תל אביב
+            </h3>
+            <a href="https://arts.tau.ac.il" class=TAULink>www.arts.tau.ac.il</a>
+            
+            
+        </nav>
+        <div>
+            <a href="https://github.com/jd-js-course/taujs2020/tree/main" class=GITHubLink>GITHUB</a>
+        </div>
+        <section class="chalkboard">
+            <img src="./img/board.jpg" alt="chalkboard">
+            <h1 class="DyingMan">DyingMan</h1>
+            <button id="hardBtn" class="button1" onClick="window.location='./game/hardGame.html'" >קשוח</button>
+            <button id="easyBtn" class="button2" onClick="window.location='./game/easyGame.html'">קליל</button>
+            <h2 id="thisIsUs">תום הדר ודנה גרוס, בהנחית יונתן דורטהיימר</h2>
+            <video width="320" height="240" autoplay muted>
+                <source src="./img/deadmanwalking.mp4" type="video/mp4">
+            </video>
+
+
+        </section>
+    </header>
+    <div class="slider"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+
+    <script src="app.js"></script>
+    <script>
+        /* opening screen animation and timeline for each element using gsap. 
+        each animation and timing is dependent on that of the previous element. 
+        starting point of time line declaerd by first element (img)*/
+        var tl = gsap.timeline();
+
+        tl.fromTo("img", 1, { opacity: 0, height: "0%" }, { opacity: 1, height: "100%", ease: Bounce.Out, delay: 1.2 })
+            .fromTo("img", 1.2, { width: "70%" }, { width: "100%", ease: Power2.easeInOut })
+            //.from("h1", {opacity: 0, y:500, duration: 0.8, ease: "back.out(1.7)"})
+            .from(".button1", { delay: 1.7, opacity: 0, y: 500, duration: 0.8, ease: "back.out(1.7)" })
+            .from(".button2", { opacity: 0, y: 500, duration: 0.8, ease: "back.out(1.7)" }, "-=0.8")
+            .from("h2", { opacity: 0, y: 5, duration: 0.5 })
+    </script>
+
+</body>
+
+</html>
