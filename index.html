@@ -1,44 +1,202 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="">
 
 <head>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.11/paper-full.js"></script>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/acorn/4.0.11/acorn.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"
-        integrity="sha512-L6Z/YtIPQ7eU3BProP34WGU5yIRk7tNHk7vaC2dB1Vy1atz6wl9mCkTPPZ2Rn1qPr+vY2mZ9odZLdGYuaBk7dQ=="
-        crossorigin="anonymous"></script>
+    <meta property="og:title" content="Javascript for the Arts - Final projects">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.75/Tone.js"
-        integrity="sha512-WRNJatjK302xMf1E7cAmjtR+9xbFL68U1+rVV/8zRGRB2laKMlxFy+75AnceYd6QocIUc8LuW/wC26jsmr1K9Q=="
-        crossorigin="anonymous"></script>
-    <script type="text/paperscript" canvas="paper" src="app.js"></script>
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
 
-    <style>
-        html,
-        body {
-            margin: 0;
-            overflow: hidden;
-            height: 100%;
-            background: rgb(124, 122, 122);
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="homepage/style.css">
 
-        }
-
-        /* Scale canvas with resize attribute to full size */
-        canvas[resize] {
-            width: 100%;
-            height: 100%;
-        }
-
-        canvas {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <meta name="theme-color" content="#fafafa">
 </head>
 
+<script type="text/javascript">
+
+    const projects = [
+
+        {
+            name: 'Beer quiz',
+            description: 'Which beer is the right for your personality? A personalized beer-recipe App by Omri Samson and Idan Zichlinsky',
+            path: 'beer_quiz',
+            kind: 'app',
+            img: 'brewit'
+        },
+        {
+            name: 'Pet-the-cat!',
+            description: 'Try to pet the cat! Beware not to be scratched! a game by Galit Zayerman and Aviv Sheli',
+            path: 'catgame',
+            kind: 'game',
+            img: 'catgame'
+        },
+        {
+            name: 'Corona City',
+            description: 'Get things done in Corona city while avoiding corona patients! A game by Maya Gayer',
+            path: 'corona_city',
+            kind: 'game',
+            img: 'corona'
+        },
+
+        {
+            name: 'TLV in Lights',
+            description: 'Highligh the Tel-Aviv municipality building and download your art. By Raz  Baran and Noa Shimoni',
+            path: 'final_project_raz_noa',
+            kind: 'app',
+            img: 'tlv'
+        },
+        {
+            name: 'Visual synth',
+            description: 'Playing and visualizing music with code. An app by Leora Kaon and Gabi Abud',
+            path: 'leora_and_gabi_project',
+            kind: 'app',
+            img: 'music'
+        },
+        {
+            name: 'Algo-Mondrian',
+            description: 'An interactive Mondrian image generator by Rom Maor and Shiri Gordon',
+            path: 'romm/final_project',
+            kind: 'app',
+            img: 'mondrian'
+        },
+        {
+            name: 'Ata-Tune',
+            description: 'Sound manipulation app by Yuvel Gredy and Hagai Livne',
+            path: 'atatune',
+            kind: 'app',
+            img: 'atatune'
+        },
+        {
+            name: 'Zombie Attack',
+            description: 'Can you survive? A game by Matan Shadmi and Noa Natanzon',
+            path: 'Noa_Matan_Project',
+            kind: 'game',
+            img: 'zombie'
+        },
+        {
+            name: 'Dying man',
+            description: 'A word guessing game by Dana Gross-Golan and Tom Hadar',
+            path: 'dyingman',
+            kind: 'game',
+            img: 'dying'
+        },
+
+        {
+            name: 'Write on sand',
+            description: 'Try writing on the sea shore. An app By Hagar Ben-Hilel Dauber',
+            path: 'benhillel',
+            kind: 'app',
+            img: 'sand'
+        },
+        {
+            name: 'Museum',
+            description: 'An app that prints some famous pictures by Matan Sagi and Alexander Smirnov',
+            path: 'MuseumGame',
+            kind: 'app',
+            img: 'museum'
+        },
+    ]
+
+    window.addEventListener('load', () => {
+        const container = document.getElementById('container')
+        projects.forEach(project => {
+            const html = `<div class="card">
+                    <img src="homepage/${project.img}.png" class="card-img-top" alt="${project.name}">
+                    <div class="card-body">
+                        <h5 class="card-title">${project.name}</h5>
+                        <p class="card-text">${project.description}</p>
+                        <a href="${project.path}" class="btn btn-primary">View ${project.kind}</a>
+                    </div>
+                </div>`
+            const el = document.createElement('DIV')
+            el.className = 'col-sm-4'
+            el.innerHTML = html;
+            container.appendChild(el)
+        })
+    })
+
+</script>
+
 <body>
-    <canvas id="paper" resize></canvas>
+    <div class="content-cont" style="direction: rtl;">
+        <div class="text-body">
+            <h1>
+                <span>Javascript for the Arts<br />
+                </span>
+                <h3>Tel Aviv University</h3>
+                <div class="shine one"></div>
+                <div class="shine two"></div>
+                <div class="shine three"></div>
+                <div class="shine four"></div>
+                <div class="shine five"></div>
+            </h1>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Introduction</h3>
+                        <p>
+
+                            Nowadays, more than ever, computers are a vital part of the art world.
+                            This course focused on presenting software development skills to art students.
+                        </p>
+                        <p>
+                            During the course, the students learned to realize artistic ideas using the Javascript
+                            computer language, emphasizing visual and interactive applications. Finally, the students
+                            were introduced to various software engineering concepts and ideas while reviewing software
+                            art projects.
+                        </p>
+                        <p>
+                            This website presents the students' final projects. Every project had to include visual and
+                            sound elements while being interactive and artistic.
+                        </p>
+                        <p>
+                            All the source code is available in the course's <a
+                                href="https://github.com/jd-js-course/taujs2020">repository</a></a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>Credits</h3>
+                        <p>
+                            Lecturer: Jonathan Dortheimer
+                        </p>
+                        <p>
+                            Students: Sheli Aviv, Alexander Smirnov, Gabi Abud, Galit Zayerman, Dana Gross-Golan, Hagar
+                            Ben Hillel Dauber, Hagai Livne, Yovel Gredy, Leora Kaon, Maya Gayer, Matan Shadmi, Matan
+                            Sagi, Noa Shimoni, Noa Natanzon, Nitzan Tamir, Omri Samson, Idan Zichlinsky, Rom Maor, Raz
+                            Baran, Shiri Gordon, and Tom Hadar.
+                        </p>
+                        <p>Thanks: to Dean Prof. Eran Neuman for making this course possible and to the open source
+                            community that we built upon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="container">
+
+
+        </div>
+
+        </section>
+
 </body>
 
 </html>

@@ -1,0 +1,219 @@
+@font-face {
+    font-family: 'Damion';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/damion/v10/hv-XlzJ3KEUe_YZkamwz.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 900;
+    src: url(https://fonts.gstatic.com/s/worksans/v9/QGY_z_wNahGAdqQ43RhVcIgYT2Xz5u32K-DQBi8Jow.ttf) format('truetype');
+  }
+  body,
+  html {
+    width: 100%;
+    height: 100%;
+    /* overflow: hidden; */
+  }
+.card {
+    border-color: green;
+    background-color: #000000;
+    margin-top: 20px;
+}
+  .card-body {
+    color: lightgreen;
+  }
+  body {
+    background: linear-gradient(#121212, #212938, #304468, #ab38bc, #121212);
+  }
+  h1,
+  h3 {
+    margin: 0;
+    line-height: 1;
+  }
+  h1 {
+    display: inline-block;
+    font-family: 'Work Sans', sans-serif;
+  }
+  h3 {
+    display: inline-block;
+    font-family: 'Damion', cursive;
+  }
+  .content-cont {
+    position: relative;
+    width: 100%;
+    /* height: 100%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+  
+  .text-body h1 {
+    position: relative;
+    text-transform: uppercase;
+    font-size: 5em;
+    z-index: 1;
+  }
+  .text-body h1 span {
+    color: transparent;
+    background: linear-gradient(#000000 0%, #113e87 22%, #10cccc 50%, #000000 51%, #e21ddc 78%, #e21ddc 78%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-body h1 span:after {
+    content: attr(text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-shadow: 3px 0px #fff, -3px 0px #fff, 0px 3px #fff, 0px -3px #fff, 3px 3px #fff, -3px -3px #fff, 3px -3px #fff, -3px 3px #fff;
+    opacity: 0.2;
+  }
+  .text-body h3 {
+    position: absolute;
+    top: 70%;
+    right: 20%;
+    text-align: right;
+    font-size: 2.5em;
+    letter-spacing: -1px;
+    text-transform: capitalize;
+    transform: skewY(-10deg);
+    z-index: 1;
+    color: #ee91ae;
+    text-shadow: 1px 1px #fff, -1px -1px #fff, -1px 1px #fff, 1px -1px #fff, 1px 0px #fff, -1px 0px #fff, 0px -1px #fff, 0px 1px #fff, 0px 0px 12px #ee91ae;
+  }
+  .text-body .shine {
+    position: absolute;
+    width: 5px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 7px 2px #fff;
+    z-index: 3;
+  }
+  .text-body .shine.one {
+    top: 15%;
+    left: 4%;
+    -webkit-animation: shine1 1000ms alternate infinite;
+            animation: shine1 1000ms alternate infinite;
+  }
+  .text-body .shine.two {
+    top: 55%;
+    left: 20%;
+    -webkit-animation: shine1 1500ms alternate infinite;
+            animation: shine1 1500ms alternate infinite;
+  }
+  .text-body .shine.three {
+    top: 15%;
+    left: 40%;
+    -webkit-animation: shine1 1700ms alternate infinite;
+            animation: shine1 1700ms alternate infinite;
+  }
+  .text-body .shine.four {
+    top: 15%;
+    left: 80%;
+    -webkit-animation: shine1 900ms alternate infinite;
+            animation: shine1 900ms alternate infinite;
+  }
+  .text-body .shine.five {
+    top: 55%;
+    left: 95%;
+    -webkit-animation: shine1 1300ms alternate infinite;
+            animation: shine1 1300ms alternate infinite;
+  }
+  .moving-grid {
+    position: absolute;
+    top: 57%;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    perspective: 1000px;
+    z-index: 1;
+  }
+  .moving-grid:before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: ;
+    width: 100%;
+    height: 10px;
+    box-shadow: -2px 0 21px -3px pink;
+  }
+  .moving-grid .container {
+    position: relative;
+    width: 100%;
+    height: 300%;
+    border: 2px solid pink;
+    box-sizing: border-box;
+    background-color: #010a1c;
+    transform-origin: top ;
+    transform: rotateX(70deg) translateY(10%);
+    overflow: hidden;
+  }
+  .moving-grid .container .static-lines {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
+  .moving-grid .container .static-lines .vert {
+    display: inline-block;
+    height: 100%;
+    width: 2px;
+    background-color: pink;
+    margin-left: 4.5%;
+    box-shadow: 0 2px 21px pink;
+  }
+  .moving-grid .container .moving-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300%;
+  }
+  .moving-grid .container .moving-lines .horz {
+    display: inline-block;
+    width: 100%;
+    height: 3px;
+    margin-top: 4.8%;
+    background-color: pink;
+    box-shadow: 2px 0 21px pink;
+    -webkit-animation: lines 600ms linear infinite;
+            animation: lines 600ms linear infinite;
+  }
+
+  .container{
+      margin-top: 40px;
+    position: relative;
+    z-index: 2;
+  }
+  @-webkit-keyframes shine1 {
+    0% {
+      transform: rotate(0) scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: rotate(360deg) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(720deg) scale(0);
+      opacity: 0;
+    }
+  }
+  @keyframes shine1 {
+    0% {
+      transform: rotate(0) scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: rotate(360deg) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(720deg) scale(0);
+      opacity: 0;
+    }
+  }
+  
