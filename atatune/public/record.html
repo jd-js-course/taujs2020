@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Record</title>
+    <script src="javascripts/records.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    </head>
+
+<body>
+<header>
+    <a href = "index.html"> <img src="images/start record.png" class="responsive"> </a>
+    <h2>הקלט אודיו</h2>
+    <style> h2, p {text-align: center;}
+    </style>
+</header>
+<!--button for 'start recording'-->
+<p>
+    <button id="btnStop">הפסק</button>
+
+    <button id="btnStart">התחל</button>
+    <!--button for 'stop recording'-->
+    <br><br>
+    <a href="list.html">אל הקבצים</a>
+
+</p>
+
+
+<!--for record-->
+<audio controls muted class="for-record"></audio>
+<!--'controls' use for add
+  play, pause, and volume-->
+
+<!--for play the audio-->
+<div class="play-wrapper" style="display: flex;
+justify-content: center;
+align-items: center;">
+    <audio id="audioPlay" controls></audio>
+    <br />
+    <button id="saveRecord">שמור לעריכה</button>
+</div>
+</body>
+
+</html>

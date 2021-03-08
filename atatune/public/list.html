@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Records</title>
+    <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+<style>h3, a, h4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
+<a href = "index.html"> <img src="images/start record.png" class="responsive"> </a>
+    <a href="record.html">חזור להקלטה</a>
+    <ul id="records">
+
+    </ul>
+    <h4>בחר אודיו ורחף על הפילטר הרצוי</h4>
+    <ul>
+        <li>
+            <a onclick="sound.addEffect(ringModulator);">Ring Modulator</a>
+        </li>
+        <li>
+            <a onclick="sound.addEffect(delay);">Delay</a>
+        </li>
+        <li>
+            <a onclick="sound.addEffect(distortion);">Distortion</a>
+        </li>
+    </ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pizzicato/0.6.1/Pizzicato.min.js"></script>
+    <script src="javascripts/list.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+@font-face {
+  font-family: 'signikabold';
+  src: url('fonts/signika-bold-webfont.woff2') format('woff2'),
+       url('fonts/signika-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'signikamedium';
+  src: url('fonts/signika-medium-webfont.woff2') format('woff2'),
+       url('fonts/signika-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'signikaregular';
+  src: url('fonts/signika-regular-webfont.woff2') format('woff2'),
+       url('fonts/signika-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'signikalight';
+  src: url('fonts/signika-light-webfont.woff2') format('woff2'),
+       url('fonts/signika-light-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'signikasemibold';
+  src: url('fonts/signika-semibold-webfont.woff2') format('woff2'),
+       url('fonts/signika-semibold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: url(./background/main.png);
+  background-size: 100% 100%;
+  text-align: center;  
+  background-repeat: no-repeat;
+
+}
+
+.container {
+  width: 800px;
+  max-width: 80%;
+  height: 600px;
+  padding: 100px;
+}
+
+#question{
+  font-family: "signikabold"; 
+  font-size: 250%;
+  color: #FBB03B;
+  padding: 0px;
+}
+
+#question-small{
+  font-family: "signikalight"; 
+  font-size: 100%;
+  color: #F2E9D7;
+  padding: 30px;
+}
+
+.btn-grid{
+  display: grid;
+  grid-template-columns: repeat(2,auto);
+  gap: 30px;
+  margin: 50px 20px;
+}
+
+.btn{
+  border-radius: 5px;
+  padding: 15px 10px;
+  background-color:#F2E9D7;
+  font-size: 100%;
+  color: #414E72;
+  font-family: "signikaregular"; 
+  border: none;
+  transition-duration: 0.1s;
+  cursor: pointer;
+  z-index: 950;
+}
+
+.btn:hover{
+  filter: brightness(85%);
+}
+
+.start-btn, .next-btn {
+  border-radius: 5px;
+  padding: 15px 10px;
+  background-color:#D1D8E5;
+  cursor: pointer;
+  color: #414E72;
+  font-family: "signikaregular"; 
+  border: none;
+  transition-duration: 0.1s;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  z-index: 900;
+}
+
+.block-next{
+  background-color:#C1C1C1;
+  color: #727272;
+  cursor: not-allowed;
+}
+
+.ok-next{
+  background-color:#94D6A3;
+  color: #414E72;
+  cursor: pointer;
+}
+
+#generate-btn{
+  background-color:#F7B04B;
+  color: #444444;
+}
+
+#generate-btn:hover{
+  filter: brightness(85%);
+}
+.controls{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.navigation{
+  display: block;
+  padding: 30px;
+}
+
+#Disclaimer{
+  font-family: "signikabold"; 
+  font-size: 250%;
+  color: #FBB03B;
+  padding: 0px;
+}
+
+#intTextBox{
+  border-radius: 90px;
+  padding: 5px 10px;
+  background-color:#F2E9D7;
+  font-size: 100%;
+  color: #2f3852;
+  font-family: "signikaregular"; 
+  border: none;
+  transition-duration: 0.1s;
+  cursor: pointer;
+  text-align: center;
+
+}
+
+#logo{
+  width: 40vw;
+
+}

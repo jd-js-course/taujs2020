@@ -1,0 +1,907 @@
+@font-face {
+  font-family: "signikabold";
+  src: url("fonts/signika-bold-webfont.woff2") format("woff2"),
+    url("fonts/signika-bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "signikamedium";
+  src: url("fonts/signika-medium-webfont.woff2") format("woff2"),
+    url("fonts/signika-medium-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "signikaregular";
+  src: url("fonts/signika-regular-webfont.woff2") format("woff2"),
+    url("fonts/signika-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "signikalight";
+  src: url("fonts/signika-light-webfont.woff2") format("woff2"),
+    url("fonts/signika-light-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "signikasemibold";
+  src: url("fonts/signika-semibold-webfont.woff2") format("woff2"),
+    url("fonts/signika-semibold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  direction: ltr;
+  background-color: wheat;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-size: 100% 100%;
+  text-align: center;
+  letter-spacing: 0.07em;
+  padding: 50px;
+
+  margin: auto;
+  font-size: 150%;
+  font-family: "signikaregular";
+}
+.list {
+  letter-spacing: 0.07em;
+  font-family: "signikaregular";
+}
+
+a:hover {
+  color: rgb(255, 174, 0);
+}
+h1 {
+  font-size: 200%;
+  width: 800px;
+  height: 50px;
+  position: center;
+  text-align: center;
+
+  margin: auto;
+  color: black(255, 0, 0);
+  text-decoration: underline overline;
+  text-decoration-color: rgb(255, 136, 0);
+}
+
+h2 {
+  color: black(255, 0, 0);
+  text-decoration-color: rgb(255, 136, 0);
+  text-decoration: underline;
+}
+h3 {
+  width: 1000px;
+  margin: 0 auto;
+}
+ol {
+  list-style: none;
+  counter-reset: steps;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 700px;
+}
+ol li {
+  counter-increment: steps;
+}
+ol li::before {
+  content: "" counter(steps) ":";
+  margin-right: 0.5rem;
+  color: #000000;
+}
+
+li {
+  padding: 10px;
+  margin-right: 0.5rem;
+  text-align: center;
+  margin: 0 auto;
+  width: 600px;
+  display: block;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+}
+
+/* body {
+        color: #1f4e5f;
+        font: 400 100%/1.4 "Lato", sans-serif;
+        background-image: radial-gradient(#1f4e5f 10%, #79a8a9 100%);
+        background-size: 2000px 2000px;
+        background-position: center;
+      }*/
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container .textbox {
+  margin-right: -120px;
+  color: #505050;
+}
+.container .borderbox {
+  position: relative;
+  transition: all 1s;
+}
+.container .borderbox:hover {
+  transform: rotate(-45deg);
+}
+.container .borderbox:hover .inner {
+  transform: rotate(30deg);
+}
+.container .borderbox:before {
+  content: "";
+  position: absolute;
+  top: 25px;
+  right: -50px;
+  width: 50px;
+  height: 110px;
+  border: 20px solid lightgray;
+  border-radius: 25px;
+}
+.container .borderbox .glass {
+  position: relative;
+  width: 180px;
+  height: 245px;
+  background-color: #969696;
+  border-radius: 5px;
+  border: 10px solid lightgray;
+  border-top: none;
+  overflow: hidden;
+}
+.container .borderbox .glass:before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 130px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 99;
+  margin: auto;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  box-shadow: 50px 0 0 0 rgba(0, 0, 0, 0.2), -50px 0 0 0 rgba(0, 0, 0, 0.2);
+}
+.container .borderbox .glass .inner {
+  position: absolute;
+  width: 200%;
+  height: 240px;
+  border-top: 50px solid rgb(255, 233, 233);
+  background-color: #f7a900;
+  transition: all 1s;
+  transform-origin: 0 0;
+}
+.inner {
+  background: linear-gradient(to bottom, #aa1414 0%, #ffe600 100%);
+}
+#pilsner {
+  background: linear-gradient(to bottom, #dff800 0%, #efd702 100%);
+}
+#Wheat {
+  background: linear-gradient(to bottom, #ffe601 0%, #ffe601 100%);
+}
+#amber {
+  background: linear-gradient(to bottom, #ff5101 0%, #ff5101 100%);
+}
+#apa {
+  background: linear-gradient(to bottom, #ff9101 0%, #ffbb01 100%);
+}
+#ipa {
+  background: linear-gradient(to bottom, #ff9101 0%, #ff6701 100%);
+}
+#neipa {
+  background: linear-gradient(to bottom, #fffb00 0%, #fffb00 100%);
+}
+#saison {
+  background: linear-gradient(to bottom, #fffb00 0%, #ffe600 100%);
+}
+#stout {
+  background: linear-gradient(to bottom, #413d3d 0%, #000000 100%);
+}
+#barleywine {
+  background: linear-gradient(to bottom, #aa1414 0%, #ff7b00 100%);
+}
+
+/* Sass is awesome */
+.bubble:nth-child(0) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 64px;
+  left: 137px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: -1050ms;
+  animation-duration: -1050ms;
+  -webkit-animation-delay: 150ms;
+  animation-delay: 150ms;
+}
+
+.bubble:nth-child(1) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 26px;
+  left: 111px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: -50ms;
+  animation-duration: -50ms;
+  -webkit-animation-delay: 151ms;
+  animation-delay: 151ms;
+}
+
+.bubble:nth-child(2) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 284px;
+  left: 183px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 950ms;
+  animation-duration: 950ms;
+  -webkit-animation-delay: 152ms;
+  animation-delay: 152ms;
+}
+
+.bubble:nth-child(3) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 101px;
+  left: 195px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 1950ms;
+  animation-duration: 1950ms;
+  -webkit-animation-delay: 153ms;
+  animation-delay: 153ms;
+}
+
+.bubble:nth-child(4) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 210px;
+  left: 145px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 2950ms;
+  animation-duration: 2950ms;
+  -webkit-animation-delay: 154ms;
+  animation-delay: 154ms;
+}
+
+.bubble:nth-child(5) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 280px;
+  left: 162px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 3950ms;
+  animation-duration: 3950ms;
+  -webkit-animation-delay: 155ms;
+  animation-delay: 155ms;
+}
+
+.bubble:nth-child(6) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 120px;
+  left: 172px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 4950ms;
+  animation-duration: 4950ms;
+  -webkit-animation-delay: 156ms;
+  animation-delay: 156ms;
+}
+
+.bubble:nth-child(7) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 51px;
+  left: 196px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 5950ms;
+  animation-duration: 5950ms;
+  -webkit-animation-delay: 157ms;
+  animation-delay: 157ms;
+}
+
+.bubble:nth-child(8) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 308px;
+  left: 184px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 6950ms;
+  animation-duration: 6950ms;
+  -webkit-animation-delay: 158ms;
+  animation-delay: 158ms;
+}
+
+.bubble:nth-child(9) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 224px;
+  left: 151px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 7950ms;
+  animation-duration: 7950ms;
+  -webkit-animation-delay: 159ms;
+  animation-delay: 159ms;
+}
+
+.bubble:nth-child(10) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 196px;
+  left: 148px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 8950ms;
+  animation-duration: 8950ms;
+  -webkit-animation-delay: 160ms;
+  animation-delay: 160ms;
+}
+
+.bubble:nth-child(11) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 36px;
+  left: 11px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 9950ms;
+  animation-duration: 9950ms;
+  -webkit-animation-delay: 161ms;
+  animation-delay: 161ms;
+}
+
+.bubble:nth-child(12) {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  width: 10px;
+  height: 10px;
+  top: 110px;
+  left: 152px;
+  -webkit-animation-name: bubbles;
+  animation-name: bubbles;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-duration: 10950ms;
+  animation-duration: 10950ms;
+  -webkit-animation-delay: 162ms;
+  animation-delay: 162ms;
+}
+
+@-webkit-keyframes bubbles {
+  100% {
+    top: -10px;
+  }
+}
+
+@keyframes bubbles {
+  100% {
+    top: -10px;
+  }
+}
+/* Markup */
+
+.arrow {
+  height: 500 px;
+  padding: 20px;
+  text-align: center;
+}
+
+.content {
+  position: relative;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -50%);
+}
+.content p {
+  margin: 0 0 80px;
+}
+
+/* Arrow & Hover Animation */
+#more-arrows {
+  width: 75px;
+  height: 65px;
+}
+#more-arrows:hover polygon {
+  fill: #fff;
+  transition: all 0.2s ease-out;
+}
+#more-arrows:hover polygon.arrow-bottom {
+  transform: translateY(-18px);
+}
+#more-arrows:hover polygon.arrow-top {
+  transform: translateY(18px);
+}
+
+polygon {
+  fill: #fff;
+  transition: all 0.2s ease-out;
+}
+polygon.arrow-middle {
+  opacity: 0.75;
+}
+polygon.arrow-top {
+  opacity: 0.5;
+}
+/* VARIABLES */
+/* BASE STYLES */
+
+ul {
+  list-style-type: "→ ";
+  list-style-position: inside;
+}
+
+/* GLASS */
+.glass {
+  position: relative;
+  width: 20%;
+  left: 40%;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.glass svg {
+  position: center;
+  z-index: 1;
+  display: block;
+  transform: translateZ(100vmin);
+}
+
+.glass .wrapper {
+  position: absolute;
+  left: 10.5%;
+  right: 10.5%;
+  top: 5%;
+  bottom: -15%;
+  transform: perspective(96vmin) rotateX(-30.8deg);
+}
+
+.glass .contents {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 0 0 25% 25% / 0 0 10% 10%;
+  overflow: hidden;
+}
+
+/* BEER */
+.glass .beer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  background-size: 100% 100%;
+  animation-name: fill;
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1526092/beer.png");
+  /* Had to use an image for the gradient because css linear gradients don't create a smooth enough ramp between stops for my liking. */
+}
+
+.glass .surface {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  transform: scale(0);
+  opacity: 1;
+  animation-name: surface;
+}
+
+.glass .surface::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding-bottom: 15%;
+  margin-top: -5%;
+  border-radius: 50%;
+  background: #000;
+  opacity: 0.35;
+}
+
+.glass .surface::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding-bottom: 15%;
+  margin-top: -7.5%;
+  border-radius: 50%;
+  background: #d39909;
+}
+
+@keyframes fill {
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: 89%;
+  }
+}
+
+@keyframes surface {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  10%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* BUBBLES */
+.glass .bubbles {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.glass .bubbles .layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10%;
+  padding-bottom: 200%;
+  background-size: 100% auto;
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1526092/bubbles.png");
+  background-repeat: repeat-y;
+  -webkit-mask-image: linear-gradient(to top, transparent 20%, black 100%);
+  animation-name: bubbly;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.glass .bubbles .layer.more {
+  transform: rotate(180deg);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 40%, black 100%);
+  animation-direction: reverse;
+  animation-duration: 3.5s;
+  opacity: 0.65;
+}
+
+@keyframes bubbly {
+  from {
+    background-position-y: 100%;
+  }
+}
+
+/* HEAD */
+.glass .head {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  padding-bottom: 0%;
+  opacity: 0;
+  animation-name: fill-head;
+  background: linear-gradient(
+    to right,
+    rgba(178, 178, 178, 1) 0%,
+    rgba(235, 235, 235, 1) 50%,
+    rgba(178, 178, 178, 1) 100%
+  );
+}
+
+.glass .head::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 15%;
+  border-radius: 50%;
+  margin-bottom: -7.5%;
+  background: linear-gradient(
+    to right,
+    rgba(178, 178, 178, 1) 0%,
+    rgba(235, 235, 235, 1) 50%,
+    rgba(178, 178, 178, 1) 100%
+  );
+}
+
+.glass .head::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding-bottom: 15%;
+  margin-top: -7.5%;
+  border-radius: 50%;
+  background: #f4f4f4;
+}
+
+@keyframes fill-head {
+  0% {
+    padding-bottom: 0%;
+    opacity: 0;
+  }
+  35% {
+    padding-bottom: 0%;
+    opacity: 0;
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    padding-bottom: 20.5%;
+  }
+}
+
+/* POUR */
+
+.pour {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  opacity: 0;
+  height: 200%;
+  transform: translateX(-50%);
+  animation-name: pour-position;
+  transition: 200ms;
+}
+
+.pour .stream {
+  content: "";
+  position: absolute;
+  left: 50%;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    rgba(211, 153, 9, 0) 0%,
+    rgba(211, 153, 9, 1) 20%,
+    rgba(211, 153, 9, 1) 100%
+  );
+  animation-name: pour-opacity;
+}
+
+.pour .stream::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 25%;
+  border-radius: 50%;
+  background: #d39909;
+  transform: translateY(50%);
+}
+
+@keyframes pour-position {
+  0% {
+    bottom: 0;
+    margin-bottom: 0%;
+    height: 200%;
+  }
+  35% {
+    margin-bottom: 0%;
+  }
+  100% {
+    bottom: 89%;
+    margin-bottom: 20.5%;
+    height: 50%;
+  }
+}
+
+@keyframes pour-opacity {
+  0%,
+  96% {
+    opacity: 1;
+    width: 100%;
+  }
+  100% {
+    opacity: 0;
+    width: 0;
+  }
+}
+
+/* INSTRUCTIONS */
+.instructions {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  color: #fff;
+  text-align: center;
+  font-family: "signikaregular";
+  font-size: 3vmin;
+  opacity: 0.5;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+  animation-name: instructions;
+}
+
+@media (pointer: fine) {
+  .instructions::before {
+    content: "Click ";
+  }
+}
+
+@media (pointer: coarse) {
+  .instructions::before {
+    content: "Tap ";
+  }
+}
+
+@keyframes instructions {
+  0%,
+  15% {
+    opacity: 0.5;
+  }
+  20%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* DEFINE ANIMATION */
+
+.glass .beer,
+.glass .head,
+.glass .surface,
+.glass .pour,
+.glass .pour .stream,
+.instructions {
+  animation-timing-function: cubic-bezier(0.2, 0, 0.4, 1);
+  animation-duration: 4s;
+  animation-fill-mode: forwards;
+  animation-play-state: paused;
+}
+
+/* ANIMATE FILL */
+@media (pointer: fine) {
+  .glass:active .beer,
+  .glass:active .head,
+  .glass:active .surface,
+  .glass:active .pour,
+  .glass:active .pour .stream,
+  .glass:active ~ .instructions {
+    animation-play-state: running;
+  }
+
+  .glass:active .pour {
+    width: 10%;
+    opacity: 1;
+  }
+}
+
+@media (pointer: coarse) {
+  .glass:hover .beer,
+  .glass:hover .head,
+  .glass:hover .surface,
+  .glass:hover .pour,
+  .glass:hover .pour .stream,
+  .glass:hover ~ .instructions {
+    animation-play-state: running;
+  }
+
+  .glass:hover .pour {
+    width: 10%;
+    opacity: 1;
+  }
+}
