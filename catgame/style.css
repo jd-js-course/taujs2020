@@ -25,3 +25,11 @@ button {
     z-index: 1;
     pointer-events: none;
 }
+
+.start_button {
+    background-image: url('opening screen - button.png');
+    background-color: transparent;
+    position: absolute;
+    top: 770px;
+    left: 20px;
+}

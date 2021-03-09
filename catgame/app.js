@@ -16,6 +16,7 @@ function gameMenu(id) { //decides what screen is displayed
             hide("game");
             hide("gameOver");
             hide("julio");
+            hide("win");
             break;
         case 2:
             show("start");
@@ -23,6 +24,7 @@ function gameMenu(id) { //decides what screen is displayed
             hide("gameOver");
             hide("splashscreen");
             hide("julio");
+            hide("win");
             in_game_music.play()
             gameover.stop()
             break;
@@ -36,6 +38,7 @@ function gameMenu(id) { //decides what screen is displayed
             hide("start");
             hide("gameOver");
             hide("splashscreen");
+            hide("win");
             in_game_music.stop()
             julio.reset();
             break;
@@ -47,8 +50,20 @@ function gameMenu(id) { //decides what screen is displayed
             hide("julio");
             hide("start");
             hide("game");
+            hide("win");
             hide("splashscreen");
             break;
+        case 5:
+            open_theme.stop()
+            gameover.play()
+            hide("gameOver");
+            hide("julio");
+            hide("start");
+            hide("game");
+            show("win");
+            hide("splashscreen");
+            break;
+
     }
 }
 
@@ -67,6 +82,11 @@ function startThegame() {
 
 function gameOver() {
     gameMenu(4);
+}
+
+function gameWin() {
+    console.log('win')
+    gameMenu(5);
 }
 
 //accept clicks on images & manage sounds
@@ -88,6 +108,7 @@ const gameover = new Howl({
 document.getElementById("splashscreen").addEventListener("click", startscreen); //send to start screen
 document.getElementById("startbutton").addEventListener("click", startThegame); //send to game screen
 document.getElementById("gameOver").addEventListener("click", startscreen); //send to game screen
+document.getElementById("win").addEventListener("click", startscreen); //send to game screen
 
 
 //////////////////////Menu part end//////////////////////////////////////////////
@@ -97,6 +118,7 @@ paper.install(window)
 paper.setup('paper-js-canvas')
 class Cat {
     mood = 'stand';
+    poke_count = 0;
     preferences = {
         //defining our cat's mood - where he likes being petted. we need to make this part randomised for each new game sesion.
         //this function generates random number (0 to 1)for every 'if' function. 
@@ -176,6 +198,7 @@ class Cat {
     reset() {
         // we return the cat to the start position
         this.mood = 'stand';
+        this.poke_count = 0;
         this.render();
 
         this.preferences = {
@@ -228,6 +251,9 @@ class Cat {
                 case 'lies_upset':
                     this.mood = 'lie'
                     break;
+                case 'in_love':
+                    gameWin();
+                    break;
             }
         } else {
             switch (this.mood) {
@@ -263,6 +289,13 @@ class Cat {
                     this.mood = 'scratch2'
                     set_hand('hand_side_scratch')
                     break
+                case 'give_in': //added a new case, the in_love case which is meant to be the same as the give_in case but with hearts flying out his eyes animation.
+                    this.mood = 'in_love'
+                    hearts()
+                    break;
+                case 'in_love':
+                    gameWin();
+                    break;
 
             }
         }
@@ -295,7 +328,22 @@ class Cat {
             context.drawImage(mapImg, 0, 0, catElement.width, catElement.height)
 
             if (!cat.clickEventAdded) {
+                catElement.addEventListener('mousedown', (event)=> {
+                    cat.stroke_start_time = Date.now()
+                })
+
                 catElement.addEventListener('click', (event) => {
+                    if (Date.now() - cat.stroke_start_time < 200) {
+                        // only actual pets count! poking doesn't count!
+                        cat.poke_count++;
+                        //too much poking leads to angry cat!
+                        if (cat.poke_count > 10){
+                            cat.mood = 'scratch1'
+                            set_hand('hand_side_scratch')
+                            cat.render()
+                        }
+                        return;
+                    }
                     let x = event.offsetX
                     let y = event.offsetY
                     switch (context.getImageData(x, y, 1, 1).data.toString()) {

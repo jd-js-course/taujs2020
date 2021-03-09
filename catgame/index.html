@@ -24,12 +24,13 @@
 
     <div id="splashscreen">
         <!--Shows the splash screen-->
-        <img src="splashscreen.png" width="800" height="500" />
+        <img src="university opening screen.png"/>
     </div>
 
     <div id="start">
         <!--Shows the start menu-->
-        <button id="startbutton" style="position: absolute; top: 0; left: 0;">Start a new game</button>
+        <img src="opening screen.png" style="position: absolute; top: 0; left: 0;"/>
+        <img id="startbutton" src="opening screen - button.png" class="start_button"/>
     </div>
 
     <div id="game">
@@ -39,9 +40,13 @@
     </div>
 
     <div id="gameOver">
-        <!--Shows the start menu-->
-        <img src="gameovercat.png" width="800" height="500" style="position: absolute; top: 0; left: 0;" />
+        <img src="lost screen.png" style="position: absolute; top: 0; left: 0;" />
     </div>
+
+    <div id="win">
+        <img src="win screen.png" style="position: absolute; top: 0; left: 0;" />
+    </div>
+
     <!--here is the canvas that lets us define the different body parts of the cat-->
     <img id="julio" style="position: absolute; top: 0; left: 0;" />
     <canvas id="julio-map" style="position: absolute; top:0; left: 0; z-index: -1; visibility: hidden;"></canvas>
