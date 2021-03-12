@@ -25,6 +25,7 @@ function gameMenu(id) { //decides what screen is displayed
             hide("splashscreen");
             hide("julio");
             hide("win");
+            set_hand("hand_point");
             in_game_music.play()
             gameover.stop()
             break;
@@ -105,10 +106,10 @@ const gameover = new Howl({
         html5: true,
         loop: false,
     });
-document.getElementById("splashscreen").addEventListener("click", startscreen); //send to start screen
+document.getElementById("playbutton").addEventListener("click", startscreen); //send to start screen
 document.getElementById("startbutton").addEventListener("click", startThegame); //send to game screen
-document.getElementById("gameOver").addEventListener("click", startscreen); //send to game screen
-document.getElementById("win").addEventListener("click", startscreen); //send to game screen
+document.getElementById("gameover_playagain_lose").addEventListener("click", startscreen); //send to game screen
+document.getElementById("gameover_playagain_win").addEventListener("click", startscreen); //send to game screen
 
 
 //////////////////////Menu part end//////////////////////////////////////////////
