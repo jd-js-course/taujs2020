@@ -78,6 +78,7 @@ function startscreen() {
 }
 
 function startThegame() {
+    cutecat.play()
     gameMenu(3);
 }
 
@@ -103,6 +104,16 @@ const in_game_music = new Howl({
     });
 const gameover = new Howl({
     src: ['Catgame-gameover.mp3'],
+        html5: true,
+        loop: false,
+    });
+const angrycat = new Howl({
+    src: ['mad_cat.mp3'],
+        html5: true,
+        loop: false,
+    });
+const cutecat = new Howl({
+    src: ['happy_cat.mpeg'],
         html5: true,
         loop: false,
     });
@@ -264,6 +275,7 @@ class Cat {
                     break;
                 case 'stand_upset':
                     this.mood = 'scratch1'
+                    angrycat.play()
                     set_hand('hand_side_scratch')
                     break;
                 case 'sit':
@@ -272,6 +284,7 @@ class Cat {
                     break;
                 case 'sit_upset':
                     this.mood = 'scratch2'
+                    angrycat.play()
                     set_hand('hand_side_scratch')
                     break;
                 case 'restive':
@@ -280,6 +293,7 @@ class Cat {
                     break;
                 case 'restive_upset':
                     this.mood = 'scratch1'
+                    angrycat.play()
                     set_hand('hand_side_scratch')
                     break;
                 case 'lie':
@@ -288,6 +302,7 @@ class Cat {
                     break
                 case 'lies_upset':
                     this.mood = 'scratch2'
+                    angrycat.play()
                     set_hand('hand_side_scratch')
                     break
                 case 'give_in': //added a new case, the in_love case which is meant to be the same as the give_in case but with hearts flying out his eyes animation.
