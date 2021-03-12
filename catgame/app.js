@@ -356,6 +356,9 @@ class Cat {
                         if (cat.poke_count > 10){
                             cat.mood = 'scratch1'
                             set_hand('hand_side_scratch')
+                            if (cat.currentAnimation) clearInterval(cat.currentAnimation)
+                            paper.project.activeLayer.removeChildren()
+                            angrycat.play()
                             cat.render()
                         }
                         return;
