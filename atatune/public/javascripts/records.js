@@ -21,7 +21,7 @@ navigator.mediaDevices.getUserMedia(audioIN)
             form.append("audioFile", audioFile);
             var request = new XMLHttpRequest();
             var async = true;
-            request.open("POST", "../upload", async);
+            request.open("POST", "upload", async);
             if (async) {
                 request.onreadystatechange = function() {
                     if(request.readyState === 4 && request.status === 200) {
@@ -31,7 +31,7 @@ navigator.mediaDevices.getUserMedia(audioIN)
                         } catch (e) {
                             response = request.responseText;
                         }
-                        window.location.href = '/list.html';
+                        window.location.href = 'list.html';
                     } else {
                         console.log('error');
                     }
