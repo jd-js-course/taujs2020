@@ -25,3 +25,74 @@ button {
     z-index: 1;
     pointer-events: none;
 }
+
+.start_button {
+    background-image: url('opening screen - button.png');
+    background-color: transparent;
+    position: absolute;
+    top: 770px;
+    left: 20px;
+}
+
+.aviv_splashscreen {
+    position: fixed;
+    top: 520px;
+    left: 340px;
+}
+
+.galit_splashscreen {
+    position: fixed;
+    top: 468px;
+    left: 340px;
+}
+
+.yolanda_splashscreen {
+    position: fixed;
+    top: 25px;
+    left: 40px;
+}
+
+.play_splashscreen {
+    position: fixed;
+    top: 610px;
+    left: 300px;
+    transform: rotate(-25deg)
+    /* I use transform to add button movement when cursor is on it */
+}
+
+.play_splashscreen:hover {
+    transform: rotate(-30deg)
+}
+
+.gameover_galit {
+    position: fixed;
+    top: 350px;
+    left: 670px;
+}
+
+.gameover_galit:hover {
+    transform: rotate(-30deg)
+}
+
+.gameover_aviv {
+    position: fixed;
+    top: 365px;
+    left: 30px;
+}
+.gameover_aviv:hover {
+    transform: rotate(10deg)
+
+}
+
+.gameover_playagain {
+    position: fixed;
+    top: 290px;
+    left: 280px;
+}
+.gameover_playagain:hover {
+    transform: scale(1.03)
+}
+
+.start_button:hover {
+    transform: scale(1.03)
+}

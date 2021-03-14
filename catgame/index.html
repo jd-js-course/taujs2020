@@ -20,7 +20,7 @@
             margin: 0;
             overflow: hidden;
             height: 100%;
-            background: rgb(249, 173, 129);
+            background: yellow;
         }
     </style>
 </head>
@@ -29,12 +29,18 @@
 
     <div id="splashscreen">
         <!--Shows the splash screen-->
-        <img src="splashscreen.png" width="800" height="500" />
+        <img src="university opening screen.png"/>
+        <a href="https://github.com/nook10" target="_blank" class="aviv_splashscreen"><img src="university opening screen - aviv button.png"/></a>
+        <a href="https://github.com/Galitoosh" target="_blank" class="galit_splashscreen"><img src="university opening screen - galit button.png"/></a>
+        <a href="https://arts.tau.ac.il" target="_blank" class="yolanda_splashscreen"><img src="university opening screen - yolanda button.png"/></a>
+        <div id="playbutton" class="play_splashscreen"><img src="university opening screen - play button.png"/></div>
+
     </div>
 
     <div id="start">
         <!--Shows the start menu-->
-        <button id="startbutton" style="position: absolute; top: 0; left: 0;">Start a new game</button>
+        <img src="opening screen.png" style="position: absolute; top: 0; left: 0;"/>
+        <img id="startbutton" src="opening screen - button.png" class="start_button"/>
     </div>
 
     <div id="game">
@@ -44,9 +50,19 @@
     </div>
 
     <div id="gameOver">
-        <!--Shows the start menu-->
-        <img src="gameovercat.png" width="800" height="500" style="position: absolute; top: 0; left: 0;" />
+        <img src="lost screen.png" style="position: absolute; top: 0; left: 0;" />
+        <div class="gameover_aviv"><a href="https://github.com/nook10" target="_blank"><img src="lost screen - aviv.png"/></a></div>
+        <div class="gameover_galit"><a href="https://github.com/Galitoosh" target="_blank"><img src="lost screen - galit.png"/></a></div>
+        <div id="gameover_playagain_lose" class="gameover_playagain"><img src="lost screen - play again button.png"/></div>
     </div>
+
+    <div id="win">
+        <img src="win screen.png" style="position: absolute; top: 0; left: 0;" />
+        <div class="gameover_aviv"><a href="https://github.com/nook10" target="_blank"><img src="lost screen - aviv.png"/></a></div>
+        <div class="gameover_galit"><a href="https://github.com/Galitoosh" target="_blank"><img src="lost screen - galit.png"/></a></div>
+        <div id="gameover_playagain_win" class="gameover_playagain"><img src="lost screen - play again button.png"/></div>
+    </div>
+
     <!--here is the canvas that lets us define the different body parts of the cat-->
     <img id="julio" style="position: absolute; top: 0; left: 0;" />
     <canvas id="julio-map" style="position: absolute; top:0; left: 0; z-index: -1; visibility: hidden;"></canvas>
