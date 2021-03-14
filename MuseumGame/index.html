@@ -2,6 +2,11 @@
 <html>
 
 <head>
+
+    <title>Museum - Javascript for the Arts student project</title>
+    <meta name="description" content="An app that prints some famous pictures by Matan Sagi and Alexander Smirnov">
+    <meta property="og:image" content="../homepage/museum.png" />
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.11/paper-full.js"></script>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/acorn/4.0.11/acorn.js'></script>
@@ -37,15 +42,15 @@
 
         var digits = [digit1, digit2, digit3, digit4, digit5, digit6];
         var numbers = ["/MuseumGame/Assets/Numbers/0.png", "/MuseumGame/Assets/Numbers/1.png",
-         "/MuseumGame/Assets/Numbers/2.png", "/MuseumGame/Assets/Numbers/3.png", "/MuseumGame/Assets/Numbers/4.png",
-         "/MuseumGame/Assets/Numbers/5.png", "/MuseumGame/Assets/Numbers/6.png", "/MuseumGame/Assets/Numbers/7.png",
-         "/MuseumGame/Assets/Numbers/8.png", "/MuseumGame/Assets/Numbers/9.png"];
+            "/MuseumGame/Assets/Numbers/2.png", "/MuseumGame/Assets/Numbers/3.png", "/MuseumGame/Assets/Numbers/4.png",
+            "/MuseumGame/Assets/Numbers/5.png", "/MuseumGame/Assets/Numbers/6.png", "/MuseumGame/Assets/Numbers/7.png",
+            "/MuseumGame/Assets/Numbers/8.png", "/MuseumGame/Assets/Numbers/9.png"];
 
-        for(i=0; i<numbers.lenght; i++){
-            for(j=0; j<digits.lenght; j++){
-                if(i==digits[j]){
-                context.drawImage(numbers[i],0,0)
-            }
+        for (i = 0; i < numbers.lenght; i++) {
+            for (j = 0; j < digits.lenght; j++) {
+                if (i == digits[j]) {
+                    context.drawImage(numbers[i], 0, 0)
+                }
             }
         }
 

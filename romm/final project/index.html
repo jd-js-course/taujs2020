@@ -2,33 +2,40 @@
 <html lang="en">
 
 <head>
+  <title>Algo-Mondrian - Javascript for the Arts student project</title>
+  <meta name="description" content="An interactive Mondrian image generator by Rom Maor and Shiri Gordon">
+  <meta property="og:image" content="../homepage/mondrian.png" />
+  <style>
+    canvas {
+      cursor: url("./brush.svg") 0 37, auto;
+    }
+  </style>
 </head>
 
-<style>
 
-  canvas {
-    cursor: url("./brush.svg") 0 37, auto;
-  }
-</style>
 
 <body>
-<div>
-<button onclick="fillPainting()" style="margin: auto; display: block; margin-bottom: 15px; margin-top: 15px; padding: 10px">Refresh</button>
-<button onclick="backgroundMusic()" class="musicButton" style="margin-left: auto; display: block; margin-bottom: 15px; margin-top: -55px; padding: 10px">Music on</button>
+  <div>
+    <button onclick="fillPainting()"
+      style="margin: auto; display: block; margin-bottom: 15px; margin-top: 15px; padding: 10px">Refresh</button>
+    <button onclick="backgroundMusic()" class="musicButton"
+      style="margin-left: auto; display: block; margin-bottom: 15px; margin-top: -55px; padding: 10px">Music on</button>
 
-<canvas id="mondrian" width="800" height="600" style="border:3px solid #000000; margin-top: 50px; display: block; margin: 25px auto"></canvas>
-</div>
-<div>
-  <button onclick="exportImage()" style="margin: auto; display: block; margin-bottom: 15px; margin-top: 15px; padding: 10px">Export</button>
-</div>
-<div>
-  <audio class="backgroundmusic" autoplay loop>
-    <source src="./music.mp3">
-  </audio>
-  <audio class="shoowshaudio">
-    <source src="./swoosh.mp3">
-  </audio>
-</div>
+    <canvas id="mondrian" width="800" height="600"
+      style="border:3px solid #000000; margin-top: 50px; display: block; margin: 25px auto"></canvas>
+  </div>
+  <div>
+    <button onclick="exportImage()"
+      style="margin: auto; display: block; margin-bottom: 15px; margin-top: 15px; padding: 10px">Export</button>
+  </div>
+  <div>
+    <audio class="backgroundmusic" autoplay loop>
+      <source src="./music.mp3">
+    </audio>
+    <audio class="shoowshaudio">
+      <source src="./swoosh.mp3">
+    </audio>
+  </div>
 
 </body>
 
