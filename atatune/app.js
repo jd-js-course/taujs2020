@@ -34,7 +34,7 @@ app.post('/upload', upload.single('audioFile'),(req, res) => {
 
 app.get('/list', (req, res) => {
   fs.readdir(folder, (err, files) => {
-    res.json(files.map(file => '/uploads/' + file));
+    res.json(files.map(file => 'uploads/' + file));
   });
 });
 

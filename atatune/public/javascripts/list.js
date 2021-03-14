@@ -32,12 +32,12 @@ function selectFile(file){
 }
 (function() {
     const ul = document.getElementsByTagName('ul')[0];
-    fetch('/list')
+    fetch('list')
         .then(response => response.json())
         .then(files => {
             for(let file of files){
                 const li = document.createElement('li');
-                const fileName = file.split('/')[2]
+                const fileName = file.split('/')[1]
                 const time = fileName.split('-')[1].split('.')[0];
                 const date = new Date(parseInt(time));
                 li.innerText = date.toLocaleString();
